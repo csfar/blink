@@ -18,6 +18,7 @@
 		4F5F12FD24B63E8200A7D9E7 /* Multipeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F12FC24B63E8200A7D9E7 /* Multipeer.swift */; };
 		4F5F130024B65AC200A7D9E7 /* BrainstormingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F12FF24B65AC200A7D9E7 /* BrainstormingViewModel.swift */; };
 		4F5F130224B65D8E00A7D9E7 /* VotingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F130124B65D8E00A7D9E7 /* VotingViewModel.swift */; };
+		4F5F130D24B6612E00A7D9E7 /* Multipeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F130C24B6612E00A7D9E7 /* Multipeer.swift */; };
 		A418231A24B39DDF0082962F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A418231924B39DDF0082962F /* AppDelegate.swift */; };
 		A418231C24B39DDF0082962F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A418231B24B39DDF0082962F /* ContentView.swift */; };
 		A418231E24B39DE10082962F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A418231D24B39DE10082962F /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		4F5F12FC24B63E8200A7D9E7 /* Multipeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multipeer.swift; sourceTree = "<group>"; };
 		4F5F12FF24B65AC200A7D9E7 /* BrainstormingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainstormingViewModel.swift; sourceTree = "<group>"; };
 		4F5F130124B65D8E00A7D9E7 /* VotingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingViewModel.swift; sourceTree = "<group>"; };
+		4F5F130C24B6612E00A7D9E7 /* Multipeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multipeer.swift; sourceTree = "<group>"; };
 		A418231624B39DDF0082962F /* Blink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A418231924B39DDF0082962F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A418231B24B39DDF0082962F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,10 @@
 		4F5F12D024B639FA00A7D9E7 /* Blink_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4F5F130524B660CD00A7D9E7 /* Menu */,
+				4F5F130424B660BF00A7D9E7 /* Brainstorming */,
+				4F5F130324B660B500A7D9E7 /* Voting */,
+				4F5F130C24B6612E00A7D9E7 /* Multipeer.swift */,
 				4F5F12D124B639FA00A7D9E7 /* AppDelegate.swift */,
 				4F5F12D324B639FA00A7D9E7 /* SceneDelegate.swift */,
 				4F5F12D524B639FA00A7D9E7 /* ContentView.swift */,
@@ -204,6 +210,75 @@
 				4F5F130124B65D8E00A7D9E7 /* VotingViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4F5F130324B660B500A7D9E7 /* Voting */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F130B24B6611800A7D9E7 /* Views */,
+				4F5F130A24B6610F00A7D9E7 /* ViewModels */,
+			);
+			path = Voting;
+			sourceTree = "<group>";
+		};
+		4F5F130424B660BF00A7D9E7 /* Brainstorming */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F130924B6610600A7D9E7 /* View */,
+				4F5F130824B660FF00A7D9E7 /* ViewModels */,
+			);
+			path = Brainstorming;
+			sourceTree = "<group>";
+		};
+		4F5F130524B660CD00A7D9E7 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F130724B660F600A7D9E7 /* View */,
+				4F5F130624B660ED00A7D9E7 /* ViewModels */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		4F5F130624B660ED00A7D9E7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4F5F130724B660F600A7D9E7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4F5F130824B660FF00A7D9E7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4F5F130924B6610600A7D9E7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4F5F130A24B6610F00A7D9E7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4F5F130B24B6611800A7D9E7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A418230D24B39DDF0082962F = {
@@ -425,6 +500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F5F12D224B639FA00A7D9E7 /* AppDelegate.swift in Sources */,
+				4F5F130D24B6612E00A7D9E7 /* Multipeer.swift in Sources */,
 				4F5F12D424B639FA00A7D9E7 /* SceneDelegate.swift in Sources */,
 				4F5F12D624B639FA00A7D9E7 /* ContentView.swift in Sources */,
 			);

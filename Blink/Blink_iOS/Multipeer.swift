@@ -1,6 +1,6 @@
 //
 //  Multipeer.swift
-//  Blink
+//  Blink_iOS
 //
 //  Created by Edgar Sgroi on 08/07/20.
 //  Copyright © 2020 Artur Carneiro. All rights reserved.
