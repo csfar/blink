@@ -1,6 +1,6 @@
 //
 //  Multipeer.swift
-//  Blink
+//  Blink_iOS
 //
 //  Created by Edgar Sgroi on 08/07/20.
 //  Copyright © 2020 Artur Carneiro. All rights reserved.
@@ -20,8 +20,8 @@ class Multipeer: NSObject {
     
     static let shared = Multipeer()
     
-    var peerID: MCPeerID
-    var mcSession: MCSession
+    private(set) var peerID: MCPeerID
+    private(set) var mcSession: MCSession
     var mcAdvertiserAssistant: MCAdvertiserAssistant
     
     var connectionStatus: ConnectionStatus

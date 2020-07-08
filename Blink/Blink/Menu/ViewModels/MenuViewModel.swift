@@ -18,6 +18,14 @@ class MenuViewModel: NSObject, MCSessionDelegate {
         multipeerConnection.delegate = self
     }
     
+    func startHosting(action: UIAlertAction!) {
+        multipeerConnection.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk", discoveryInfo: nil, session: multipeerConnection.mcSession)
+        multipeerConnection.mcAdvertiserAssistant.start()
+            print("You are hosting now!")
+        }
+}
+
+extension MenuViewModel: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case MCSessionState.connected:
@@ -42,11 +50,4 @@ class MenuViewModel: NSObject, MCSessionDelegate {
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
     }
-    
-    func startHosting(action: UIAlertAction!) {
-        multipeerConnection.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk-kb", discoveryInfo: nil, session: multipeerConnection.mcSession)
-        multipeerConnection.mcAdvertiserAssistant.start()
-            print("You are hosting now!")
-        }
-    
 }
