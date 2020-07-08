@@ -20,8 +20,8 @@ class Multipeer: NSObject {
     
     static let shared = Multipeer()
     
-    var peerID: MCPeerID
-    var mcSession: MCSession
+    private(set) var peerID: MCPeerID
+    private(set) var mcSession: MCSession
     var mcAdvertiserAssistant: MCAdvertiserAssistant
     
     var connectionStatus: ConnectionStatus
@@ -31,7 +31,7 @@ class Multipeer: NSObject {
         peerID = MCPeerID(displayName: UIDevice.current.name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         connectionStatus = .notConnected
-        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk-kb", discoveryInfo: nil, session: mcSession)
+        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk", discoveryInfo: nil, session: mcSession)
         super.init()
         
     }

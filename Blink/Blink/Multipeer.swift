@@ -31,7 +31,7 @@ class Multipeer: NSObject {
         peerID = MCPeerID(displayName: UIDevice.current.name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         connectionStatus = .notConnected
-        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk-kb", discoveryInfo: nil, session: mcSession)
+        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk", discoveryInfo: nil, session: mcSession)
         super.init()
         
     }

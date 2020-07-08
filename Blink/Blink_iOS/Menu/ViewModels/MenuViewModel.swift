@@ -1,6 +1,6 @@
 //
-//  BrainstormingViewModel.swift
-//  Blink
+//  MenuViewModel.swift
+//  Blink_iOS
 //
 //  Created by Edgar Sgroi on 08/07/20.
 //  Copyright © 2020 Artur Carneiro. All rights reserved.
@@ -9,20 +9,25 @@
 import Foundation
 import MultipeerConnectivity
 
-class BrainstormingViewModel: NSObject, MCSessionDelegate {
+class MenuViewModel: NSObject {
+    
+    //TODO - Pesquisar como usar o Browser no SwiftUI
     
     let multipeerConnection = Multipeer.shared
     
-    var ideas: [String]
-    
     override init() {
-        ideas = []
         super.init()
         multipeerConnection.delegate = self
     }
+    
+    func joinSession(action: UIAlertAction) {
+//        let mcBrowser = MCBrowserViewController(serviceType: "blnk", session: multipeerConnection.mcSession)
+//        mcBrowser.delegate = self
+//        present(mcBrowser, animated: true)
+    }
 }
 
-extension BrainstormingViewModel: MCSessionDelegate {
+extension MenuViewModel: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case MCSessionState.connected:
@@ -37,13 +42,6 @@ extension BrainstormingViewModel: MCSessionDelegate {
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        if let text = String(data: data, encoding: .utf8) {
-            DispatchQueue.main.async {
-                if !self.ideas.contains(text) {
-                    self.ideas.append(text)
-                }
-            }
-        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -54,4 +52,14 @@ extension BrainstormingViewModel: MCSessionDelegate {
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
     }
+}
+
+extension MenuViewModel:  MCBrowserViewControllerDelegate {
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+    }
+    
+    
 }
