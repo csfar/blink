@@ -10,9 +10,10 @@ import SwiftUI
 
 /// Representation of the brainstorming screen.
 struct BrainstormView: View {
-    /// The 2D matrix containing the ideas as Strings.
-    var ideas: [[String]]
-
+    
+    /// Observed ViewModel so BrainstormView can get its data.
+    @ObservedObject var brainstormVM = BrainstormingViewModel()
+    
     /// The topic set for the session.
     var topic: String
 
@@ -20,17 +21,14 @@ struct BrainstormView: View {
     var timer: String
 
     /// Initialize a new instance of this type.
-    /// - Parameter ideas: 2D matrix containing the ideas as Strings. Empty by default.
     /// - Parameter topic: The topic set for the session. Empty by default.
     /// - Parameter timer: The timer set for the sessiion. Empty by default.
-    init(ideas: [[String]] = [[String]](),
-         topic: String = "",
+    init(topic: String = "",
          timer: String = "") {
-        self.ideas = ideas
         self.topic = topic
         self.timer = timer
     }
-
+    
     /// The body of a `BrainstormingView`
     var body: some View {
         VStack {
@@ -44,14 +42,15 @@ struct BrainstormView: View {
                 Spacer()
                 Text(timer).font(.title)
                 Spacer()
-                Text("\(ideas.reduce(0) { $0 + $1.count })").font(.headline)
+                Text("\(brainstormVM.ideasMatrix.reduce(0) { $0 + $1.count })").font(.headline)
                 Spacer()
             }
             Spacer()
+            
 
             /// The `GridView` used to layout the ideas in a
             /// 3-column grid.
-            GridView(items: ideas)
+            GridView(items: self.brainstormVM.ideasMatrix)
             Spacer()
 
             /// The HStack containing the buttons for
@@ -79,3 +78,9 @@ struct BrainstormView: View {
     }
 }
 
+
+struct BrainstormView_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
+}
