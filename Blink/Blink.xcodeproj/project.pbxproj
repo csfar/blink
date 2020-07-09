@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F5F12D224B639FA00A7D9E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F12D124B639FA00A7D9E7 /* AppDelegate.swift */; };
+		4F5F12D424B639FA00A7D9E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F12D324B639FA00A7D9E7 /* SceneDelegate.swift */; };
+		4F5F12D624B639FA00A7D9E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F12D524B639FA00A7D9E7 /* ContentView.swift */; };
+		4F5F12D824B639FC00A7D9E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F12D724B639FC00A7D9E7 /* Assets.xcassets */; };
+		4F5F12DB24B639FC00A7D9E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F12DA24B639FC00A7D9E7 /* Preview Assets.xcassets */; };
+		4F5F12DE24B639FC00A7D9E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F12DC24B639FC00A7D9E7 /* LaunchScreen.storyboard */; };
+		4F5F12E924B639FD00A7D9E7 /* Blink_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F12E824B639FD00A7D9E7 /* Blink_iOSTests.swift */; };
+		4F5F12F224B63A5600A7D9E7 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F12F124B63A5600A7D9E7 /* MenuViewModel.swift */; };
+		4F5F12FD24B63E8200A7D9E7 /* Multipeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F12FC24B63E8200A7D9E7 /* Multipeer.swift */; };
+		4F5F130024B65AC200A7D9E7 /* BrainstormingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F12FF24B65AC200A7D9E7 /* BrainstormingViewModel.swift */; };
+		4F5F130224B65D8E00A7D9E7 /* VotingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F130124B65D8E00A7D9E7 /* VotingViewModel.swift */; };
+		4F5F130D24B6612E00A7D9E7 /* Multipeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F130C24B6612E00A7D9E7 /* Multipeer.swift */; };
+		4F5F130F24B661D700A7D9E7 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F130E24B661D700A7D9E7 /* MenuViewModel.swift */; };
+		4F5F131124B6659A00A7D9E7 /* BrainstormingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F131024B6659A00A7D9E7 /* BrainstormingViewModel.swift */; };
 		A418231A24B39DDF0082962F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A418231924B39DDF0082962F /* AppDelegate.swift */; };
 		A418231C24B39DDF0082962F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A418231B24B39DDF0082962F /* MenuView.swift */; };
 		A418231E24B39DE10082962F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A418231D24B39DE10082962F /* Assets.xcassets */; };
@@ -21,6 +35,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4F5F12E524B639FD00A7D9E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A418230E24B39DDF0082962F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F5F12CE24B639FA00A7D9E7;
+			remoteInfo = Blink_iOS;
+		};
 		A418232B24B39DE10082962F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A418230E24B39DDF0082962F /* Project object */;
@@ -31,6 +52,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F5F12CF24B639FA00A7D9E7 /* Blink_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blink_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F5F12D124B639FA00A7D9E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4F5F12D324B639FA00A7D9E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		4F5F12D524B639FA00A7D9E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4F5F12D724B639FC00A7D9E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4F5F12DA24B639FC00A7D9E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4F5F12DD24B639FC00A7D9E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4F5F12DF24B639FC00A7D9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F5F12E424B639FD00A7D9E7 /* Blink_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Blink_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F5F12E824B639FD00A7D9E7 /* Blink_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blink_iOSTests.swift; sourceTree = "<group>"; };
+		4F5F12EA24B639FD00A7D9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F5F12F124B63A5600A7D9E7 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		4F5F12FC24B63E8200A7D9E7 /* Multipeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multipeer.swift; sourceTree = "<group>"; };
+		4F5F12FF24B65AC200A7D9E7 /* BrainstormingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainstormingViewModel.swift; sourceTree = "<group>"; };
+		4F5F130124B65D8E00A7D9E7 /* VotingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingViewModel.swift; sourceTree = "<group>"; };
+		4F5F130C24B6612E00A7D9E7 /* Multipeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multipeer.swift; sourceTree = "<group>"; };
+		4F5F130E24B661D700A7D9E7 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		4F5F131024B6659A00A7D9E7 /* BrainstormingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainstormingViewModel.swift; sourceTree = "<group>"; };
 		A418231624B39DDF0082962F /* Blink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A418231924B39DDF0082962F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A418231B24B39DDF0082962F /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -49,6 +88,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4F5F12CC24B639FA00A7D9E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F5F12E124B639FD00A7D9E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A418231324B39DDF0082962F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -66,11 +119,191 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F5F12D024B639FA00A7D9E7 /* Blink_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F130524B660CD00A7D9E7 /* Menu */,
+				4F5F130424B660BF00A7D9E7 /* Brainstorming */,
+				4F5F130324B660B500A7D9E7 /* Voting */,
+				4F5F130C24B6612E00A7D9E7 /* Multipeer.swift */,
+				4F5F12D124B639FA00A7D9E7 /* AppDelegate.swift */,
+				4F5F12D324B639FA00A7D9E7 /* SceneDelegate.swift */,
+				4F5F12D524B639FA00A7D9E7 /* ContentView.swift */,
+				4F5F12D724B639FC00A7D9E7 /* Assets.xcassets */,
+				4F5F12DC24B639FC00A7D9E7 /* LaunchScreen.storyboard */,
+				4F5F12DF24B639FC00A7D9E7 /* Info.plist */,
+				4F5F12D924B639FC00A7D9E7 /* Preview Content */,
+			);
+			path = Blink_iOS;
+			sourceTree = "<group>";
+		};
+		4F5F12D924B639FC00A7D9E7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F12DA24B639FC00A7D9E7 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4F5F12E724B639FD00A7D9E7 /* Blink_iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F12E824B639FD00A7D9E7 /* Blink_iOSTests.swift */,
+				4F5F12EA24B639FD00A7D9E7 /* Info.plist */,
+			);
+			path = Blink_iOSTests;
+			sourceTree = "<group>";
+		};
+		4F5F12F324B63D9300A7D9E7 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F12F424B63DBD00A7D9E7 /* Views */,
+				4F5F12F524B63DCA00A7D9E7 /* ViewModels */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		4F5F12F424B63DBD00A7D9E7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4F5F12F524B63DCA00A7D9E7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F12F124B63A5600A7D9E7 /* MenuViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4F5F12F624B63DED00A7D9E7 /* Brainstorming */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F12F724B63DF700A7D9E7 /* Views */,
+				4F5F12F824B63E0000A7D9E7 /* ViewModels */,
+			);
+			path = Brainstorming;
+			sourceTree = "<group>";
+		};
+		4F5F12F724B63DF700A7D9E7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4F5F12F824B63E0000A7D9E7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F12FF24B65AC200A7D9E7 /* BrainstormingViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4F5F12F924B63E1400A7D9E7 /* Voting */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F12FA24B63E2200A7D9E7 /* Views */,
+				4F5F12FB24B63E2E00A7D9E7 /* ViewModel */,
+			);
+			path = Voting;
+			sourceTree = "<group>";
+		};
+		4F5F12FA24B63E2200A7D9E7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4F5F12FB24B63E2E00A7D9E7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F130124B65D8E00A7D9E7 /* VotingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4F5F130324B660B500A7D9E7 /* Voting */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F130B24B6611800A7D9E7 /* Views */,
+				4F5F130A24B6610F00A7D9E7 /* ViewModels */,
+			);
+			path = Voting;
+			sourceTree = "<group>";
+		};
+		4F5F130424B660BF00A7D9E7 /* Brainstorming */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F130924B6610600A7D9E7 /* View */,
+				4F5F130824B660FF00A7D9E7 /* ViewModels */,
+			);
+			path = Brainstorming;
+			sourceTree = "<group>";
+		};
+		4F5F130524B660CD00A7D9E7 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F130724B660F600A7D9E7 /* View */,
+				4F5F130624B660ED00A7D9E7 /* ViewModels */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		4F5F130624B660ED00A7D9E7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F130E24B661D700A7D9E7 /* MenuViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4F5F130724B660F600A7D9E7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4F5F130824B660FF00A7D9E7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F131024B6659A00A7D9E7 /* BrainstormingViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4F5F130924B6610600A7D9E7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4F5F130A24B6610F00A7D9E7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4F5F130B24B6611800A7D9E7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A418230D24B39DDF0082962F = {
 			isa = PBXGroup;
 			children = (
 				A418231824B39DDF0082962F /* Blink */,
 				A418232D24B39DE10082962F /* BlinkTests */,
+				4F5F12D024B639FA00A7D9E7 /* Blink_iOS */,
+				4F5F12E724B639FD00A7D9E7 /* Blink_iOSTests */,
 				A418231724B39DDF0082962F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,6 +313,8 @@
 			children = (
 				A418231624B39DDF0082962F /* Blink.app */,
 				A418232A24B39DE10082962F /* BlinkTests.xctest */,
+				4F5F12CF24B639FA00A7D9E7 /* Blink_iOS.app */,
+				4F5F12E424B639FD00A7D9E7 /* Blink_iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,6 +322,10 @@
 		A418231824B39DDF0082962F /* Blink */ = {
 			isa = PBXGroup;
 			children = (
+				4F5F12F324B63D9300A7D9E7 /* Menu */,
+				4F5F12F624B63DED00A7D9E7 /* Brainstorming */,
+				4F5F12F924B63E1400A7D9E7 /* Voting */,
+				4F5F12FC24B63E8200A7D9E7 /* Multipeer.swift */,
 				A4CC2B2F24B6491700C1B165 /* Grid */,
 				A418231924B39DDF0082962F /* AppDelegate.swift */,
 				A418231B24B39DDF0082962F /* MenuView.swift */,
@@ -130,6 +369,41 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4F5F12CE24B639FA00A7D9E7 /* Blink_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F5F12EF24B639FD00A7D9E7 /* Build configuration list for PBXNativeTarget "Blink_iOS" */;
+			buildPhases = (
+				4F5F12CB24B639FA00A7D9E7 /* Sources */,
+				4F5F12CC24B639FA00A7D9E7 /* Frameworks */,
+				4F5F12CD24B639FA00A7D9E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Blink_iOS;
+			productName = Blink_iOS;
+			productReference = 4F5F12CF24B639FA00A7D9E7 /* Blink_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4F5F12E324B639FD00A7D9E7 /* Blink_iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F5F12F024B639FD00A7D9E7 /* Build configuration list for PBXNativeTarget "Blink_iOSTests" */;
+			buildPhases = (
+				4F5F12E024B639FD00A7D9E7 /* Sources */,
+				4F5F12E124B639FD00A7D9E7 /* Frameworks */,
+				4F5F12E224B639FD00A7D9E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4F5F12E624B639FD00A7D9E7 /* PBXTargetDependency */,
+			);
+			name = Blink_iOSTests;
+			productName = Blink_iOSTests;
+			productReference = 4F5F12E424B639FD00A7D9E7 /* Blink_iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A418231524B39DDF0082962F /* Blink */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A418233324B39DE10082962F /* Build configuration list for PBXNativeTarget "Blink" */;
@@ -171,10 +445,17 @@
 		A418230E24B39DDF0082962F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1150;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Artur Carneiro";
 				TargetAttributes = {
+					4F5F12CE24B639FA00A7D9E7 = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					4F5F12E324B639FD00A7D9E7 = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 4F5F12CE24B639FA00A7D9E7;
+					};
 					A418231524B39DDF0082962F = {
 						CreatedOnToolsVersion = 11.5;
 					};
@@ -199,11 +480,30 @@
 			targets = (
 				A418231524B39DDF0082962F /* Blink */,
 				A418232924B39DE10082962F /* BlinkTests */,
+				4F5F12CE24B639FA00A7D9E7 /* Blink_iOS */,
+				4F5F12E324B639FD00A7D9E7 /* Blink_iOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4F5F12CD24B639FA00A7D9E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F5F12DE24B639FC00A7D9E7 /* LaunchScreen.storyboard in Resources */,
+				4F5F12DB24B639FC00A7D9E7 /* Preview Assets.xcassets in Resources */,
+				4F5F12D824B639FC00A7D9E7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F5F12E224B639FD00A7D9E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A418231424B39DDF0082962F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -224,10 +524,35 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4F5F12CB24B639FA00A7D9E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F5F131124B6659A00A7D9E7 /* BrainstormingViewModel.swift in Sources */,
+				4F5F12D224B639FA00A7D9E7 /* AppDelegate.swift in Sources */,
+				4F5F130D24B6612E00A7D9E7 /* Multipeer.swift in Sources */,
+				4F5F12D424B639FA00A7D9E7 /* SceneDelegate.swift in Sources */,
+				4F5F130F24B661D700A7D9E7 /* MenuViewModel.swift in Sources */,
+				4F5F12D624B639FA00A7D9E7 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F5F12E024B639FD00A7D9E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F5F12E924B639FD00A7D9E7 /* Blink_iOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A418231224B39DDF0082962F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F5F130024B65AC200A7D9E7 /* BrainstormingViewModel.swift in Sources */,
+				4F5F130224B65D8E00A7D9E7 /* VotingViewModel.swift in Sources */,
+				4F5F12FD24B63E8200A7D9E7 /* Multipeer.swift in Sources */,
+				4F5F12F224B63A5600A7D9E7 /* MenuViewModel.swift in Sources */,
 				A4CC2B3124B6492700C1B165 /* GridRowView.swift in Sources */,
 				A4CC2B2C24B635CC00C1B165 /* VotingView.swift in Sources */,
 				A4CC2B2E24B63AD300C1B165 /* RankingView.swift in Sources */,
@@ -249,6 +574,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4F5F12E624B639FD00A7D9E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4F5F12CE24B639FA00A7D9E7 /* Blink_iOS */;
+			targetProxy = 4F5F12E524B639FD00A7D9E7 /* PBXContainerItemProxy */;
+		};
 		A418232C24B39DE10082962F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A418231524B39DDF0082962F /* Blink */;
@@ -257,6 +587,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		4F5F12DC24B639FC00A7D9E7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F5F12DD24B639FC00A7D9E7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		A418232224B39DE10082962F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -268,6 +606,96 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4F5F12EB24B639FD00A7D9E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Blink_iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = 93JG72P729;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Blink_iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.edgarsgroi.Blink-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4F5F12EC24B639FD00A7D9E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Blink_iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = 93JG72P729;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Blink_iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.edgarsgroi.Blink-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4F5F12ED24B639FD00A7D9E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 93JG72P729;
+				INFOPLIST_FILE = Blink_iOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.edgarsgroi.Blink-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blink_iOS.app/Blink_iOS";
+			};
+			name = Debug;
+		};
+		4F5F12EE24B639FD00A7D9E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 93JG72P729;
+				INFOPLIST_FILE = Blink_iOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.edgarsgroi.Blink-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blink_iOS.app/Blink_iOS";
+			};
+			name = Release;
+		};
 		A418233124B39DE10082962F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -469,6 +897,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4F5F12EF24B639FD00A7D9E7 /* Build configuration list for PBXNativeTarget "Blink_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F5F12EB24B639FD00A7D9E7 /* Debug */,
+				4F5F12EC24B639FD00A7D9E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F5F12F024B639FD00A7D9E7 /* Build configuration list for PBXNativeTarget "Blink_iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F5F12ED24B639FD00A7D9E7 /* Debug */,
+				4F5F12EE24B639FD00A7D9E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A418231124B39DDF0082962F /* Build configuration list for PBXProject "Blink" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
