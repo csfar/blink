@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-class MenuViewModel: NSObject, MCSessionDelegate {
+class MenuViewModel: NSObject {
     
     let multipeerConnection = Multipeer.shared
     

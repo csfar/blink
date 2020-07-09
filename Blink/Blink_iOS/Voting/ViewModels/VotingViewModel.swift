@@ -1,28 +1,27 @@
 //
-//  BrainstormingViewModel.swift
-//  Blink
+//  VotingViewModel.swift
+//  Blink_iOS
 //
-//  Created by Edgar Sgroi on 08/07/20.
+//  Created by Edgar Sgroi on 09/07/20.
 //  Copyright © 2020 Artur Carneiro. All rights reserved.
 //
 
 import Foundation
 import MultipeerConnectivity
 
-class BrainstormingViewModel: NSObject {
+class VotingViewModel: NSObject {
     
-    let multipeerConnection = Multipeer.shared
+    var multipeerConnection = Multipeer.shared
     
-    var ideas: [String]
+    var ideas: [String] = []
     
     override init() {
-        ideas = []
         super.init()
         multipeerConnection.delegate = self
     }
 }
 
-extension BrainstormingViewModel: MCSessionDelegate {
+extension VotingViewModel: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case MCSessionState.connected:
@@ -37,12 +36,8 @@ extension BrainstormingViewModel: MCSessionDelegate {
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        if let text = String(data: data, encoding: .utf8) {
-            DispatchQueue.main.async {
-                if !self.ideas.contains(text) {
-                    self.ideas.append(text)
-                }
-            }
+        if let ideasList:[String] = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String] {
+            ideas = ideasList
         }
     }
     
@@ -54,4 +49,6 @@ extension BrainstormingViewModel: MCSessionDelegate {
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
     }
+    
+    
 }
