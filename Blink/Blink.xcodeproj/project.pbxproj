@@ -170,6 +170,7 @@
 		4F5F12F424B63DBD00A7D9E7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A418231B24B39DDF0082962F /* MenuView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +195,7 @@
 		4F5F12F724B63DF700A7D9E7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A43323D124B4F3620027B909 /* BrainstormView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -218,6 +220,7 @@
 		4F5F12FA24B63E2200A7D9E7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A4CC2B2B24B635CC00C1B165 /* VotingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -333,13 +336,10 @@
 				4F5F12FC24B63E8200A7D9E7 /* Multipeer.swift */,
 				A4CC2B2F24B6491700C1B165 /* Grid */,
 				A418231924B39DDF0082962F /* AppDelegate.swift */,
-				A418231B24B39DDF0082962F /* MenuView.swift */,
 				A418231D24B39DE10082962F /* Assets.xcassets */,
 				A418232224B39DE10082962F /* LaunchScreen.storyboard */,
 				A418232524B39DE10082962F /* Info.plist */,
 				A418231F24B39DE10082962F /* Preview Content */,
-				A43323D124B4F3620027B909 /* BrainstormView.swift */,
-				A4CC2B2B24B635CC00C1B165 /* VotingView.swift */,
 				A4CC2B2D24B63AD300C1B165 /* RankingView.swift */,
 			);
 			path = Blink;
@@ -620,7 +620,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Blink_iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = 93JG72P729;
+				DEVELOPMENT_TEAM = 4LXC4A87QZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Blink_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -642,7 +642,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Blink_iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = 93JG72P729;
+				DEVELOPMENT_TEAM = 4LXC4A87QZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Blink_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -824,7 +824,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Blink/Preview Content\"";
-				DEVELOPMENT_TEAM = L76X5KFZD9;
+				DEVELOPMENT_TEAM = 4LXC4A87QZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Blink/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -844,7 +844,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Blink/Preview Content\"";
-				DEVELOPMENT_TEAM = L76X5KFZD9;
+				DEVELOPMENT_TEAM = 4LXC4A87QZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Blink/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
