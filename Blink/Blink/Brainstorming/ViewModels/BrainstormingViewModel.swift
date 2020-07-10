@@ -31,17 +31,20 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     }
     
     /// Internal functional that converts the idea String array
-    /// in a idea 2D String matrix with 3 columns and N rows.
+    /// in an idea 2D String matrix with 3 columns and N rows.
     /// This function is called with the following parameters:
     /// - Parameter ideas: The String array that contains the ideas sent through P2P connection.
-    private func convertIdeasArrayInMatrix(ideas: [String]) -> [[String]] {
+    func convertIdeasArrayInMatrix(ideas: [String]) -> [[String]] {
         var matrixIdeas: [[String]] = [[String]]()
-        var ideaIndex = 0
-        for _ in ideas {
-            for n in 0...2 {
-                matrixIdeas[n].append(ideas[ideaIndex])
-                ideaIndex += 1
+        var colIndex: Int = 0
+        var rowIndex: Int = 0
+        for idea in ideas {
+            if colIndex == 3 {
+                colIndex = 0
             }
+            matrixIdeas[rowIndex].append(idea)
+            rowIndex += 1
+            colIndex += 1
         }
         return matrixIdeas
     }
