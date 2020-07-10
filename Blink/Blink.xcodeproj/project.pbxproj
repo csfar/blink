@@ -21,6 +21,8 @@
 		4F5F130D24B6612E00A7D9E7 /* Multipeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F130C24B6612E00A7D9E7 /* Multipeer.swift */; };
 		4F5F130F24B661D700A7D9E7 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F130E24B661D700A7D9E7 /* MenuViewModel.swift */; };
 		4F5F131124B6659A00A7D9E7 /* BrainstormingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F131024B6659A00A7D9E7 /* BrainstormingViewModel.swift */; };
+		4F5F131324B78BCB00A7D9E7 /* VotingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F131224B78BCB00A7D9E7 /* VotingViewModel.swift */; };
+		4F5F131524B8DDB500A7D9E7 /* VotingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F131424B8DDB500A7D9E7 /* VotingViewModelTests.swift */; };
 		A418231A24B39DDF0082962F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A418231924B39DDF0082962F /* AppDelegate.swift */; };
 		A418231C24B39DDF0082962F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A418231B24B39DDF0082962F /* MenuView.swift */; };
 		A418231E24B39DE10082962F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A418231D24B39DE10082962F /* Assets.xcassets */; };
@@ -70,6 +72,8 @@
 		4F5F130C24B6612E00A7D9E7 /* Multipeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multipeer.swift; sourceTree = "<group>"; };
 		4F5F130E24B661D700A7D9E7 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		4F5F131024B6659A00A7D9E7 /* BrainstormingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainstormingViewModel.swift; sourceTree = "<group>"; };
+		4F5F131224B78BCB00A7D9E7 /* VotingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingViewModel.swift; sourceTree = "<group>"; };
+		4F5F131424B8DDB500A7D9E7 /* VotingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingViewModelTests.swift; sourceTree = "<group>"; };
 		A418231624B39DDF0082962F /* Blink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A418231924B39DDF0082962F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A418231B24B39DDF0082962F /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -289,6 +293,7 @@
 		4F5F130A24B6610F00A7D9E7 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				4F5F131224B78BCB00A7D9E7 /* VotingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -353,6 +358,7 @@
 			children = (
 				A418232E24B39DE10082962F /* BlinkTests.swift */,
 				A418233024B39DE10082962F /* Info.plist */,
+				4F5F131424B8DDB500A7D9E7 /* VotingViewModelTests.swift */,
 			);
 			path = BlinkTests;
 			sourceTree = "<group>";
@@ -534,6 +540,7 @@
 				4F5F12D424B639FA00A7D9E7 /* SceneDelegate.swift in Sources */,
 				4F5F130F24B661D700A7D9E7 /* MenuViewModel.swift in Sources */,
 				4F5F12D624B639FA00A7D9E7 /* ContentView.swift in Sources */,
+				4F5F131324B78BCB00A7D9E7 /* VotingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +575,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A418232F24B39DE10082962F /* BlinkTests.swift in Sources */,
+				4F5F131524B8DDB500A7D9E7 /* VotingViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

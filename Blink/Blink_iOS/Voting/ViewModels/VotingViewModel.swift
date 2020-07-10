@@ -1,8 +1,8 @@
 //
 //  VotingViewModel.swift
-//  Blink
+//  Blink_iOS
 //
-//  Created by Edgar Sgroi on 08/07/20.
+//  Created by Edgar Sgroi on 09/07/20.
 //  Copyright © 2020 Artur Carneiro. All rights reserved.
 //
 
@@ -10,24 +10,23 @@ import Foundation
 import MultipeerConnectivity
 
 class VotingViewModel: NSObject {
-    typealias Ranking = [(key: String, value: Int)]
-    let multipeerConnection = Multipeer.shared
+    
+    var multipeerConnection = Multipeer.shared
     
     var ideas: [String] = []
     var votes: [String] = []
-    var rank: Ranking = []
     
     override init() {
         super.init()
         multipeerConnection.delegate = self
     }
     
-    func sendIdeas() {
+    func sendVotes() {
         let mcSession = multipeerConnection.mcSession
         if mcSession.connectedPeers.count > 0 {
-            if let ideasData = try? NSKeyedArchiver.archivedData(withRootObject: ideas, requiringSecureCoding: false) {
+            if let votesData = try? NSKeyedArchiver.archivedData(withRootObject: votes, requiringSecureCoding: false) {
                 do {
-                    try mcSession.send(ideasData, toPeers: mcSession.connectedPeers, with: .reliable)
+                    try mcSession.send(votesData, toPeers: mcSession.connectedPeers, with: .reliable)
                 } catch let error as NSError {
                     let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Ok", style: .default))
@@ -35,22 +34,6 @@ class VotingViewModel: NSObject {
                 }
             }
         }
-    }
-    
-    func countVotes(votes: [String], ideas: [String]) -> Ranking {
-        let votedIdeas = Array(Set(votes))
-        var nonVotedIdeas = [String]()
-        for i in ideas {
-            if !votedIdeas.contains(i) {
-                nonVotedIdeas.append(i)
-            }
-        }
-        let votedIdeasArray = votes.map { ($0, 1) }
-        let ideasFrequency = Dictionary(votedIdeasArray, uniquingKeysWith: +)
-        let nonVotedIdeasArray = nonVotedIdeas.map { ($0, 0) }
-        let ideasNonFrequency = Dictionary(nonVotedIdeasArray, uniquingKeysWith: +)
-        let votingResult = ideasFrequency.merging(ideasNonFrequency) { (_, new) in new }
-        return votingResult.sorted(by: {($0.value > $1.value)})
     }
 }
 
@@ -67,18 +50,21 @@ extension VotingViewModel: MCSessionDelegate {
             multipeerConnection.connectionStatus = .unknown
         }
     }
-
+    
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        if let votesList:[String] = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String] {
-            votes += votesList        }
+        if let ideasList:[String] = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String] {
+            ideas = ideasList
+        }
     }
-
+    
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
     }
-
+    
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
     }
-
+    
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
     }
+    
+    
 }
