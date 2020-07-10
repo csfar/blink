@@ -13,6 +13,8 @@ import SwiftUI
 struct GridView: View {
     /// The 2D matrix containing the items as Strings.
     var items: [[String]]
+    
+    @State var votes: [String] = []
 
     /// Whether the grid's items are votable.
     var isVotingOn: Bool
@@ -39,11 +41,16 @@ struct GridView: View {
                                 /// The Button representing each row as
                                 /// a `GridRowView`.
                                 Button(action: {
+                                    if self.votes.contains(col) {
+                                        self.votes.removeAll { $0 == col }
+                                    } else {
+                                        self.votes.append(col)
+                                    }
                                 }) {
                                     GridRowView(content: col, votable: self.isVotingOn)
                                         .frame(minWidth: 200, maxWidth: 300, minHeight: 50, maxHeight: 75)
                                         .padding()
-                                }.padding()
+                                    }.padding()
                                 Spacer()
                             }
                         }

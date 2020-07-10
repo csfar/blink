@@ -10,16 +10,29 @@ import Foundation
 import MultipeerConnectivity
 
 class VotingViewModel: NSObject {
+    
     typealias Ranking = [(key: String, value: Int)]
     let multipeerConnection = Multipeer.shared
     
-    var ideas: [String] = []
-    var votes: [String] = []
-    var rank: Ranking = []
+    private var ideas: [String]
+    private var votes: [String]
+    var rank: Ranking
     
-    override init() {
+    /// Initialization of this ViewModel with the following parameters:
+    /// - Parameter ideas: An array of String type that composes the ideas
+    init(ideas: [String]) {
+        self.ideas = ideas
+        votes = []
+        rank = []
+        
         super.init()
         multipeerConnection.delegate = self
+        sendIdeas()
+        
+    }
+    
+    func receiveTvVotes(_ tvVotes: [String]) {
+        votes.append(contentsOf: tvVotes)
     }
     
     func sendIdeas() {
@@ -31,6 +44,7 @@ class VotingViewModel: NSObject {
                 } catch let error as NSError {
                     let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Ok", style: .default))
+                    /// - TODO: Propper error handling
 //                    present(ac, animated: true)
                 }
             }

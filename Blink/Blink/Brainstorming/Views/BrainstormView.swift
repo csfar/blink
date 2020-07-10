@@ -12,7 +12,7 @@ import SwiftUI
 struct BrainstormView: View {
     
     /// Observed ViewModel so BrainstormView can get its data.
-    @ObservedObject var brainstormVM = BrainstormingViewModel()
+    @ObservedObject var viewmodel: BrainstormingViewModel
     
     /// The topic set for the session.
     var topic: String
@@ -21,10 +21,13 @@ struct BrainstormView: View {
     var timer: String
 
     /// Initialize a new instance of this type.
+    /// - Parameter viewmodel: The ViewModel that will be used by the View
     /// - Parameter topic: The topic set for the session. Empty by default.
     /// - Parameter timer: The timer set for the sessiion. Empty by default.
-    init(topic: String = "",
+    init(viewmodel: BrainstormingViewModel,
+         topic: String = "",
          timer: String = "") {
+        self.viewmodel = viewmodel
         self.topic = topic
         self.timer = timer
     }
@@ -42,7 +45,7 @@ struct BrainstormView: View {
                 Spacer()
                 Text(timer).font(.title)
                 Spacer()
-                Text("\(brainstormVM.ideasMatrix.reduce(0) { $0 + $1.count })").font(.headline)
+                Text("\(viewmodel.ideasMatrix.reduce(0) { $0 + $1.count })").font(.headline)
                 Spacer()
             }
             Spacer()
@@ -50,7 +53,7 @@ struct BrainstormView: View {
 
             /// The `GridView` used to layout the ideas in a
             /// 3-column grid.
-            GridView(items: self.brainstormVM.ideasMatrix)
+            GridView(items: self.viewmodel.ideasMatrix)
             Spacer()
 
             /// The HStack containing the buttons for

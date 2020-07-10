@@ -10,6 +10,11 @@ import SwiftUI
 
 /// Representation of the voting screen.
 struct VotingView: View {
+    /// The ViewModel that will be attributed to the View
+    var viewmodel: VotingViewModel
+    
+    @State var votes: [String] = [String]()
+    
     /// The 2D matrix containing the ideas as Strings.
     var ideas: [[String]]
 
@@ -17,10 +22,13 @@ struct VotingView: View {
     var topic: String
 
     /// Initialize a new instance of this type.
+    /// - Parameter viewmodel: The ViewModel that the View will receive
     /// - Parameter ideas: 2D matrix containing the ideas as Strings.
     /// - Parameter topic: The topic set for the session.
-    init(ideas: [[String]],
+    init(viewmodel: VotingViewModel,
+         ideas: [[String]],
          topic: String) {
+        self.viewmodel = viewmodel
         self.ideas = ideas
         self.topic = topic
     }
@@ -52,7 +60,7 @@ struct VotingView: View {
             /// The Button responsible for moving forward to
             /// ranking. Should alert the user before moving on.
             Button(action: {
-
+                self.viewmodel.receiveTvVotes(self.votes)
             }) {
                 Image(systemName: "arrow.right")
             }
