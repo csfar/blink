@@ -14,10 +14,26 @@ class VotingViewModel: NSObject {
     var multipeerConnection = Multipeer.shared
     
     var ideas: [String] = []
+    var votes: [String] = []
     
     override init() {
         super.init()
         multipeerConnection.delegate = self
+    }
+    
+    func sendVotes() {
+        let mcSession = multipeerConnection.mcSession
+        if mcSession.connectedPeers.count > 0 {
+            if let votesData = try? NSKeyedArchiver.archivedData(withRootObject: votes, requiringSecureCoding: false) {
+                do {
+                    try mcSession.send(votesData, toPeers: mcSession.connectedPeers, with: .reliable)
+                } catch let error as NSError {
+                    let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "Ok", style: .default))
+//                    present(ac, animated: true)
+                }
+            }
+        }
     }
 }
 
