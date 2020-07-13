@@ -14,24 +14,6 @@ struct BrainstormView: View {
     /// Observed ViewModel so BrainstormView can get its data.
     @ObservedObject var viewmodel: BrainstormingViewModel
     
-    /// The topic set for the session.
-    var topic: String
-
-    /// The timer set for the session.
-    var timer: String
-
-    /// Initialize a new instance of this type.
-    /// - Parameter viewmodel: The ViewModel that will be used by the View
-    /// - Parameter topic: The topic set for the session. Empty by default.
-    /// - Parameter timer: The timer set for the sessiion. Empty by default.
-    init(viewmodel: BrainstormingViewModel,
-         topic: String = "",
-         timer: String = "") {
-        self.viewmodel = viewmodel
-        self.topic = topic
-        self.timer = timer
-    }
-    
     /// The body of a `BrainstormingView`
     var body: some View {
         VStack {
@@ -41,9 +23,9 @@ struct BrainstormView: View {
             /// number of ideas added.
             HStack {
                 Spacer()
-                Text(topic).font(.headline)
+                Text(viewmodel.topic).font(.headline)
                 Spacer()
-                Text(timer).font(.title)
+                Text(viewmodel.timer).font(.title)
                 Spacer()
                 Text("\(viewmodel.ideasMatrix.reduce(0) { $0 + $1.count })").font(.headline)
                 Spacer()
@@ -78,12 +60,5 @@ struct BrainstormView: View {
             }.padding()
             Spacer()
         }
-    }
-}
-
-
-struct BrainstormView_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

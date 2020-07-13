@@ -9,26 +9,33 @@
 import Foundation
 import MultipeerConnectivity
 
-class VotingViewModel: NSObject {
-    
+class VotingViewModel: NSObject, ObservableObject {
     typealias Ranking = [(key: String, value: Int)]
+
     let multipeerConnection = Multipeer.shared
-    
-    private var ideas: [String]
-    private var votes: [String]
-    var rank: Ranking
+
+    /// Published variable of the idea Matrix.
+    /// Any changes that occur in this variable will make the view update.
+    @Published private(set) var ideas: [[String]]
+
+    /// The poll of votes for the session.
+    @Published var votes: [String] = [String]()
+
+    var rank: Ranking = []
+
+    /// The topic set for the session
+    var topic: String
     
     /// Initialization of this ViewModel with the following parameters:
     /// - Parameter ideas: An array of String type that composes the ideas
-    init(ideas: [String]) {
+    /// - Parameter topic: A session's topic. Empty by default.
+    init(ideas: [[String]],
+         topic: String = "") {
         self.ideas = ideas
-        votes = []
-        rank = []
-        
+        self.topic = topic
         super.init()
         multipeerConnection.delegate = self
         sendIdeas()
-        
     }
     
     func receiveTvVotes(_ tvVotes: [String]) {
