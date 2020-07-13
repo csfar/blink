@@ -9,6 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
+
 /// `VotingView`'s ViewModel dependant on `MultipeerConnectivity`.
 class VotingViewModel: NSObject, ObservableObject {
     /// Typealias used to describe the structure of the Ranking in a
