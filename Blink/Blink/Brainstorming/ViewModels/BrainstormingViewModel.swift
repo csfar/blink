@@ -24,7 +24,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
 
     /// The timer set for the session.
     @Published private(set) var timer: String
-    let brainstormTimer = Timer()
+    var brainstormTimer = Timer()
     
     /// String array variable to store ideas.
     /// When an idea is sent through P2P connection,
