@@ -46,16 +46,27 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     /// This function is called with the following parameters:
     /// - Parameter ideas: The String array that contains the ideas sent through P2P connection.
     func convertIdeasArrayInMatrix(ideas: [String]) -> [[String]] {
-        var matrixIdeas: [[String]] = [[String]]()
+        var matrixIdeas: [[String]] = []
         var colIndex: Int = 0
-        var rowIndex: Int = 0
+        var ideaArray: [String] = []
         for idea in ideas {
             if colIndex == 3 {
+                matrixIdeas.append(ideaArray)
+                ideaArray = []
                 colIndex = 0
+                
+                if ideaArray.isEmpty {
+                    ideaArray.append(idea)
+                    colIndex += 1
+                }
+                
+            } else {
+                ideaArray.append(idea)
+                colIndex += 1
             }
-            matrixIdeas[rowIndex].append(idea)
-            rowIndex += 1
-            colIndex += 1
+        }
+        if ideaArray.isEmpty == false {
+            matrixIdeas.append(ideaArray)
         }
         return matrixIdeas
     }
