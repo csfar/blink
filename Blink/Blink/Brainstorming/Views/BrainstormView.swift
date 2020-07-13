@@ -12,22 +12,7 @@ import SwiftUI
 struct BrainstormView: View {
     
     /// Observed ViewModel so BrainstormView can get its data.
-    @ObservedObject var brainstormVM = BrainstormingViewModel()
-    
-    /// The topic set for the session.
-    var topic: String
-
-    /// The timer set for the session.
-    var timer: String
-
-    /// Initialize a new instance of this type.
-    /// - Parameter topic: The topic set for the session. Empty by default.
-    /// - Parameter timer: The timer set for the sessiion. Empty by default.
-    init(topic: String = "",
-         timer: String = "") {
-        self.topic = topic
-        self.timer = timer
-    }
+    @ObservedObject var viewmodel: BrainstormingViewModel
     
     /// The body of a `BrainstormingView`
     var body: some View {
@@ -38,11 +23,11 @@ struct BrainstormView: View {
             /// number of ideas added.
             HStack {
                 Spacer()
-                Text(topic).font(.headline)
+                Text(viewmodel.topic).font(.headline)
                 Spacer()
-                Text(timer).font(.title)
+                Text(viewmodel.timer).font(.title)
                 Spacer()
-                Text("\(brainstormVM.ideasMatrix.reduce(0) { $0 + $1.count })").font(.headline)
+                Text("\(viewmodel.ideasMatrix.reduce(0) { $0 + $1.count })").font(.headline)
                 Spacer()
             }
             Spacer()
@@ -50,7 +35,7 @@ struct BrainstormView: View {
 
             /// The `GridView` used to layout the ideas in a
             /// 3-column grid.
-            GridView(items: self.brainstormVM.ideasMatrix)
+            GridView(items: self.viewmodel.ideasMatrix)
             Spacer()
 
             /// The HStack containing the buttons for
@@ -75,12 +60,5 @@ struct BrainstormView: View {
             }.padding()
             Spacer()
         }
-    }
-}
-
-
-struct BrainstormView_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

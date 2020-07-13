@@ -17,16 +17,26 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     
     /// Published variable of the idea Matrix.
     /// Any changes that occur in this variable will make the view update.
-    @Published var ideasMatrix: [[String]] = [[String]]()
+    @Published private(set) var ideasMatrix: [[String]]
+
+    /// The topic set for the session.
+    @Published private(set) var topic: String
+
+    /// The timer set for the session.
+    @Published private(set) var timer: String
     
     /// String array variable to store ideas.
     /// When an idea is sent through P2P connection,
     /// It will be stored in this array.
     var ideas: [String]
-    
-    /// Initialization of the Brainstorm ViewModel.
-    override init() {
-        ideas = []
+
+    init(ideas: [[String]] = [[String]](),
+         topic: String = "",
+         timer: String = "") {
+        self.ideas = []
+        self.ideasMatrix = ideas
+        self.topic = topic
+        self.timer = timer
         super.init()
         multipeerConnection.delegate = self
     }

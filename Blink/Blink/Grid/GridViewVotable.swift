@@ -1,18 +1,18 @@
 //
-//  GridView.swift
+//  GridViewVotable.swift
 //  Blink
 //
-//  Created by Artur Carneiro on 08/07/20.
+//  Created by Artur Carneiro on 13/07/20.
 //  Copyright © 2020 Artur Carneiro. All rights reserved.
 //
 
 import SwiftUI
 
-/// Representation of a 2D grid using
-/// `GridRowView` as rows.
-struct GridView: View {
+struct GridViewVotable: View {
     /// The 2D matrix containing the items as Strings.
     var items: [[String]]
+
+    @Binding var votes: [String]
 
     /// The body of a `GridView`
     var body: some View {
@@ -27,6 +27,11 @@ struct GridView: View {
                                 /// The Button representing each row as
                                 /// a `GridRowView`.
                                 Button(action: {
+                                    if self.votes.contains(col) {
+                                        self.votes.removeAll { $0 == col }
+                                    } else {
+                                        self.votes.append(col)
+                                    }
                                 }) {
                                     Text(col)
                                         .frame(minWidth: 200, maxWidth: 300, minHeight: 50, maxHeight: 75)
@@ -41,5 +46,3 @@ struct GridView: View {
         }
     }
 }
-
-
