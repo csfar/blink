@@ -24,6 +24,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
 
     /// The timer set for the session.
     @Published private(set) var timer: String
+    let brainstormTimer = Timer()
     
     /// String array variable to store ideas.
     /// When an idea is sent through P2P connection,
@@ -69,6 +70,33 @@ class BrainstormingViewModel: NSObject, ObservableObject {
             matrixIdeas.append(ideaArray)
         }
         return matrixIdeas
+    }
+    
+    /// Internal function that creates a
+    /// scheduled timer for the Brainstorm View.
+    /// This function is called with the following parameters:
+    /// - Parameter counter: An Int type variable that tells the time amount for the Brainstorm Timer.
+    func startBrainstormTimer(counter: Int) {
+        
+        /// Create a var to put the counter variable in the function scope.
+        var timerCounter = counter
+        
+        /// Instanciating the brainstormTimer as a repeatable scheduledTimer with a 1 second interval.
+        brainstormTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (_) in
+            
+            /// Safely unwrapping the self in the timer scope
+            guard let self = self else { return }
+            
+            /// Updating the timerCounter by decreasing it, and also updating the ViewModel timer String.
+            timerCounter = timerCounter - 1
+            self.timer = "\(timerCounter)"
+            
+            /// When the timer reaches 0, it will be stopped through the invalidate method.
+            if timerCounter == 0 {
+                brainstormTimer.invalidate()
+            }
+        })
+        
     }
 }
 
