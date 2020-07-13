@@ -10,7 +10,7 @@ import Foundation
 import MultipeerConnectivity
 
 
-class BrainstormingViewModel: NSObject, ObservableObject {
+final class BrainstormingViewModel: NSObject, ObservableObject {
     
     /// Shared instance of the Multipeer Class.
     let multipeerConnection = Multipeer.shared

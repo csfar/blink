@@ -16,7 +16,7 @@ enum ConnectionStatus {
     case unknown
 }
 
-class Multipeer: NSObject {
+final class Multipeer: NSObject {
     
     static let shared = Multipeer()
     

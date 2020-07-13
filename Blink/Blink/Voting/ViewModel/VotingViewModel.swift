@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-class VotingViewModel: NSObject, ObservableObject {
+final class VotingViewModel: NSObject, ObservableObject {
     typealias Ranking = [(key: String, value: Int)]
 
     let multipeerConnection = Multipeer.shared
@@ -29,7 +29,7 @@ class VotingViewModel: NSObject, ObservableObject {
     /// Initialization of this ViewModel with the following parameters:
     /// - Parameter ideas: An array of String type that composes the ideas
     /// - Parameter topic: A session's topic. Empty by default.
-    init(ideas: [[String]],
+    init(ideas: [[String]] = [[String]](),
          topic: String = "") {
         self.ideas = ideas
         self.topic = topic
