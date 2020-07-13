@@ -1,5 +1,5 @@
 //
-//  BrainstormView.swift
+//  BrainstormingView.swift
 //  Blink
 //
 //  Created by Artur Carneiro on 07/07/20.
@@ -9,9 +9,9 @@
 import SwiftUI
 
 /// Representation of the brainstorming screen.
-struct BrainstormView: View {
+struct BrainstormingView: View {
     
-    /// Observed ViewModel so BrainstormView can get its data.
+    /// `BrainstormingView`'s viewmodel.
     @ObservedObject var viewmodel: BrainstormingViewModel
     
     /// The body of a `BrainstormingView`
