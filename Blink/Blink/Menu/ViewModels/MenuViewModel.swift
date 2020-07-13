@@ -9,22 +9,26 @@
 import Foundation
 import MultipeerConnectivity
 
-final class MenuViewModel: NSObject {
-    
-    let multipeerConnection = Multipeer.shared
-    
+/// `MenuView`'s ViewModel dependant on `MultipeerConnectivity`.
+class MenuViewModel: NSObject {
+
+    /// Shared instance of the Multipeer Singleton.
+    private let multipeerConnection = Multipeer.shared
+
     override init() {
         super.init()
         multipeerConnection.delegate = self
     }
-    
-    func startHosting(action: UIAlertAction!) {
+
+    /// Starts hosting a Multipeer session with `blnk` as service type.
+    func startHosting() {
         multipeerConnection.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk", discoveryInfo: nil, session: multipeerConnection.mcSession)
         multipeerConnection.mcAdvertiserAssistant.start()
             print("You are hosting now!")
         }
 }
 
+// MARK: - MultipeerConnectivity Session Delegate Functions
 extension MenuViewModel: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {

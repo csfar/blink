@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-/// Representaiton of the main menu. This view should be
+/// Representation of the main menu. This view should be
 /// the app's entry point.
 struct MenuView: View {
 

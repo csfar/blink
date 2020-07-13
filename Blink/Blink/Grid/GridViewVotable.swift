@@ -12,6 +12,8 @@ struct GridViewVotable: View {
     /// The 2D matrix containing the items as Strings.
     var items: [[String]]
 
+    /// The array of votes. Requires a `Binding` to type
+    /// responsible for counting all the votes.
     @Binding var votes: [String]
 
     /// The body of a `GridView`
@@ -24,8 +26,6 @@ struct GridViewVotable: View {
                             HStack {
                                 Spacer()
 
-                                /// The Button representing each row as
-                                /// a `GridRowView`.
                                 Button(action: {
                                     if self.votes.contains(col) {
                                         self.votes.removeAll { $0 == col }

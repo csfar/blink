@@ -10,7 +10,8 @@ import SwiftUI
 
 /// Representation of the voting screen.
 struct VotingView: View {
-    /// The ViewModel that will be attributed to the View
+
+    /// `VotingView`'s viewmodel.
     @ObservedObject var viewmodel: VotingViewModel
 
     /// The body of a `VotingView`
@@ -31,9 +32,8 @@ struct VotingView: View {
             }
             Spacer()
 
-            /// The `GridView` used to layout the ideas in a
-            /// 3-column grid. In this scenario, voting is
-            /// possible.
+            /// A votable version of `GridView` following the same 3-column
+            /// structure. Requires a `Binding` for voting.
             GridViewVotable(items: viewmodel.ideas, votes: $viewmodel.votes)
             Spacer()
 

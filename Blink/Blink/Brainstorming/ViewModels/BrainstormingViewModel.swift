@@ -9,11 +9,11 @@
 import Foundation
 import MultipeerConnectivity
 
-
-final class BrainstormingViewModel: NSObject, ObservableObject {
+/// `BrainstormingView`'s ViewModel dependant on `MultipeerConnectivity`.
+class BrainstormingViewModel: NSObject, ObservableObject {
     
-    /// Shared instance of the Multipeer Class.
-    let multipeerConnection = Multipeer.shared
+    /// Shared instance of the Multipeer Singleton.
+    private let multipeerConnection = Multipeer.shared
     
     /// Published variable of the idea Matrix.
     /// Any changes that occur in this variable will make the view update.
@@ -28,8 +28,14 @@ final class BrainstormingViewModel: NSObject, ObservableObject {
     /// String array variable to store ideas.
     /// When an idea is sent through P2P connection,
     /// It will be stored in this array.
-    var ideas: [String]
+    private var ideas: [String]
 
+    /// Initialize a new instance of this type.
+    /// Sets itself as the MultipeerConnectivity delegate.
+    /// - Parameter ideas: An array of Strings containing the ideas of
+    /// a brainstorming session. Empty by default.
+    /// - Parameter topic: A session's topic. Empty by default.
+    /// - Parameter timer: A session's timer. Empty by default.
     init(ideas: [[String]] = [[String]](),
          topic: String = "",
          timer: String = "") {
@@ -72,6 +78,7 @@ final class BrainstormingViewModel: NSObject, ObservableObject {
     }
 }
 
+// MARK: - MultipeerConnectivity Session Delegate Functions
 extension BrainstormingViewModel: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
