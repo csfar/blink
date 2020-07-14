@@ -24,6 +24,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
 
     /// The timer set for the session.
     @Published private(set) var timer: String
+    var brainstormTimer = Timer()
     
     /// String array variable to store ideas.
     /// When an idea is sent through P2P connection,
@@ -75,6 +76,52 @@ class BrainstormingViewModel: NSObject, ObservableObject {
             matrixIdeas.append(ideaArray)
         }
         return matrixIdeas
+    }
+    
+    /// Internal function that creates a
+    /// scheduled timer for the Brainstorm View.
+    /// This function is called with the following parameters:
+    /// - Parameter counter: An Int type variable that tells the time amount for the Brainstorm Timer.
+    func startBrainstormTimer(counter: Int) {
+        
+        /// Create a var to put the counter variable in the function scope.
+        var timerCounter = counter
+        var minute: Int = 0
+        var second: Int = 0
+        
+        /// Instanciating the brainstormTimer as a repeatable scheduledTimer with a 1 second interval.
+        brainstormTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (_) in
+            
+            /// Safely unwrapping the self in the timer scope
+            guard let self = self else { return }
+            
+            /// Updating the timerCounter by decreasing it, and also updating the ViewModel timer String.
+            timerCounter = timerCounter - 1
+            minute = timerCounter / 60
+            second = timerCounter % 60
+            
+            /// The timer will use 2 in both minute and second display.
+            /// If one of them are under 10, a 0 will be added to keep the standard size.
+            if minute < 10 {
+                if second < 10 {
+                    self.timer = "0\(minute) : 0\(second)"
+                } else {
+                    self.timer = "0\(minute) : \(second)"
+                }
+            } else {
+                if second < 10 {
+                    self.timer = "\(minute) : 0\(second)"
+                } else {
+                    self.timer = "\(minute) : \(second)"
+                }
+            }
+            
+            /// When the timer reaches 0, it will be stopped through the invalidate method.
+            if timerCounter == 0 {
+                self.brainstormTimer.invalidate()
+            }
+        })
+        
     }
 }
 
