@@ -24,7 +24,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
 
     /// The timer set for the session.
     @Published private(set) var timer: String
-    let brainstormTimer = Timer()
+    var brainstormTimer = Timer()
     
     /// String array variable to store ideas.
     /// When an idea is sent through P2P connection,
@@ -80,6 +80,8 @@ class BrainstormingViewModel: NSObject, ObservableObject {
         
         /// Create a var to put the counter variable in the function scope.
         var timerCounter = counter
+        var minute: Int = 0
+        var second: Int = 0
         
         /// Instanciating the brainstormTimer as a repeatable scheduledTimer with a 1 second interval.
         brainstormTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (_) in
@@ -89,11 +91,28 @@ class BrainstormingViewModel: NSObject, ObservableObject {
             
             /// Updating the timerCounter by decreasing it, and also updating the ViewModel timer String.
             timerCounter = timerCounter - 1
-            self.timer = "\(timerCounter)"
+            minute = timerCounter / 60
+            second = timerCounter % 60
+            
+            /// The timer will use 2 in both minute and second display.
+            /// If one of them are under 10, a 0 will be added to keep the standard size.
+            if minute < 10 {
+                if second < 10 {
+                    self.timer = "0\(minute) : 0\(second)"
+                } else {
+                    self.timer = "0\(minute) : \(second)"
+                }
+            } else {
+                if second < 10 {
+                    self.timer = "\(minute) : 0\(second)"
+                } else {
+                    self.timer = "\(minute) : \(second)"
+                }
+            }
             
             /// When the timer reaches 0, it will be stopped through the invalidate method.
             if timerCounter == 0 {
-                brainstormTimer.invalidate()
+                self.brainstormTimer.invalidate()
             }
         })
         
