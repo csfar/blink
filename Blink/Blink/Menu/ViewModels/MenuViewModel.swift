@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-class MenuViewModel: NSObject {
+class MenuViewModel: NSObject, ObservableObject {
     
     let multipeerConnection = Multipeer.shared
     
@@ -18,7 +18,7 @@ class MenuViewModel: NSObject {
         multipeerConnection.delegate = self
     }
     
-    func startHosting(action: UIAlertAction!) {
+    func startHosting() {
         multipeerConnection.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk", discoveryInfo: nil, session: multipeerConnection.mcSession)
         multipeerConnection.mcAdvertiserAssistant.start()
             print("You are hosting now!")

@@ -12,8 +12,12 @@ import SwiftUI
 /// the app's entry point.
 struct MenuView: View {
 
+    @ObservedObject var viewmodel: MenuViewModel
+    @ObservedObject var multipeer = Multipeer.shared
+    
     /// The body of a `MenuView`.
     var body: some View {
+        
         HStack(alignment: .center) {
 
             /// The Button responsible for setting a timer.
@@ -30,9 +34,21 @@ struct MenuView: View {
 
             /// The Button responsible for starting the session.
             Button(action: {
+                self.viewmodel.startHosting()
             }) {
                 Image(systemName: "play")
             }
+//            List() {
+//                ForEach(multipeer.connectedPeersName, id: \.self) { peer in
+//                    Text(peer)
+//                }
+//            }
         }
+    }
+}
+
+struct MenuView_Previews: PreviewProvider {
+    static var previews: some View {
+        MenuView(viewmodel: MenuViewModel())
     }
 }

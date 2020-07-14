@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Create the SwiftUI view that provides the window contents.
-        let viewmodel = VotingViewModel(ideas: [["1st", "2nd", "3rd"], ["6th", "7th", "8th"]])
-        let contentView = VotingView(viewmodel: viewmodel)
+        let viewmodel = MenuViewModel()
+        let contentView = MenuView(viewmodel: viewmodel)
 
         // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)

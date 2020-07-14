@@ -9,22 +9,25 @@
 import Foundation
 import MultipeerConnectivity
 
-class MenuViewModel: NSObject {
+class MenuViewModel: NSObject, ObservableObject {
+    
     
     //TODO - Pesquisar como usar o Browser no SwiftUI
     
     let multipeerConnection = Multipeer.shared
+    
+    typealias MCBrowserViewControllerType = MCBrowserViewController
     
     override init() {
         super.init()
         multipeerConnection.delegate = self
     }
     
-    func joinSession(action: UIAlertAction) {
+//    func joinSession() {
 //        let mcBrowser = MCBrowserViewController(serviceType: "blnk", session: multipeerConnection.mcSession)
 //        mcBrowser.delegate = self
-//        present(mcBrowser, animated: true)
-    }
+////        present(mcBrowser, animated: true)
+//    }
 }
 
 extension MenuViewModel: MCSessionDelegate {
