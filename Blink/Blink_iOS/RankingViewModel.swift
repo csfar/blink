@@ -1,8 +1,8 @@
 //
-//  BrainstormingViewModel.swift
+//  RankingViewModel.swift
 //  Blink_iOS
 //
-//  Created by Edgar Sgroi on 08/07/20.
+//  Created by Victor Falcetta do Nascimento on 15/07/20.
 //  Copyright © 2020 Artur Carneiro. All rights reserved.
 //
 
@@ -10,32 +10,27 @@ import Foundation
 import MultipeerConnectivity
 import os.log
 
-final class BrainstormingViewModel: NSObject, ObservableObject {
+final class RankingViewModel: NSObject, ObservableObject {
     
     private let multipeerConnection = Multipeer.shared
-    @Published var topic: String = ""
     
-    override init() {
+    @Published var topic: String
+    private var ideas: [Idea] = [] {
+        didSet {
+            ranking = ideas.sorted { $0.votes > $1.votes }
+        }
+    }
+    @Published var ranking: [Idea] = []
+    
+    init(topic: String = "") {
+        self.topic = topic
         super.init()
         multipeerConnection.delegate = self
     }
-    
-    func sendIdea(_ content: String) {
-        let idea = Idea(content: content)
-        let mcSession = multipeerConnection.mcSession
-        if mcSession.connectedPeers.count > 0 {
-            do {
-                let data = try JSONEncoder().encode(idea)
-                try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
-            } catch _ as EncodingError {
-                os_log("Failed to encode idea as JSON.", log: OSLog.brainstorm, type: .error)
-            } catch _ as NSError {
-                os_log("Failed to send data through connected peers.", log: OSLog.brainstorm, type: .error)
-            }
-        }
-    }
 }
-extension BrainstormingViewModel: MCSessionDelegate {
+
+extension RankingViewModel: MCSessionDelegate {
+    
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case MCSessionState.connected:
@@ -50,8 +45,11 @@ extension BrainstormingViewModel: MCSessionDelegate {
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        if let topic: String = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? String {
-            self.topic = topic
+        do {
+            let receivedIdeas = try JSONDecoder().decode([Idea].self, from: data)
+            self.ideas = receivedIdeas
+        } catch {
+            os_log("Could not receive ranking data from Host.", log: OSLog.ranking, type: .error)
         }
     }
     
