@@ -131,12 +131,16 @@ extension BrainstormingViewModel: MCSessionDelegate {
         switch state {
         case MCSessionState.connected:
             multipeerConnection.connectionStatus = .connected
+            print("1")
         case MCSessionState.connecting:
             multipeerConnection.connectionStatus = .connecting
+            print("2")
         case MCSessionState.notConnected:
             multipeerConnection.connectionStatus = .notConnected
+            print("3")
         @unknown default:
             multipeerConnection.connectionStatus = .unknown
+            print("4")
         }
     }
     
