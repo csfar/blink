@@ -38,11 +38,6 @@ struct MenuView: View {
             }) {
                 Image(systemName: "play")
             }
-//            List() {
-//                ForEach(multipeer.connectedPeersName, id: \.self) { peer in
-//                    Text(peer)
-//                }
-//            }
         }
     }
 }
