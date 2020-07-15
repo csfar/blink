@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-class MenuViewModel: NSObject {
+final class MenuViewModel: NSObject {
     
     //TODO - Pesquisar como usar o Browser no SwiftUI
     
@@ -21,9 +21,7 @@ class MenuViewModel: NSObject {
     }
     
     func joinSession(action: UIAlertAction) {
-//        let mcBrowser = MCBrowserViewController(serviceType: "blnk", session: multipeerConnection.mcSession)
-//        mcBrowser.delegate = self
-//        present(mcBrowser, animated: true)
+        /// - TODO: Add browser in UIKit.
     }
 }
 

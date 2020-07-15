@@ -8,30 +8,37 @@
 
 import Foundation
 import MultipeerConnectivity
+import os.log
 
-class VotingViewModel: NSObject {
+final class VotingViewModel: NSObject, ObservableObject {
     
-    var multipeerConnection = Multipeer.shared
+    private var multipeerConnection = Multipeer.shared
     
-    var ideas: [String] = []
-    var votes: [String] = []
+    @Published var topic: String
+    @Published var ideas: [Idea] = []
     
-    override init() {
+    init(topic: String) {
+        self.topic = topic
         super.init()
         multipeerConnection.delegate = self
     }
     
-    func sendVotes() {
+    func checkVotedIdeas(_ ideas: [Idea]) {
+        let votedIdeas = ideas.filter { $0.isSelected == true }
+        sendVotes(votedIdeas)
+    }
+    
+    /// - TODO: Check any necessary changes on p2p for new data structure.
+    private func sendVotes(_ votes: [Idea]) {
         let mcSession = multipeerConnection.mcSession
         if mcSession.connectedPeers.count > 0 {
-            if let votesData = try? NSKeyedArchiver.archivedData(withRootObject: votes, requiringSecureCoding: false) {
-                do {
-                    try mcSession.send(votesData, toPeers: mcSession.connectedPeers, with: .reliable)
-                } catch let error as NSError {
-                    let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "Ok", style: .default))
-//                    present(ac, animated: true)
-                }
+            do {
+                let data = try JSONEncoder().encode(votes)
+                try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
+            } catch _ as EncodingError {
+                os_log("Failed to encode voted ideas as JSON.", log: OSLog.voting, type: .error)
+            } catch _ as NSError {
+                os_log("Failed to send data through connected peers.", log: OSLog.voting, type: .error)
             }
         }
     }
@@ -51,9 +58,13 @@ extension VotingViewModel: MCSessionDelegate {
         }
     }
     
+    /// - TODO: Check any necessary changes on p2p for new data structure.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        if let ideasList:[String] = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String] {
-            ideas = ideasList
+        do {
+            let receivedIdeas = try JSONDecoder().decode([Idea].self, from: data)
+            ideas = receivedIdeas
+        } catch {
+            os_log("Failed to decode ideas data from Host.", log: OSLog.voting, type: .error)
         }
     }
     
