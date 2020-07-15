@@ -9,10 +9,15 @@
 import Foundation
 import MultipeerConnectivity
 
+
+/// `VotingView`'s ViewModel dependant on `MultipeerConnectivity`.
 class VotingViewModel: NSObject, ObservableObject {
+    /// Typealias used to describe the structure of the Ranking in a
+    /// more readable format.
     typealias Ranking = [(key: String, value: Int)]
 
-    let multipeerConnection = Multipeer.shared
+    /// Shared instace of the Multipeer Singleton.
+    private let multipeerConnection = Multipeer.shared
 
     /// Published variable of the idea Matrix.
     /// Any changes that occur in this variable will make the view update.
@@ -21,15 +26,16 @@ class VotingViewModel: NSObject, ObservableObject {
     /// The poll of votes for the session.
     @Published var votes: [String] = [String]()
 
-    var rank: Ranking = []
+    /// The ranking for the session.
+    private var rank: Ranking = []
 
-    /// The topic set for the session
+    /// The topic set for the session.
     var topic: String
     
     /// Initialization of this ViewModel with the following parameters:
     /// - Parameter ideas: An array of String type that composes the ideas
     /// - Parameter topic: A session's topic. Empty by default.
-    init(ideas: [[String]],
+    init(ideas: [[String]] = [[String]](),
          topic: String = "") {
         self.ideas = ideas
         self.topic = topic
@@ -37,12 +43,16 @@ class VotingViewModel: NSObject, ObservableObject {
         multipeerConnection.delegate = self
         sendIdeas()
     }
-    
+
+    /// Receives votes from tvOS user (Mediator).
+    /// - TODO: Might not be used anymore.
     func receiveTvVotes(_ tvVotes: [String]) {
         votes.append(contentsOf: tvVotes)
     }
-    
-    func sendIdeas() {
+
+    /// Sends ideas generated during the Brainstorming session to
+    /// all iOS users connected to the current session.
+    private func sendIdeas() {
         let mcSession = multipeerConnection.mcSession
         if mcSession.connectedPeers.count > 0 {
             if let ideasData = try? NSKeyedArchiver.archivedData(withRootObject: ideas, requiringSecureCoding: false) {
@@ -52,12 +62,15 @@ class VotingViewModel: NSObject, ObservableObject {
                     let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Ok", style: .default))
                     /// - TODO: Propper error handling
-//                    present(ac, animated: true)
                 }
             }
         }
     }
-    
+
+    /// Counts all the votes and returns a `Ranking`.
+    /// - Parameter votes: An array of Strings containing votes.
+    /// - Parameter ideas: An array of Strings containting ideas.
+    /// - Returns: A `Ranking` dictionary. Look up the `Ranking` typealias for more info.
     func countVotes(votes: [String], ideas: [String]) -> Ranking {
         let votedIdeas = Array(Set(votes))
         var nonVotedIdeas = [String]()
@@ -75,6 +88,7 @@ class VotingViewModel: NSObject, ObservableObject {
     }
 }
 
+// MARK: - MultipeerConnectivity Session Delegate Functions
 extension VotingViewModel: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {

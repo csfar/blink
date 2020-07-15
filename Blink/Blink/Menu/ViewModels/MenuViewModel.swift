@@ -11,13 +11,12 @@ import MultipeerConnectivity
 
 class MenuViewModel: NSObject, ObservableObject {
     
-    let multipeerConnection = Multipeer.shared
-    
+    private let multipeerConnection = Multipeer.shared
     override init() {
         super.init()
         multipeerConnection.delegate = self
-    }
-    
+
+    /// Starts hosting a Multipeer session with `blnk` as service type.
     func startHosting() {
         multipeerConnection.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk", discoveryInfo: nil, session: multipeerConnection.mcSession)
         multipeerConnection.mcAdvertiserAssistant.start()
@@ -25,6 +24,7 @@ class MenuViewModel: NSObject, ObservableObject {
         }
 }
 
+// MARK: - MultipeerConnectivity Session Delegate Functions
 extension MenuViewModel: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {

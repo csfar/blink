@@ -9,11 +9,11 @@
 import Foundation
 import MultipeerConnectivity
 
-
+/// `BrainstormingView`'s ViewModel dependant on `MultipeerConnectivity`.
 class BrainstormingViewModel: NSObject, ObservableObject {
     
-    /// Shared instance of the Multipeer Class.
-    let multipeerConnection = Multipeer.shared
+    /// Shared instance of the Multipeer Singleton.
+    private let multipeerConnection = Multipeer.shared
     
     /// Published variable of the idea Matrix.
     /// Any changes that occur in this variable will make the view update.
@@ -24,12 +24,19 @@ class BrainstormingViewModel: NSObject, ObservableObject {
 
     /// The timer set for the session.
     @Published private(set) var timer: String
+    var brainstormTimer = Timer()
     
     /// String array variable to store ideas.
     /// When an idea is sent through P2P connection,
     /// It will be stored in this array.
-    var ideas: [String]
+    private var ideas: [String]
 
+    /// Initialize a new instance of this type.
+    /// Sets itself as the MultipeerConnectivity delegate.
+    /// - Parameter ideas: An array of Strings containing the ideas of
+    /// a brainstorming session. Empty by default.
+    /// - Parameter topic: A session's topic. Empty by default.
+    /// - Parameter timer: A session's timer. Empty by default.
     init(ideas: [[String]] = [[String]](),
          topic: String = "",
          timer: String = "") {
@@ -70,8 +77,55 @@ class BrainstormingViewModel: NSObject, ObservableObject {
         }
         return matrixIdeas
     }
+    
+    /// Internal function that creates a
+    /// scheduled timer for the Brainstorm View.
+    /// This function is called with the following parameters:
+    /// - Parameter counter: An Int type variable that tells the time amount for the Brainstorm Timer.
+    func startBrainstormTimer(counter: Int) {
+        
+        /// Create a var to put the counter variable in the function scope.
+        var timerCounter = counter
+        var minute: Int = 0
+        var second: Int = 0
+        
+        /// Instanciating the brainstormTimer as a repeatable scheduledTimer with a 1 second interval.
+        brainstormTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (_) in
+            
+            /// Safely unwrapping the self in the timer scope
+            guard let self = self else { return }
+            
+            /// Updating the timerCounter by decreasing it, and also updating the ViewModel timer String.
+            timerCounter = timerCounter - 1
+            minute = timerCounter / 60
+            second = timerCounter % 60
+            
+            /// The timer will use 2 in both minute and second display.
+            /// If one of them are under 10, a 0 will be added to keep the standard size.
+            if minute < 10 {
+                if second < 10 {
+                    self.timer = "0\(minute) : 0\(second)"
+                } else {
+                    self.timer = "0\(minute) : \(second)"
+                }
+            } else {
+                if second < 10 {
+                    self.timer = "\(minute) : 0\(second)"
+                } else {
+                    self.timer = "\(minute) : \(second)"
+                }
+            }
+            
+            /// When the timer reaches 0, it will be stopped through the invalidate method.
+            if timerCounter == 0 {
+                self.brainstormTimer.invalidate()
+            }
+        })
+        
+    }
 }
 
+// MARK: - MultipeerConnectivity Session Delegate Functions
 extension BrainstormingViewModel: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {

@@ -8,27 +8,64 @@
 
 import Foundation
 import MultipeerConnectivity
+import os.log
 
-class BrainstormingViewModel: NSObject {
+final class BrainstormingViewModel: NSObject, ObservableObject {
     
-    let multipeerConnection = Multipeer.shared
+    private let multipeerConnection = Multipeer.shared
+    @Published var topic: String = ""
     
     override init() {
         super.init()
+        multipeerConnection.delegate = self
     }
     
-    func sendIdea(idea: String) {
+    func sendIdea(_ content: String) {
+        let idea = Idea(content: content)
         let mcSession = multipeerConnection.mcSession
         if mcSession.connectedPeers.count > 0 {
-            if let ideaData = idea.data(using: .utf8) {
-                do {
-                    try mcSession.send(ideaData, toPeers: mcSession.connectedPeers, with: .reliable)
-                } catch let error as NSError {
-                    let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "Ok", style: .default))
-//                    present(ac, animated: true)
-                }
+            do {
+                let data = try JSONEncoder().encode(idea)
+                try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
+            } catch _ as EncodingError {
+                os_log("Failed to encode idea as JSON.", log: OSLog.brainstorm, type: .error)
+            } catch _ as NSError {
+                os_log("Failed to send data through connected peers.", log: OSLog.brainstorm, type: .error)
             }
         }
     }
+}
+extension BrainstormingViewModel: MCSessionDelegate {
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        switch state {
+        case MCSessionState.connected:
+            multipeerConnection.connectionStatus = .connected
+        case MCSessionState.connecting:
+            multipeerConnection.connectionStatus = .connecting
+        case MCSessionState.notConnected:
+            multipeerConnection.connectionStatus = .notConnected
+        @unknown default:
+            multipeerConnection.connectionStatus = .unknown
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        if let topic: String = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? String {
+            self.topic = topic
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        
+    }
+    
+    
 }

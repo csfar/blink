@@ -1,33 +1,36 @@
 //
-//  MenuViewModel.swift
+//  RankingViewModel.swift
 //  Blink_iOS
 //
-//  Created by Edgar Sgroi on 08/07/20.
+//  Created by Victor Falcetta do Nascimento on 15/07/20.
 //  Copyright © 2020 Artur Carneiro. All rights reserved.
 //
 
 import Foundation
 import MultipeerConnectivity
+import os.log
 
-final class MenuViewModel: NSObject, ObservableObject {
+final class RankingViewModel: NSObject, ObservableObject {
     
-    //TODO - Pesquisar como usar o Browser no SwiftUI
+    private let multipeerConnection = Multipeer.shared
     
-    let multipeerConnection = Multipeer.shared
+    @Published var topic: String
+    private var ideas: [Idea] = [] {
+        didSet {
+            ranking = ideas.sorted { $0.votes > $1.votes }
+        }
+    }
+    @Published var ranking: [Idea] = []
     
-    typealias MCBrowserViewControllerType = MCBrowserViewController
-    
-    override init() {
+    init(topic: String = "") {
+        self.topic = topic
         super.init()
         multipeerConnection.delegate = self
     }
-  
-    func joinSession(action: UIAlertAction) {
-        /// - TODO: Add browser in UIKit.
-    }
 }
 
-extension MenuViewModel: MCSessionDelegate {
+extension RankingViewModel: MCSessionDelegate {
+    
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case MCSessionState.connected:
@@ -42,23 +45,24 @@ extension MenuViewModel: MCSessionDelegate {
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        do {
+            let receivedIdeas = try JSONDecoder().decode([Idea].self, from: data)
+            self.ideas = receivedIdeas
+        } catch {
+            os_log("Could not receive ranking data from Host.", log: OSLog.ranking, type: .error)
+        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        
     }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-    }
-}
-
-extension MenuViewModel:  MCBrowserViewControllerDelegate {
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-    }
-    
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        
     }
     
     

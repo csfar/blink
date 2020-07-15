@@ -23,9 +23,6 @@ struct GridView: View {
                         ForEach(row, id: \.self) { col in
                             HStack {
                                 Spacer()
-
-                                /// The Button representing each row as
-                                /// a `GridRowView`.
                                 Button(action: {
                                 }) {
                                     Text(col)

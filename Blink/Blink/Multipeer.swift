@@ -10,6 +10,7 @@ import Foundation
 import MultipeerConnectivity
 import Combine
 
+/// Representation of a `MulipeerConnectivity` session status.
 enum ConnectionStatus {
     case connected
     case connecting
@@ -17,6 +18,7 @@ enum ConnectionStatus {
     case unknown
 }
 
+/// Singleton responsible for managing a `MultipeerConnectivity` session.
 class Multipeer: NSObject, ObservableObject {
     
     static let shared = Multipeer()
