@@ -38,6 +38,10 @@
 		A419E11424BCD0D1008BE53D /* GridViewVotable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A419E11324BCD0D1008BE53D /* GridViewVotable.swift */; };
 		A419E11B24BCF0B3008BE53D /* RankingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A419E11A24BCF0B3008BE53D /* RankingViewModel.swift */; };
 		A43323D224B4F3620027B909 /* BrainstormingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43323D124B4F3620027B909 /* BrainstormingView.swift */; };
+		A4706C3924BE1EB4004B00AE /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4706C3824BE1EB4004B00AE /* MenuView.swift */; };
+		A4706C3E24BE21CE004B00AE /* BrainstormingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4706C3D24BE21CE004B00AE /* BrainstormingView.swift */; };
+		A4706C4724BE39C5004B00AE /* VotingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4706C4624BE39C5004B00AE /* VotingView.swift */; };
+		A4706C4C24BE3B60004B00AE /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4706C4B24BE3B60004B00AE /* RankingView.swift */; };
 		A4CC2B2A24B6335B00C1B165 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC2B2924B6335B00C1B165 /* GridView.swift */; };
 		A4CC2B2C24B635CC00C1B165 /* VotingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC2B2B24B635CC00C1B165 /* VotingView.swift */; };
 		A4CC2B2E24B63AD300C1B165 /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC2B2D24B63AD300C1B165 /* RankingView.swift */; };
@@ -100,6 +104,10 @@
 		A419E11324BCD0D1008BE53D /* GridViewVotable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewVotable.swift; sourceTree = "<group>"; };
 		A419E11A24BCF0B3008BE53D /* RankingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewModel.swift; sourceTree = "<group>"; };
 		A43323D124B4F3620027B909 /* BrainstormingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainstormingView.swift; sourceTree = "<group>"; };
+		A4706C3824BE1EB4004B00AE /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuView.swift; path = Blink/Ranking/ViewModels/MenuView.swift; sourceTree = SOURCE_ROOT; };
+		A4706C3D24BE21CE004B00AE /* BrainstormingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainstormingView.swift; sourceTree = "<group>"; };
+		A4706C4624BE39C5004B00AE /* VotingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingView.swift; sourceTree = "<group>"; };
+		A4706C4B24BE3B60004B00AE /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		A4CC2B2924B6335B00C1B165 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		A4CC2B2B24B635CC00C1B165 /* VotingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingView.swift; sourceTree = "<group>"; };
 		A4CC2B2D24B63AD300C1B165 /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
@@ -143,7 +151,7 @@
 				4F5F130524B660CD00A7D9E7 /* Menu */,
 				4F5F130424B660BF00A7D9E7 /* Brainstorming */,
 				4F5F130324B660B500A7D9E7 /* Voting */,
-				2294603824BF802100BBEE2C /* RankingViewModel.swift */,
+				A4706C4824BE3B42004B00AE /* Ranking */,
 				4F5F130C24B6612E00A7D9E7 /* Multipeer.swift */,
 				4F5F12D124B639FA00A7D9E7 /* AppDelegate.swift */,
 				4F5F12D324B639FA00A7D9E7 /* SceneDelegate.swift */,
@@ -253,7 +261,7 @@
 		4F5F130324B660B500A7D9E7 /* Voting */ = {
 			isa = PBXGroup;
 			children = (
-				4F5F130B24B6611800A7D9E7 /* Views */,
+				A4706C4524BE39B6004B00AE /* Views */,
 				4F5F130A24B6610F00A7D9E7 /* ViewModels */,
 			);
 			path = Voting;
@@ -262,7 +270,7 @@
 		4F5F130424B660BF00A7D9E7 /* Brainstorming */ = {
 			isa = PBXGroup;
 			children = (
-				4F5F130924B6610600A7D9E7 /* View */,
+				A4706C3C24BE21C0004B00AE /* Views */,
 				4F5F130824B660FF00A7D9E7 /* ViewModels */,
 			);
 			path = Brainstorming;
@@ -289,7 +297,7 @@
 		4F5F130724B660F600A7D9E7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4F5F131824BCEBF100A7D9E7 /* MenuView.swift */,
+				A4706C3824BE1EB4004B00AE /* MenuView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -302,26 +310,12 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		4F5F130924B6610600A7D9E7 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		4F5F130A24B6610F00A7D9E7 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				4F5F131224B78BCB00A7D9E7 /* VotingViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		4F5F130B24B6611800A7D9E7 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		A418230D24B39DDF0082962F = {
@@ -404,6 +398,47 @@
 			isa = PBXGroup;
 			children = (
 				A419E11A24BCF0B3008BE53D /* RankingViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A4706C3C24BE21C0004B00AE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A4706C3D24BE21CE004B00AE /* BrainstormingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A4706C4524BE39B6004B00AE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A4706C4624BE39C5004B00AE /* VotingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A4706C4824BE3B42004B00AE /* Ranking */ = {
+			isa = PBXGroup;
+			children = (
+				A4706C4924BE3B49004B00AE /* Views */,
+				A4706C4A24BE3B4E004B00AE /* ViewModels */,
+			);
+			path = Ranking;
+			sourceTree = "<group>";
+		};
+		A4706C4924BE3B49004B00AE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A4706C4B24BE3B60004B00AE /* RankingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A4706C4A24BE3B4E004B00AE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2294603824BF802100BBEE2C /* RankingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -582,13 +617,16 @@
 				2294603524BE4FC300BBEE2C /* Idea.swift in Sources */,
 				2294603724BF750100BBEE2C /* OSLog+Extensions.swift in Sources */,
 				4F5F131124B6659A00A7D9E7 /* BrainstormingViewModel.swift in Sources */,
-				4F5F131924BCEBF100A7D9E7 /* MenuView.swift in Sources */,
+				A4706C4C24BE3B60004B00AE /* RankingView.swift in Sources */,
+				A4706C3924BE1EB4004B00AE /* MenuView.swift in Sources */,
+				A4706C3E24BE21CE004B00AE /* BrainstormingView.swift in Sources */,
 				4F5F131B24BCFFA400A7D9E7 /* Browser.swift in Sources */,
 				4F5F12D224B639FA00A7D9E7 /* AppDelegate.swift in Sources */,
 				4F5F130D24B6612E00A7D9E7 /* Multipeer.swift in Sources */,
 				2294603924BF802100BBEE2C /* RankingViewModel.swift in Sources */,
 				4F5F12D424B639FA00A7D9E7 /* SceneDelegate.swift in Sources */,
 				4F5F130F24B661D700A7D9E7 /* MenuViewModel.swift in Sources */,
+				A4706C4724BE39C5004B00AE /* VotingView.swift in Sources */,
 				4F5F12D624B639FA00A7D9E7 /* ContentView.swift in Sources */,
 				4F5F131324B78BCB00A7D9E7 /* VotingViewModel.swift in Sources */,
 			);
@@ -672,7 +710,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Blink_iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = 4LXC4A87QZ;
+				DEVELOPMENT_TEAM = L76X5KFZD9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Blink_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -694,7 +732,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Blink_iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = 4LXC4A87QZ;
+				DEVELOPMENT_TEAM = L76X5KFZD9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Blink_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -874,9 +912,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Blink/Preview Content\"";
-				DEVELOPMENT_TEAM = 4LXC4A87QZ;
+				DEVELOPMENT_TEAM = L76X5KFZD9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Blink/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -885,6 +924,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.csfar.Blink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -895,9 +935,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Blink/Preview Content\"";
-				DEVELOPMENT_TEAM = 4LXC4A87QZ;
+				DEVELOPMENT_TEAM = L76X5KFZD9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Blink/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -906,6 +947,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.csfar.Blink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
