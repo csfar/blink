@@ -10,30 +10,22 @@ import SwiftUI
 
 struct GridViewVotable: View {
     /// The 2D matrix containing the items as Strings.
-    var items: [[String]]
-
-    /// The array of votes. Requires a `Binding` to type
-    /// responsible for counting all the votes.
-    @Binding var votes: [String]
+    @Binding var items: [[Idea]]
 
     /// The body of a `GridView`
     var body: some View {
         VStack {
             ScrollView(.vertical) {
-                ForEach(items, id: \.self) { row in
+                ForEach(0 ..< items.count) { row in
                     HStack {
-                        ForEach(row, id: \.self) { col in
+                        ForEach(0 ..< self.items[row].count) { col in
                             HStack {
                                 Spacer()
 
                                 Button(action: {
-                                    if self.votes.contains(col) {
-                                        self.votes.removeAll { $0 == col }
-                                    } else {
-                                        self.votes.append(col)
-                                    }
+                                    self.items[row][col].isSelected.toggle()
                                 }) {
-                                    Text(col)
+                                    Text(self.items[row][col].content)
                                         .frame(minWidth: 200, maxWidth: 300, minHeight: 50, maxHeight: 75)
                                         .padding()
                                     }.padding()

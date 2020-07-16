@@ -13,6 +13,10 @@ struct BrainstormingView: View {
     
     /// `BrainstormingView`'s viewmodel.
     @ObservedObject var viewmodel: BrainstormingViewModel
+
+    @State var newIdea: String = ""
+
+    @State var showKeyboard: Bool = false
     
     /// The body of a `BrainstormingView`
     var body: some View {
@@ -35,7 +39,7 @@ struct BrainstormingView: View {
 
             /// The `GridView` used to layout the ideas in a
             /// 3-column grid.
-            GridView(items: self.viewmodel.ideasMatrix)
+            GridView(items: self.$viewmodel.ideasMatrix)
             Spacer()
 
             /// The HStack containing the buttons for
@@ -43,11 +47,22 @@ struct BrainstormingView: View {
             /// and moving forward to voting.
             HStack(alignment: .center) {
 
-                /// The Button responsible for adding new ideas
-                /// using the Apple TV remote.
-                Button(action: {
-                }) {
-                    Image(systemName: "plus")
+                VStack {
+                    /// The Button responsible for adding new ideas
+                    /// using the Apple TV remote.
+                    Button(action: {
+                        self.showKeyboard.toggle()
+                    }) {
+                        Image(systemName: "plus.circle")
+                    }
+
+                    if showKeyboard {
+                        TextField("Idea", text: self.$newIdea, onEditingChanged: {_ in}) {
+                            self.viewmodel.addIdea(self.newIdea)
+                            self.showKeyboard.toggle()
+                            self.newIdea = ""
+                        }
+                    }
                 }
 
                 /// The Button responsible for moving forward to

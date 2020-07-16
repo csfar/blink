@@ -12,7 +12,7 @@ import SwiftUI
 /// `GridRowView` as rows.
 struct GridView: View {
     /// The 2D matrix containing the items as Strings.
-    var items: [[String]]
+    @Binding var items: [[Idea]]
 
     /// The body of a `GridView`
     var body: some View {
@@ -25,7 +25,7 @@ struct GridView: View {
                                 Spacer()
                                 Button(action: {
                                 }) {
-                                    Text(col)
+                                    Text(col.content)
                                         .frame(minWidth: 200, maxWidth: 300, minHeight: 50, maxHeight: 75)
                                         .padding()
                                     }.padding()

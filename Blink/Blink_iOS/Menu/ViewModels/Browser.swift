@@ -12,8 +12,11 @@ import SwiftUI
 
 
 struct Browser: UIViewControllerRepresentable {
+    var delegate: MenuViewModel
+
     func makeUIViewController(context: Context) -> MCBrowserViewController {
         let mcBrowser = MCBrowserViewController(serviceType: "blnk", session: Multipeer.shared.mcSession)
+        mcBrowser.delegate = self.delegate
         return mcBrowser
     }
     

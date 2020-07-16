@@ -34,7 +34,7 @@ struct VotingView: View {
 
             /// A votable version of `GridView` following the same 3-column
             /// structure. Requires a `Binding` for voting.
-            GridViewVotable(items: viewmodel.ideas, votes: $viewmodel.votes)
+//            GridViewVotable(items: $viewmodel.ideas)
             Spacer()
 
             /// The Button responsible for moving forward to

@@ -19,7 +19,7 @@ struct MenuView: View {
                 Text("Blink").font(.largeTitle).bold()
                 Spacer()
                 Button(action: {
-                    self.viewmodel.joinSession()
+                    self.viewmodel.isJoining.toggle()
                 }) {
                     Text("Join session")
                         .bold()
@@ -28,7 +28,9 @@ struct MenuView: View {
                         .background(Color.yellow)
                         .cornerRadius(10)
                 }
-                Spacer()
+                Spacer().sheet(isPresented: $viewmodel.isJoining) {
+                    Browser(delegate: self.viewmodel)
+                }
                 NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel()), isActive: $viewmodel.isConnected, label: {EmptyView()})
             }
         }

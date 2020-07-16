@@ -17,6 +17,7 @@ final class MenuViewModel: NSObject, ObservableObject {
     let multipeerConnection = Multipeer.shared
 
     @Published var isConnected: Bool = false
+    @Published var isJoining: Bool = false
     
     typealias MCBrowserViewControllerType = MCBrowserViewController
     
@@ -24,12 +25,7 @@ final class MenuViewModel: NSObject, ObservableObject {
         super.init()
         multipeerConnection.delegate = self
     }
-    
-    func joinSession() {
-        os_log("Trying to join a session", log: .interaction, type: .info)
-        /// - TODO: Add browser in UIKit.
-        isConnected.toggle()
-    }
+
 }
 
 extension MenuViewModel: MCSessionDelegate {
@@ -61,9 +57,15 @@ extension MenuViewModel: MCSessionDelegate {
 
 extension MenuViewModel:  MCBrowserViewControllerDelegate {
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        browserViewController.dismiss(animated: true) { [weak self] in
+            self?.isConnected.toggle()
+        }
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        browserViewController.dismiss(animated: true) { [weak self] in
+            self?.isConnected.toggle()
+        }
     }
     
     

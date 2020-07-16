@@ -8,6 +8,7 @@
 
 import Foundation
 import MultipeerConnectivity
+import os.log
 
 /// `BrainstormingView`'s ViewModel dependant on `MultipeerConnectivity`.
 class BrainstormingViewModel: NSObject, ObservableObject {
@@ -17,7 +18,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     
     /// Published variable of the idea Matrix.
     /// Any changes that occur in this variable will make the view update.
-    @Published private(set) var ideasMatrix: [[String]]
+    @Published var ideasMatrix: [[Idea]] = [[Idea]]()
 
     /// The topic set for the session.
     @Published private(set) var topic: String
@@ -29,7 +30,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     /// String array variable to store ideas.
     /// When an idea is sent through P2P connection,
     /// It will be stored in this array.
-    private var ideas: [String]
+    private var ideas: [Idea] = [Idea]()
 
     /// Initialize a new instance of this type.
     /// Sets itself as the MultipeerConnectivity delegate.
@@ -37,25 +38,29 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     /// a brainstorming session. Empty by default.
     /// - Parameter topic: A session's topic. Empty by default.
     /// - Parameter timer: A session's timer. Empty by default.
-    init(ideas: [[String]] = [[String]](),
-         topic: String = "",
+    init(topic: String = "",
          timer: String = "") {
-        self.ideas = []
-        self.ideasMatrix = ideas
         self.topic = topic
         self.timer = timer
         super.init()
         multipeerConnection.delegate = self
+    }
+
+    func addIdea(_ content: String) {
+        print(ideasMatrix)
+        let newIdea = Idea(content: content)
+        ideas.append(newIdea)
+        ideasMatrix = convertIdeasArrayInMatrix(ideas: ideas)
     }
     
     /// Internal functional that converts the idea String array
     /// in an idea 2D String matrix with 3 columns and N rows.
     /// This function is called with the following parameters:
     /// - Parameter ideas: The String array that contains the ideas sent through P2P connection.
-    func convertIdeasArrayInMatrix(ideas: [String]) -> [[String]] {
-        var matrixIdeas: [[String]] = []
+    func convertIdeasArrayInMatrix(ideas: [Idea]) -> [[Idea]] {
+        var matrixIdeas: [[Idea]] = []
         var colIndex: Int = 0
-        var ideaArray: [String] = []
+        var ideaArray: [Idea] = []
         for idea in ideas {
             if colIndex == 3 {
                 matrixIdeas.append(ideaArray)
@@ -131,28 +136,23 @@ extension BrainstormingViewModel: MCSessionDelegate {
         switch state {
         case MCSessionState.connected:
             multipeerConnection.connectionStatus = .connected
-            print("1")
         case MCSessionState.connecting:
             multipeerConnection.connectionStatus = .connecting
-            print("2")
         case MCSessionState.notConnected:
             multipeerConnection.connectionStatus = .notConnected
-            print("3")
         @unknown default:
             multipeerConnection.connectionStatus = .unknown
-            print("4")
         }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        if let text = String(data: data, encoding: .utf8) {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                if !self.ideas.contains(text) {
-                    self.ideas.append(text)
-                    self.ideasMatrix = self.convertIdeasArrayInMatrix(ideas: self.ideas)
-                }
-            }
+        do {
+            let idea = try JSONDecoder().decode(Idea.self, from: data)
+            print(idea)
+            ideas.append(idea)
+            ideasMatrix = convertIdeasArrayInMatrix(ideas: ideas)
+        } catch {
+            os_log("Failed to decode Idea from iOS participant", log: .brainstorm, type: .error)
         }
     }
     

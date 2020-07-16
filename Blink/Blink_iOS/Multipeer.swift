@@ -16,7 +16,7 @@ enum ConnectionStatus {
     case unknown
 }
 
-class Multipeer: NSObject {
+final class Multipeer: NSObject {
     
     static let shared = Multipeer()
     
@@ -33,6 +33,5 @@ class Multipeer: NSObject {
         connectionStatus = .notConnected
         mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk", discoveryInfo: nil, session: mcSession)
         super.init()
-        
     }
 }

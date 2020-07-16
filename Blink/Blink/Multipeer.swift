@@ -9,6 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 import Combine
+import os.log
 
 /// Representation of a `MulipeerConnectivity` session status.
 enum ConnectionStatus {
@@ -19,7 +20,7 @@ enum ConnectionStatus {
 }
 
 /// Singleton responsible for managing a `MultipeerConnectivity` session.
-class Multipeer: NSObject, ObservableObject {
+final class Multipeer: NSObject, ObservableObject {
     
     static let shared = Multipeer()
     
@@ -37,9 +38,10 @@ class Multipeer: NSObject, ObservableObject {
         connectionStatus = .notConnected
         mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk", discoveryInfo: nil, session: mcSession)
         super.init()
-        let _ = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer  in
-            self.connectedPeersName = self.mcSession.peersName
-        }
+//        let _ = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer  in
+//            self.connectedPeersName = self.mcSession.peersName
+//            os_log("Peers name timer", log: .multipeer, type: .debug)
+//        }
     }
 }
 
