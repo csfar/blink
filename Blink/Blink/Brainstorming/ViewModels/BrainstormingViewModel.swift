@@ -53,6 +53,14 @@ class BrainstormingViewModel: NSObject, ObservableObject {
         ideas.append(newIdea)
         ideasMatrix = convertIdeasArrayInMatrix(ideas: ideas)
     }
+
+    func addNew(idea: Idea) {
+        ideas.append(idea)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.ideasMatrix = self.convertIdeasArrayInMatrix(ideas: self.ideas)
+        }
+    }
     
     /// Internal functional that converts the idea String array
     /// in an idea 2D String matrix with 3 columns and N rows.
@@ -149,14 +157,7 @@ extension BrainstormingViewModel: MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {
             let idea = try JSONDecoder().decode(Idea.self, from: data)
-            print(idea)
-            ideas.append(idea)
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                self.ideasMatrix = self.convertIdeasArrayInMatrix(ideas: self.ideas)
-            }
+            addNew(idea: idea)
         } catch {
             os_log("Failed to decode Idea from iOS participant", log: .brainstorm, type: .error)
         }

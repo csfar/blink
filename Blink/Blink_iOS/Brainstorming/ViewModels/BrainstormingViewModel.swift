@@ -24,7 +24,6 @@ final class BrainstormingViewModel: NSObject, ObservableObject {
         let idea = Idea(content: content)
         let mcSession = multipeerConnection.mcSession
         if mcSession.connectedPeers.count > 0 {
-            print("Entrou")
             do {
                 let data = try JSONEncoder().encode(idea)
                 try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
