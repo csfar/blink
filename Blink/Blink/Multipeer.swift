@@ -29,7 +29,7 @@ final class Multipeer: NSObject, ObservableObject {
     var mcAdvertiserAssistant: MCAdvertiserAssistant
     
     var connectionStatus: ConnectionStatus
-    var delegate: MCSessionDelegate?
+//    var delegate: MCSessionDelegate?
     @Published var connectedPeersName: [String] = []
 
     override init() {

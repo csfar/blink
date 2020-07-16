@@ -43,7 +43,8 @@ class BrainstormingViewModel: NSObject, ObservableObject {
         self.topic = topic
         self.timer = timer
         super.init()
-        multipeerConnection.delegate = self
+//        multipeerConnection.delegate = self
+        multipeerConnection.mcSession.delegate = self
     }
 
     func addIdea(_ content: String) {
@@ -150,7 +151,12 @@ extension BrainstormingViewModel: MCSessionDelegate {
             let idea = try JSONDecoder().decode(Idea.self, from: data)
             print(idea)
             ideas.append(idea)
-            ideasMatrix = convertIdeasArrayInMatrix(ideas: ideas)
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                self.ideasMatrix = self.convertIdeasArrayInMatrix(ideas: self.ideas)
+            }
         } catch {
             os_log("Failed to decode Idea from iOS participant", log: .brainstorm, type: .error)
         }

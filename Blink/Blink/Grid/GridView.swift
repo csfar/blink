@@ -18,14 +18,14 @@ struct GridView: View {
     var body: some View {
         VStack {
             ScrollView(.vertical) {
-                ForEach(items, id: \.self) { row in
+                ForEach(0 ..< items.count) { row in
                     HStack {
-                        ForEach(row, id: \.self) { col in
+                        ForEach(0 ..< self.items[row].count) { col in
                             HStack {
                                 Spacer()
                                 Button(action: {
                                 }) {
-                                    Text(col.content)
+                                    Text(self.items[row][col].content)
                                         .frame(minWidth: 200, maxWidth: 300, minHeight: 50, maxHeight: 75)
                                         .padding()
                                     }.padding()

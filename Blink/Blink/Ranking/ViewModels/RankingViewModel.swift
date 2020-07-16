@@ -23,7 +23,8 @@ final class RankingViewModel: NSObject, ObservableObject {
         self.ranking = ranking
         self.topic = topic
         super.init()
-        multipeerConnection.delegate = self
+//        multipeerConnection.delegate = self
+        multipeerConnection.mcSession.delegate = self
     }
 }
 

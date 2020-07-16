@@ -40,7 +40,8 @@ class VotingViewModel: NSObject, ObservableObject {
         self.ideas = ideas
         self.topic = topic
         super.init()
-        multipeerConnection.delegate = self
+//        multipeerConnection.delegate = self
+        multipeerConnection.mcSession.delegate = self
         sendIdeas()
     }
 
