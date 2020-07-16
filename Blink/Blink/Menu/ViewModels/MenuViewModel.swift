@@ -9,16 +9,12 @@
 import Foundation
 import MultipeerConnectivity
 
-/// `MenuView`'s ViewModel dependant on `MultipeerConnectivity`.
-class MenuViewModel: NSObject {
-
-    /// Shared instance of the Multipeer Singleton.
+class MenuViewModel: NSObject, ObservableObject {
+    
     private let multipeerConnection = Multipeer.shared
-
     override init() {
         super.init()
         multipeerConnection.delegate = self
-    }
 
     /// Starts hosting a Multipeer session with `blnk` as service type.
     func startHosting() {

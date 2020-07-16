@@ -18,6 +18,8 @@ final class MenuViewModel: NSObject, ObservableObject {
 
     @Published var isConnected: Bool = false
     
+    typealias MCBrowserViewControllerType = MCBrowserViewController
+    
     override init() {
         super.init()
         multipeerConnection.delegate = self
