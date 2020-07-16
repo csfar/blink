@@ -11,7 +11,9 @@ import os.log
 
 extension OSLog {
     private static var subsystem = Bundle.main.bundleIdentifier ?? "com.csfar.Blink.error"
+
     static let brainstorm = OSLog(subsystem: subsystem, category: "brainstorm")
     static let voting = OSLog(subsystem: subsystem, category: "voting")
     static let ranking = OSLog(subsystem: subsystem, category: "ranking")
+    static let interaction = OSLog(subsystem: subsystem, category: "interaction")
 }

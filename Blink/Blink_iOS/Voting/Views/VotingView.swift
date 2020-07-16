@@ -9,24 +9,37 @@
 import SwiftUI
 
 struct VotingView: View {
+    @ObservedObject var viewmodel: VotingViewModel
+
     @State var ideas: [String] = [String]()
+
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(ideas, id: \.self) { idea in
-                    HStack(alignment: .center) {
-                        Text("\(idea)")
-                        Spacer()
-                        Image(systemName: "circle")
+        List {
+            ForEach(0 ..< viewmodel.ideas.count) { index in
+                HStack(alignment: .center) {
+                    Text("\(self.viewmodel.ideas[index].content)")
+                    Spacer()
+                    if self.viewmodel.ideas[index].isSelected {
+                        Button(action: {
+                            self.viewmodel.ideas[index].isSelected.toggle()
+                        }, label: {
+                            Image(systemName: "checkmark.circle.fill").foregroundColor(Color.red)
+                        })
+                    } else {
+                        Button(action: {
+                            self.viewmodel.ideas[index].isSelected.toggle()
+                        }, label: {
+                            Image(systemName: "circle").foregroundColor(Color.yellow)
+                        })
                     }
                 }
-            }.navigationBarTitle("Poll")
-        }
+            }
+        }.navigationBarTitle("\(viewmodel.topic)")
     }
 }
 
 struct VotingView_Previews: PreviewProvider {
     static var previews: some View {
-        VotingView()
+        VotingView(viewmodel: VotingViewModel())
     }
 }

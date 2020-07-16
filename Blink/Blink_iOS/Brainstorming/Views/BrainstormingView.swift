@@ -9,37 +9,26 @@
 import SwiftUI
 
 struct BrainstormingView: View {
-    @State var _testArr: [String] = [String]()
 
-    @State var newIdea: String = ""
-    @State var showAddIdeaSheet: Bool = false
+    @ObservedObject var viewmodel: BrainstormingViewModel
+    @State private var newIdea: String = ""
+
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(_testArr, id: \.self) { idea in
-                    Text("\(idea)")
-                }
-            }.navigationBarTitle("Ideas")
-                .navigationBarItems(trailing: Button(action: {
-                    self.showAddIdeaSheet.toggle()
-                }, label: { Image(systemName: "plus") })
-                    .sheet(isPresented: $showAddIdeaSheet, content: {
-                        AddIdeaSheetView(idea: self.$newIdea, isBeingShown: self.$showAddIdeaSheet)
-                            .onDisappear(perform: {
-                                if !self.newIdea.isEmpty {
-                                    self._testArr.append(self.newIdea)
-                                }
-                                self.newIdea = ""
-                            })
-                    })
-            )
-        }
+        VStack {
+            Text(viewmodel.topic).font(.title).padding()
+            TextField("Idea", text: $newIdea).padding()
+            Button(action: {
+                self.viewmodel.sendIdea(self.newIdea)
+            }) {
+                Text("Send").foregroundColor(Color.white).bold()
+            }.padding().background(Color.red).cornerRadius(10)
+            }.navigationBarBackButtonHidden(true).padding()
     }
 }
 
 struct BrainstormingView_Previews: PreviewProvider {
     static var previews: some View {
-        BrainstormingView()
+        BrainstormingView(viewmodel: BrainstormingViewModel())
     }
 }

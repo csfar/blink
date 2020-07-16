@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Idea: Identifiable, Codable {
+struct Idea: Identifiable, Codable, Hashable {
     
     let id: UUID = UUID()
     var content: String

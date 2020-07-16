@@ -9,28 +9,34 @@
 import SwiftUI
 
 struct MenuView: View {
+
+    @ObservedObject var viewmodel: MenuViewModel
     
     var body: some View {
-        VStack {
-            Spacer()
-            Text("Blink").font(.largeTitle).bold()
-            Spacer()
-            Button(action: {
-            }) {
-                Text("Join session")
-                    .bold()
-                    .foregroundColor(.black)
-                    .padding()
-                    .background(Color.yellow)
-                    .cornerRadius(10)
+        NavigationView {
+            VStack {
+                Spacer()
+                Text("Blink").font(.largeTitle).bold()
+                Spacer()
+                Button(action: {
+                    self.viewmodel.joinSession()
+                }) {
+                    Text("Join session")
+                        .bold()
+                        .foregroundColor(.black)
+                        .padding()
+                        .background(Color.yellow)
+                        .cornerRadius(10)
+                }
+                Spacer()
+                NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel()), isActive: $viewmodel.isConnected, label: {EmptyView()})
             }
-            Spacer()
         }
     }
 }
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView()
+        MenuView(viewmodel: MenuViewModel() )
     }
 }

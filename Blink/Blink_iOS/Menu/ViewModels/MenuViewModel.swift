@@ -8,20 +8,25 @@
 
 import Foundation
 import MultipeerConnectivity
+import os.log
 
-final class MenuViewModel: NSObject {
+final class MenuViewModel: NSObject, ObservableObject {
     
     //TODO - Pesquisar como usar o Browser no SwiftUI
     
     let multipeerConnection = Multipeer.shared
+
+    @Published var isConnected: Bool = false
     
     override init() {
         super.init()
         multipeerConnection.delegate = self
     }
     
-    func joinSession(action: UIAlertAction) {
+    func joinSession() {
+        os_log("Trying to join a session", log: .interaction, type: .info)
         /// - TODO: Add browser in UIKit.
+        isConnected.toggle()
     }
 }
 

@@ -15,9 +15,9 @@ final class VotingViewModel: NSObject, ObservableObject {
     private var multipeerConnection = Multipeer.shared
     
     @Published var topic: String
-    @Published var ideas: [Idea] = []
+    @Published var ideas: [Idea] = [Idea]()
     
-    init(topic: String) {
+    init(topic: String = "") {
         self.topic = topic
         super.init()
         multipeerConnection.delegate = self

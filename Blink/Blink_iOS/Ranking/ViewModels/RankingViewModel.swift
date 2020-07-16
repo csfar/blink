@@ -27,6 +27,7 @@ final class RankingViewModel: NSObject, ObservableObject {
         super.init()
         multipeerConnection.delegate = self
     }
+
 }
 
 extension RankingViewModel: MCSessionDelegate {
