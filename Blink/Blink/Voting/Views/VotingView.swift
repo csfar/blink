@@ -39,15 +39,22 @@ struct VotingView: View {
 
             /// The Button responsible for moving forward to
             /// ranking. Should alert the user before moving on.
-            NavigationLink(destination: RankingView(viewmodel: RankingViewModel(ideas: viewmodel.ideas, topic: viewmodel.topic)),
-            label: {
+            if viewmodel.shouldShowRanking {
+                NavigationLink(destination: RankingView(viewmodel: RankingViewModel(ideas: viewmodel.ideas, topic: viewmodel.topic)),
+                               isActive: $viewmodel.shouldShowRanking,
+                               label: {EmptyView()})
+            }
+            Button(action: {
+                self.viewmodel.shouldShowRanking.toggle()
+            }, label: {
                 HStack(alignment: .center) {
                     Image(systemName: "list.number")
                     Spacer()
-                    Text("Ranking")
+                    Text("Rank")
                     Spacer()
-                }.frame(width: 400, height: 50).font(.headline)
-            })
+                }
+            }).frame(width: 400, height: 50).font(.headline)
+
             Spacer()
         }
     }

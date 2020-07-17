@@ -11,7 +11,6 @@ import SwiftUI
 struct VotingView: View {
     @ObservedObject var viewmodel: VotingViewModel
 
-
     @State var currentlyChosen: Idea = Idea(content: "")
 
     var body: some View {
@@ -45,7 +44,7 @@ struct VotingView: View {
                     }
                 }.font(.headline)
             }
-        }.navigationBarTitle("\(viewmodel.topic)")
+        }.navigationBarTitle("\(viewmodel.topic)").navigationBarBackButtonHidden(true).padding()
     }
 }
 

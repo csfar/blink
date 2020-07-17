@@ -27,6 +27,8 @@ class VotingViewModel: NSObject, ObservableObject {
 
     private var votedIdeas: [Idea] = [Idea]()
 
+    @Published var shouldShowRanking: Bool = false
+
     /// The topic set for the session.
     var topic: String
     
@@ -39,6 +41,7 @@ class VotingViewModel: NSObject, ObservableObject {
         self.topic = topic
         super.init()
         multipeerConnection.mcSession.delegate = self
+        self.arrIdeas = convertIdeasMatrixIntoArray(ideas)
         sendIdeas()
     }
 
@@ -48,9 +51,9 @@ class VotingViewModel: NSObject, ObservableObject {
         let mcSession = multipeerConnection.mcSession
         if mcSession.connectedPeers.count > 0 {
             do {
-                let data = try JSONEncoder().encode(ideas)
-                mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
-            } catch let _ as EncodingError {
+                let data = try JSONEncoder().encode(arrIdeas)
+                try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
+            } catch _ as EncodingError {
                 os_log("Failed to encode ideas to be sent for voting", log: .voting, type: .error)
             } catch {
                 os_log("Failed to send ideas to be voted on", log: .voting, type: .error)
@@ -64,6 +67,20 @@ class VotingViewModel: NSObject, ObservableObject {
             guard let self = self else { return }
             self.ideas = self.convertIdeasArrayInMatrix(ideas: self.arrIdeas)
         }
+    }
+
+    func convertIdeasMatrixIntoArray(_ ideas: [[Idea]]) -> [Idea] {
+        var arr: [Idea] = [Idea]()
+        for row in ideas {
+            arr.append(contentsOf: row)
+        }
+        return arr.map { if $0.isSelected {
+            var idea = $0
+            idea.votes += 1
+            return idea
+        } else {
+            return $0
+        }}.sorted { $0.votes > $1.votes }
     }
 
     /// Internal functional that converts the idea String array
