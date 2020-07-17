@@ -14,18 +14,32 @@ final class RankingViewModel: NSObject, ObservableObject {
 
     private let multipeerConnection = Multipeer.shared
 
-    @Published var ranking: Ranking
+    @Published var ideas: [Idea] = [Idea]()
 
     @Published var topic: String
 
-    init(ranking: Ranking,
+    init(ideas: [[Idea]],
          topic: String = "") {
-        self.ranking = ranking
         self.topic = topic
         super.init()
-//        multipeerConnection.delegate = self
+        self.ideas = convertIdeasMatrixIntoArray(ideas)
         multipeerConnection.mcSession.delegate = self
     }
+
+    func convertIdeasMatrixIntoArray(_ ideas: [[Idea]]) -> [Idea] {
+        var arr: [Idea] = [Idea]()
+        for row in ideas {
+            arr.append(contentsOf: row)
+        }
+        return arr.map { if $0.isSelected {
+            var idea = $0
+            idea.votes += 1
+            return idea
+        } else {
+            return $0
+        }}.sorted { $0.votes > $1.votes }
+    }
+
 }
 
 extension RankingViewModel: MCSessionDelegate {

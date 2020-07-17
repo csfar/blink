@@ -25,7 +25,7 @@ struct VotingView: View {
                 Spacer()
                 Text(viewmodel.topic).font(.headline)
                 Spacer()
-                Text("Time to vote!").font(.headline)
+                Text("Time to vote!").font(.title)
                 Spacer()
                 Text("\(viewmodel.ideas.reduce(0) { $0 + $1.count })").font(.headline)
                 Spacer()
@@ -34,15 +34,20 @@ struct VotingView: View {
 
             /// A votable version of `GridView` following the same 3-column
             /// structure. Requires a `Binding` for voting.
-//            GridViewVotable(items: $viewmodel.ideas)
+            GridViewVotable(items: $viewmodel.ideas)
             Spacer()
 
             /// The Button responsible for moving forward to
             /// ranking. Should alert the user before moving on.
-            Button(action: {
-            }) {
-                Image(systemName: "arrow.right")
-            }
+            NavigationLink(destination: RankingView(viewmodel: RankingViewModel(ideas: viewmodel.ideas, topic: viewmodel.topic)),
+            label: {
+                HStack(alignment: .center) {
+                    Image(systemName: "list.number")
+                    Spacer()
+                    Text("Ranking")
+                    Spacer()
+                }.frame(width: 400, height: 50).font(.headline)
+            })
             Spacer()
         }
     }

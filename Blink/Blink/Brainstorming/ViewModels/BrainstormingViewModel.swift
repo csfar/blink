@@ -43,12 +43,10 @@ class BrainstormingViewModel: NSObject, ObservableObject {
         self.topic = topic
         self.timer = timer
         super.init()
-//        multipeerConnection.delegate = self
         multipeerConnection.mcSession.delegate = self
     }
 
     func addIdea(_ content: String) {
-        print(ideasMatrix)
         let newIdea = Idea(content: content)
         ideas.append(newIdea)
         ideasMatrix = convertIdeasArrayInMatrix(ideas: ideas)

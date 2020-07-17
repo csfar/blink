@@ -27,7 +27,6 @@ final class MenuViewModel: NSObject, ObservableObject {
 
     override init() {
         super.init()
-//        multipeerConnection.delegate = self
         multipeerConnection.mcSession.delegate = self
     }
     /// Starts hosting a Multipeer session with `blnk` as service type.

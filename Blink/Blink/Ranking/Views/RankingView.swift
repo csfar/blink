@@ -8,6 +8,37 @@
 
 import SwiftUI
 
+struct RankingViewRow: View {
+    let index: Int
+    let content: String
+    let votes: Int
+
+    var body: some View {
+        HStack {
+            if index == 1 {
+                Image(systemName: "rosette")
+                    .font(.headline)
+                    .foregroundColor(Color.yellow)
+            } else if index == 2 {
+                Image(systemName: "rosette")
+                    .font(.headline)
+                    .foregroundColor(Color.white)
+            } else if index == 3 {
+                Image(systemName: "rosette")
+                    .font(.headline)
+                    .foregroundColor(Color.orange)
+            } else {
+                Image(systemName: "minus")
+            }
+            Text("\(index)").font(.subheadline)
+            Text("\(content)").font(.headline)
+            Spacer()
+            Text("\(votes)").bold()
+            Text("votes")
+        }
+    }
+}
+
 /// Representation of the ranking screen.
 struct RankingView: View {
     /// `RankingView`s ViewModel.
@@ -26,20 +57,18 @@ struct RankingView: View {
                 Spacer()
                 Text("Ranking").font(.title)
                 Spacer()
-                Text("\(viewmodel.ranking.count)").font(.headline)
+                Text("\(viewmodel.ideas.count)").font(.headline)
                 Spacer()
             }
             Spacer()
 
             /// The list of ideas in order represented by Buttons.
             ScrollView(.vertical){
-                ForEach(0 ..< viewmodel.ranking.count) { pos in
+                ForEach(0 ..< viewmodel.ideas.count) { index in
                     Button(action: {
                     }) {
-                        Text("\(pos + 1). \(self.viewmodel.ranking[pos].key) - \(self.viewmodel.ranking[pos].value) votes")
-                            .font(.headline)
-                            .frame(width: 500, height: 75, alignment: .center)
-                            .padding()
+                        RankingViewRow(index: index + 1, content: self.viewmodel.ideas[index].content, votes: self.viewmodel.ideas[index].votes)
+                        .frame(width: 1000, height: 50)
                     }.padding()
                 }
             }
@@ -50,7 +79,12 @@ struct RankingView: View {
             Button(action: {
 
             }) {
-                Image(systemName: "arrow.clockwise.circle")
+                HStack(alignment: .center) {
+                    Image(systemName: "arrow.clockwise")
+                    Spacer()
+                    Text("Restart")
+                    Spacer()
+                }.frame(width: 400, height: 50).font(.headline)
             }
             Spacer()
         }

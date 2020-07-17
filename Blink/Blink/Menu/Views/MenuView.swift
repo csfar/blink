@@ -17,9 +17,12 @@ struct TimerRow: View {
             self.timer = self.minutes
         }, label: {
             HStack {
-                Text("\(minutes)").bold().frame(width: 100, height: 50)
+                Image(systemName: "timer")
+                Spacer()
+                Text("\(minutes)").bold()
+                Spacer()
                 Text("minutes")
-            }
+            }.frame(width: 400, height: 50)
         })
     }
 }
@@ -47,15 +50,20 @@ struct MenuView: View {
                     }
                 }
                 Spacer()
-                HStack(alignment: .center) {
+                HStack {
 
                     VStack {
                         /// The Button responsible for setting a timer.
                         Button(action: {
                             self.selectingTimer.toggle()
                         }) {
-                            Image(systemName: "timer")
-                        }.padding()
+                            HStack(alignment: .center) {
+                                Image(systemName: "clock")
+                                Spacer()
+                                Text("Set a timer").font(.headline)
+                                Spacer()
+                            }.frame(width: 400, height: 50)
+                        }.frame(width: 400, height: 50).font(.headline)
 
                         if selectingTimer {
                             VStack {
@@ -63,36 +71,53 @@ struct MenuView: View {
                                 TimerRow(timer: $viewmodel.timer, minutes: 10)
                                 TimerRow(timer: $viewmodel.timer, minutes: 15)
                                 TimerRow(timer: $viewmodel.timer, minutes: 20)
-                            }.padding()
+                            }.padding().frame(width: 400)
                         }
-                    }
+                    }.frame(width: 500)
 
                     VStack{
                         /// The Button responsible for setting a topic.
                         Button(action: {
                             self.selectingTopic.toggle()
                         }) {
-                            Image(systemName: "t.bubble")
+                            HStack(alignment: .center) {
+                                Image(systemName: "textbox")
+                                Spacer()
+                                Text("Set a topic")
+                                Spacer()
+                            }.frame(width: 400, height: 50).font(.headline)
                         }
                         if selectingTopic {
-                            TextField("Topic", text: $viewmodel.topic)
+                            TextField("Topic", text: $viewmodel.topic).frame(width: 400, height: 50)
                         }
-                    }
+                    }.frame(width: 500)
 
                     VStack {
                         if viewmodel.anyConnected || viewmodel.isHosting {
-                            NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel()),
-                                           label: {Text("Start session")}).padding()
+                            NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel(topic: viewmodel.topic, timer: viewmodel.topic)),
+                                           label: {
+                                            HStack(alignment: .center) {
+                                                Image(systemName: "play")
+                                                Spacer()
+                                                Text("Start session")
+                                                Spacer()
+                                            }.frame(width: 400, height: 50).font(.headline)
+                            })
 
                         } else {
                             /// The Button responsible for starting the session.
                             Button(action: {
                                 self.viewmodel.startHosting()
                             }) {
-                                Image(systemName: "play")
+                                HStack(alignment: .center) {
+                                    Image(systemName: "plus")
+                                    Spacer()
+                                    Text("Host a session")
+                                    Spacer()
+                                }.frame(width: 400, height: 50).font(.headline)
                             }
                         }
-                    }
+                    }.frame(width: 500)
                 }
                 Spacer()
             }

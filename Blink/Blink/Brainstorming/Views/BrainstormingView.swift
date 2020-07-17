@@ -53,7 +53,12 @@ struct BrainstormingView: View {
                     Button(action: {
                         self.showKeyboard.toggle()
                     }) {
-                        Image(systemName: "plus.circle")
+                        HStack(alignment: .center) {
+                            Image(systemName: "plus")
+                            Spacer()
+                            Text("Add")
+                            Spacer()
+                        }.frame(width: 400, height: 50).font(.headline)
                     }
 
                     if showKeyboard {
@@ -67,11 +72,15 @@ struct BrainstormingView: View {
 
                 /// The Button responsible for moving forward to
                 /// voting. Should alert the user before moving on.
-                Button(action: {
-
-                }) {
-                    Image(systemName: "arrow.right")
-                }
+                NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: nil, topic: viewmodel.topic)),
+                label: {
+                    HStack(alignment: .center) {
+                        Image(systemName: "checkmark.circle.fill")
+                        Spacer()
+                        Text("Vote")
+                        Spacer()
+                    }.frame(width: 400, height: 50).font(.headline)
+                })
             }.padding()
             Spacer()
         }
