@@ -15,12 +15,14 @@ final class VotingViewModel: NSObject, ObservableObject {
     private var multipeerConnection = Multipeer.shared
     
     @Published var topic: String
-    @Published var ideas: [Idea] = [Idea]()
+    @Published var ideas: [Idea]
     
-    init(topic: String = "") {
+    init(ideas: [Idea],
+         topic: String = "") {
+        self.ideas = ideas
         self.topic = topic
         super.init()
-        multipeerConnection.delegate = self
+        multipeerConnection.mcSession.delegate = self
     }
     
     func checkVotedIdeas(_ ideas: [Idea]) {

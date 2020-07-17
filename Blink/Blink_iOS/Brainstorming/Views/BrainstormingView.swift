@@ -23,6 +23,9 @@ struct BrainstormingView: View {
             }) {
                 Text("Send").foregroundColor(Color.white).bold()
             }.padding().background(Color.red).cornerRadius(10)
+            if viewmodel.shouldVote {
+                NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: self.viewmodel.ideas)), isActive: self.$viewmodel.shouldVote, label: {EmptyView().navigationBarItems(trailing: Text("Vote"))})
+            }
             }.navigationBarBackButtonHidden(true).padding()
     }
 }

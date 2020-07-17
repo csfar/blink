@@ -11,7 +11,7 @@ import SwiftUI
 struct VotingView: View {
     @ObservedObject var viewmodel: VotingViewModel
 
-    @State var ideas: [String] = [String]()
+    @State var currentlyChosen: Idea = Idea(content: "")
 
     var body: some View {
         List {
@@ -22,24 +22,29 @@ struct VotingView: View {
                     if self.viewmodel.ideas[index].isSelected {
                         Button(action: {
                             self.viewmodel.ideas[index].isSelected.toggle()
+                            self.currentlyChosen = self.viewmodel.ideas[index]
+                            self.currentlyChosen = Idea(content: "")
                         }, label: {
-                            Image(systemName: "checkmark.circle.fill").foregroundColor(Color.red)
+                            Image(systemName: "checkmark.circle.fill")
                         })
                     } else {
                         Button(action: {
                             self.viewmodel.ideas[index].isSelected.toggle()
+                            self.viewmodel.ideas = self.viewmodel.ideas.map {
+                                var idea = $0
+                                if $0 == self.currentlyChosen {
+                                    idea.isSelected.toggle()
+                                }
+                                return idea
+                            }
+                            self.currentlyChosen = self.viewmodel.ideas[index]
                         }, label: {
-                            Image(systemName: "circle").foregroundColor(Color.yellow)
+                            Image(systemName: "circle")
                         })
                     }
-                }
+                }.font(.headline)
             }
-        }.navigationBarTitle("\(viewmodel.topic)")
+        }.navigationBarTitle("\(viewmodel.topic)").navigationBarBackButtonHidden(true).padding()
     }
 }
 
-struct VotingView_Previews: PreviewProvider {
-    static var previews: some View {
-        VotingView(viewmodel: VotingViewModel())
-    }
-}

@@ -12,7 +12,7 @@ import SwiftUI
 /// `GridRowView` as rows.
 struct GridView: View {
     /// The 2D matrix containing the items as Strings.
-    var items: [[String]]
+    @Binding var items: [[Idea]]
 
     /// The body of a `GridView`
     var body: some View {
@@ -20,21 +20,15 @@ struct GridView: View {
             ScrollView(.vertical) {
                 ForEach(items, id: \.self) { row in
                     HStack {
-                        ForEach(row, id: \.self) { col in
-                            HStack {
-                                Spacer()
-                                Button(action: {
-                                }) {
-                                    Text(col)
-                                        .frame(minWidth: 200, maxWidth: 300, minHeight: 50, maxHeight: 75)
-                                        .padding()
-                                    }.padding()
-                                Spacer()
+                        ForEach(row, id: \.id) { col in
+                            Button(action: {
+                            }) {
+                                Text(col.content).frame(width: 400, height: 50).font(.headline)
                             }
                         }
                     }
                 }
-            }
+            }.padding()
         }
     }
 }

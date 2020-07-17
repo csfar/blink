@@ -8,26 +8,26 @@
 
 import Foundation
 import MultipeerConnectivity
+import os.log
 
 
 /// `VotingView`'s ViewModel dependant on `MultipeerConnectivity`.
 class VotingViewModel: NSObject, ObservableObject {
-    /// Typealias used to describe the structure of the Ranking in a
-    /// more readable format.
-    typealias Ranking = [(key: String, value: Int)]
-
     /// Shared instace of the Multipeer Singleton.
     private let multipeerConnection = Multipeer.shared
 
     /// Published variable of the idea Matrix.
     /// Any changes that occur in this variable will make the view update.
-    @Published private(set) var ideas: [[String]]
+    @Published var ideas: [[Idea]] = [[Idea]]()
 
     /// The poll of votes for the session.
-    @Published var votes: [String] = [String]()
+    @Published var votes: [Idea] = [Idea]()
 
-    /// The ranking for the session.
-    private var rank: Ranking = []
+    private var arrIdeas: [Idea] = [Idea]()
+
+    private var votedIdeas: [Idea] = [Idea]()
+
+    @Published var shouldShowRanking: Bool = false
 
     /// The topic set for the session.
     var topic: String
@@ -35,19 +35,14 @@ class VotingViewModel: NSObject, ObservableObject {
     /// Initialization of this ViewModel with the following parameters:
     /// - Parameter ideas: An array of String type that composes the ideas
     /// - Parameter topic: A session's topic. Empty by default.
-    init(ideas: [[String]] = [[String]](),
+    init(ideas: [[Idea]],
          topic: String = "") {
         self.ideas = ideas
         self.topic = topic
         super.init()
-        multipeerConnection.delegate = self
+        multipeerConnection.mcSession.delegate = self
+        self.arrIdeas = convertIdeasMatrixIntoArray(ideas)
         sendIdeas()
-    }
-
-    /// Receives votes from tvOS user (Mediator).
-    /// - TODO: Might not be used anymore.
-    func receiveTvVotes(_ tvVotes: [String]) {
-        votes.append(contentsOf: tvVotes)
     }
 
     /// Sends ideas generated during the Brainstorming session to
@@ -55,36 +50,67 @@ class VotingViewModel: NSObject, ObservableObject {
     private func sendIdeas() {
         let mcSession = multipeerConnection.mcSession
         if mcSession.connectedPeers.count > 0 {
-            if let ideasData = try? NSKeyedArchiver.archivedData(withRootObject: ideas, requiringSecureCoding: false) {
-                do {
-                    try mcSession.send(ideasData, toPeers: mcSession.connectedPeers, with: .reliable)
-                } catch let error as NSError {
-                    let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "Ok", style: .default))
-                    /// - TODO: Propper error handling
-                }
+            do {
+                let data = try JSONEncoder().encode(arrIdeas)
+                try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
+            } catch _ as EncodingError {
+                os_log("Failed to encode ideas to be sent for voting", log: .voting, type: .error)
+            } catch {
+                os_log("Failed to send ideas to be voted on", log: .voting, type: .error)
             }
         }
     }
 
-    /// Counts all the votes and returns a `Ranking`.
-    /// - Parameter votes: An array of Strings containing votes.
-    /// - Parameter ideas: An array of Strings containting ideas.
-    /// - Returns: A `Ranking` dictionary. Look up the `Ranking` typealias for more info.
-    func countVotes(votes: [String], ideas: [String]) -> Ranking {
-        let votedIdeas = Array(Set(votes))
-        var nonVotedIdeas = [String]()
-        for i in ideas {
-            if !votedIdeas.contains(i) {
-                nonVotedIdeas.append(i)
+    func addNew(idea: Idea) {
+        arrIdeas.append(idea)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.ideas = self.convertIdeasArrayInMatrix(ideas: self.arrIdeas)
+        }
+    }
+
+    func convertIdeasMatrixIntoArray(_ ideas: [[Idea]]) -> [Idea] {
+        var arr: [Idea] = [Idea]()
+        for row in ideas {
+            arr.append(contentsOf: row)
+        }
+        return arr.map { if $0.isSelected {
+            var idea = $0
+            idea.votes += 1
+            return idea
+        } else {
+            return $0
+        }}.sorted { $0.votes > $1.votes }
+    }
+
+    /// Internal functional that converts the idea String array
+    /// in an idea 2D String matrix with 3 columns and N rows.
+    /// This function is called with the following parameters:
+    /// - Parameter ideas: The String array that contains the ideas sent through P2P connection.
+    func convertIdeasArrayInMatrix(ideas: [Idea]) -> [[Idea]] {
+        var matrixIdeas: [[Idea]] = []
+        var colIndex: Int = 0
+        var ideaArray: [Idea] = []
+        for idea in ideas {
+            if colIndex == 3 {
+                matrixIdeas.append(ideaArray)
+                ideaArray = []
+                colIndex = 0
+
+                if ideaArray.isEmpty {
+                    ideaArray.append(idea)
+                    colIndex += 1
+                }
+
+            } else {
+                ideaArray.append(idea)
+                colIndex += 1
             }
         }
-        let votedIdeasArray = votes.map { ($0, 1) }
-        let ideasFrequency = Dictionary(votedIdeasArray, uniquingKeysWith: +)
-        let nonVotedIdeasArray = nonVotedIdeas.map { ($0, 0) }
-        let ideasNonFrequency = Dictionary(nonVotedIdeasArray, uniquingKeysWith: +)
-        let votingResult = ideasFrequency.merging(ideasNonFrequency) { (_, new) in new }
-        return votingResult.sorted(by: {($0.value > $1.value)})
+        if ideaArray.isEmpty == false {
+            matrixIdeas.append(ideaArray)
+        }
+        return matrixIdeas
     }
 }
 
@@ -104,8 +130,12 @@ extension VotingViewModel: MCSessionDelegate {
     }
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        if let votesList:[String] = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String] {
-            votes += votesList        }
+        do {
+            let idea = try JSONDecoder().decode(Idea.self, from: data)
+            votedIdeas.append(idea)
+        } catch {
+            os_log("Failed to decode Idea from iOS participant", log: .brainstorm, type: .error)
+        }
     }
 
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

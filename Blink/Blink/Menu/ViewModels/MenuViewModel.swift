@@ -8,20 +8,34 @@
 
 import Foundation
 import MultipeerConnectivity
+import os.log
 
-class MenuViewModel: NSObject, ObservableObject {
+final class MenuViewModel: NSObject, ObservableObject {
     
-    private let multipeerConnection = Multipeer.shared
+    private lazy var multipeerConnection = Multipeer.shared
+
+    @Published var topic: String = ""
+    @Published var timer: Int = 0
+    @Published var isHosting: Bool = false
+    var anyConnected: Bool {
+        if multipeerConnection.mcSession.connectedPeers.count > 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+
     override init() {
         super.init()
-        multipeerConnection.delegate = self
-
+        multipeerConnection.mcSession.delegate = self
+    }
     /// Starts hosting a Multipeer session with `blnk` as service type.
     func startHosting() {
         multipeerConnection.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk", discoveryInfo: nil, session: multipeerConnection.mcSession)
         multipeerConnection.mcAdvertiserAssistant.start()
-            print("You are hosting now!")
-        }
+        isHosting.toggle()
+        os_log("Started hosting a Multipeer session", log: .multipeer, type: .info)
+    }
 }
 
 // MARK: - MultipeerConnectivity Session Delegate Functions
@@ -38,16 +52,16 @@ extension MenuViewModel: MCSessionDelegate {
             multipeerConnection.connectionStatus = .unknown
         }
     }
-    
+
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
     }
-    
+
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
     }
-    
+
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
     }
-    
+
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
     }
 }

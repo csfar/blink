@@ -14,10 +14,13 @@ final class BrainstormingViewModel: NSObject, ObservableObject {
     
     private let multipeerConnection = Multipeer.shared
     @Published var topic: String = ""
+
+    @Published var ideas: [Idea] = [Idea]()
+    @Published var shouldVote: Bool = false
     
     override init() {
         super.init()
-        multipeerConnection.delegate = self
+        multipeerConnection.mcSession.delegate = self
     }
     
     func sendIdea(_ content: String) {
@@ -50,8 +53,12 @@ extension BrainstormingViewModel: MCSessionDelegate {
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        if let topic: String = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? String {
-            self.topic = topic
+        do {
+            let ideas = try JSONDecoder().decode([Idea].self, from: data)
+            self.ideas = ideas
+            self.shouldVote = true
+        } catch {
+            os_log("Failed to decode ideas from Mediator to be voted on", log: .voting, type: .error)
         }
     }
     

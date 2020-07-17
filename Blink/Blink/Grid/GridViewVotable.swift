@@ -8,36 +8,58 @@
 
 import SwiftUI
 
+struct GridViewVotableRow: View {
+    let idea: Idea
+
+    var body: some View {
+        HStack {
+            Text(idea.content)
+            Spacer()
+            if idea.isSelected {
+                Image(systemName: "checkmark.circle.fill")
+            } else {
+                Image(systemName: "circle")
+            }
+        }.frame(width: 400, height: 50).font(.headline)
+    }
+}
+
 struct GridViewVotable: View {
     /// The 2D matrix containing the items as Strings.
-    var items: [[String]]
+    @Binding var items: [[Idea]]
 
-    /// The array of votes. Requires a `Binding` to type
-    /// responsible for counting all the votes.
-    @Binding var votes: [String]
+    @State private var currentlyChosen: Idea = Idea(content: "")
 
     /// The body of a `GridView`
     var body: some View {
         VStack {
             ScrollView(.vertical) {
-                ForEach(items, id: \.self) { row in
+                ForEach(0 ..< items.count) { row in
                     HStack {
-                        ForEach(row, id: \.self) { col in
+                        ForEach(0 ..< self.items[row].count) { col in
                             HStack {
-                                Spacer()
-
                                 Button(action: {
-                                    if self.votes.contains(col) {
-                                        self.votes.removeAll { $0 == col }
+                                    if self.items[row][col] == self.currentlyChosen {
+                                        self.items[row][col].isSelected.toggle()
+                                        self.currentlyChosen = Idea(content: "")
                                     } else {
-                                        self.votes.append(col)
+                                        self.items = self.items.map { $0.map {
+                                            var idea = $0
+                                            if $0 == self.currentlyChosen {
+                                                idea.isSelected.toggle()
+                                            }
+                                            return idea
+                                            } }
+                                        self.items[row][col].isSelected.toggle()
+                                        self.currentlyChosen = self.items[row][col]
                                     }
                                 }) {
-                                    Text(col)
-                                        .frame(minWidth: 200, maxWidth: 300, minHeight: 50, maxHeight: 75)
-                                        .padding()
-                                    }.padding()
-                                Spacer()
+                                    if self.items[row][col] == self.currentlyChosen {
+                                        GridViewVotableRow(idea: self.currentlyChosen)
+                                    } else {
+                                        GridViewVotableRow(idea: self.items[row][col])
+                                    }
+                                }.padding()
                             }
                         }
                     }

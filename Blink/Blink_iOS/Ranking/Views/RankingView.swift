@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+
 struct RankingViewRow: View {
     let index: Int
     let content: String
@@ -47,7 +48,7 @@ struct RankingView: View {
                 ForEach(0 ..< viewmodel.ranking.count) { index in
                     RankingViewRow(index: index + 1, content: self.viewmodel.ranking[index].content, votes: self.viewmodel.ranking[index].votes)
                 }
-            }.navigationBarTitle("Ranking")
+            }.navigationBarTitle("Ranking").navigationBarBackButtonHidden(true).padding()
         }
     }
 }

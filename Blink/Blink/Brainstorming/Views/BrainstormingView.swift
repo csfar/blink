@@ -13,6 +13,10 @@ struct BrainstormingView: View {
     
     /// `BrainstormingView`'s viewmodel.
     @ObservedObject var viewmodel: BrainstormingViewModel
+
+    @State var newIdea: String = ""
+
+    @State var showKeyboard: Bool = false
     
     /// The body of a `BrainstormingView`
     var body: some View {
@@ -23,9 +27,9 @@ struct BrainstormingView: View {
             /// number of ideas added.
             HStack {
                 Spacer()
-                Text(viewmodel.topic).font(.headline)
+                Text(viewmodel.timer).font(.headline)
                 Spacer()
-                Text(viewmodel.timer).font(.title)
+                Text(viewmodel.topic).font(.title)
                 Spacer()
                 Text("\(viewmodel.ideasMatrix.reduce(0) { $0 + $1.count })").font(.headline)
                 Spacer()
@@ -35,7 +39,7 @@ struct BrainstormingView: View {
 
             /// The `GridView` used to layout the ideas in a
             /// 3-column grid.
-            GridView(items: self.viewmodel.ideasMatrix)
+            GridView(items: self.$viewmodel.ideasMatrix)
             Spacer()
 
             /// The HStack containing the buttons for
@@ -43,19 +47,41 @@ struct BrainstormingView: View {
             /// and moving forward to voting.
             HStack(alignment: .center) {
 
-                /// The Button responsible for adding new ideas
-                /// using the Apple TV remote.
-                Button(action: {
-                }) {
-                    Image(systemName: "plus")
+                VStack {
+                    /// The Button responsible for adding new ideas
+                    /// using the Apple TV remote.
+                    Button(action: {
+                        self.showKeyboard.toggle()
+                    }) {
+                        HStack(alignment: .center) {
+                            Image(systemName: "plus")
+                            Spacer()
+                            Text("Add")
+                            Spacer()
+                        }.frame(width: 400, height: 50).font(.headline)
+                    }
+
+                    if showKeyboard {
+                        TextField("Idea", text: self.$newIdea, onEditingChanged: {_ in}) {
+                            self.viewmodel.addIdea(self.newIdea)
+                            self.showKeyboard.toggle()
+                            self.newIdea = ""
+                        }.frame(width: 400, height: 50)
+                    }
                 }
 
                 /// The Button responsible for moving forward to
                 /// voting. Should alert the user before moving on.
-                Button(action: {
-
-                }) {
-                    Image(systemName: "arrow.right")
+                if !viewmodel.isTimerActive {
+                    NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: viewmodel.ideasMatrix, topic: viewmodel.topic)),
+                                   label: {
+                                    HStack(alignment: .center) {
+                                        Image(systemName: "checkmark.circle.fill")
+                                        Spacer()
+                                        Text("Vote")
+                                        Spacer()
+                                    }.frame(width: 400, height: 50).font(.headline)
+                    })
                 }
             }.padding()
             Spacer()

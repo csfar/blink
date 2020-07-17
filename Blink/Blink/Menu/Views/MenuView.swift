@@ -8,35 +8,118 @@
 
 import SwiftUI
 
+struct TimerRow: View {
+    @Binding var timer: Int
+    let minutes: Int
+
+    var body: some View {
+        Button(action: {
+            self.timer = self.minutes
+        }, label: {
+            HStack {
+                Image(systemName: "timer")
+                Spacer()
+                Text("\(minutes)").bold()
+                Spacer()
+                Text("minutes")
+            }.frame(width: 400, height: 50)
+        })
+    }
+}
+
 /// Representation of the main menu. This view should be
 /// the app's entry point.
 struct MenuView: View {
 
     @ObservedObject var viewmodel: MenuViewModel
-    @ObservedObject var multipeer = Multipeer.shared
+
+    @State var selectingTimer: Bool = false
+
+    @State var selectingTopic: Bool = false
     
     /// The body of a `MenuView`.
     var body: some View {
-        
-        HStack(alignment: .center) {
+        NavigationView {
+            VStack {
+                HStack {
+                    if viewmodel.timer > 0 {
+                        Text("\(viewmodel.timer) minutes")
+                    }
+                    if !viewmodel.topic.isEmpty {
+                        Text("\(viewmodel.topic)")
+                    }
+                }
+                Spacer()
+                HStack {
 
-            /// The Button responsible for setting a timer.
-            Button(action: {
-            }) {
-                Image(systemName: "timer")
-            }
+                    VStack {
+                        /// The Button responsible for setting a timer.
+                        Button(action: {
+                            self.selectingTimer.toggle()
+                        }) {
+                            HStack(alignment: .center) {
+                                Image(systemName: "clock")
+                                Spacer()
+                                Text("Set a timer").font(.headline)
+                                Spacer()
+                            }.frame(width: 400, height: 50)
+                        }.frame(width: 400, height: 50).font(.headline)
 
-            /// The Button responsible for setting a topic.
-            Button(action: {
-            }) {
-                Image(systemName: "t.bubble")
-            }
+                        if selectingTimer {
+                            VStack {
+                                TimerRow(timer: $viewmodel.timer, minutes: 5)
+                                TimerRow(timer: $viewmodel.timer, minutes: 10)
+                                TimerRow(timer: $viewmodel.timer, minutes: 15)
+                                TimerRow(timer: $viewmodel.timer, minutes: 20)
+                            }.padding().frame(width: 400)
+                        }
+                    }.frame(width: 500)
 
-            /// The Button responsible for starting the session.
-            Button(action: {
-                self.viewmodel.startHosting()
-            }) {
-                Image(systemName: "play")
+                    VStack{
+                        /// The Button responsible for setting a topic.
+                        Button(action: {
+                            self.selectingTopic.toggle()
+                        }) {
+                            HStack(alignment: .center) {
+                                Image(systemName: "textbox")
+                                Spacer()
+                                Text("Set a topic")
+                                Spacer()
+                            }.frame(width: 400, height: 50).font(.headline)
+                        }
+                        if selectingTopic {
+                            TextField("Topic", text: $viewmodel.topic).frame(width: 400, height: 50)
+                        }
+                    }.frame(width: 500)
+
+                    VStack {
+                        if viewmodel.anyConnected || viewmodel.isHosting {
+                            NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel(topic: viewmodel.topic, timer: viewmodel.timer)),
+                                           label: {
+                                            HStack(alignment: .center) {
+                                                Image(systemName: "play")
+                                                Spacer()
+                                                Text("Start session")
+                                                Spacer()
+                                            }.frame(width: 400, height: 50).font(.headline)
+                            })
+
+                        } else {
+                            /// The Button responsible for starting the session.
+                            Button(action: {
+                                self.viewmodel.startHosting()
+                            }) {
+                                HStack(alignment: .center) {
+                                    Image(systemName: "plus")
+                                    Spacer()
+                                    Text("Host a session")
+                                    Spacer()
+                                }.frame(width: 400, height: 50).font(.headline)
+                            }
+                        }
+                    }.frame(width: 500)
+                }
+                Spacer()
             }
         }
     }

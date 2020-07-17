@@ -1,8 +1,8 @@
 //
 //  Idea.swift
-//  Blink_iOS
+//  Blink
 //
-//  Created by Victor Falcetta do Nascimento on 14/07/20.
+//  Created by Artur Carneiro on 16/07/20.
 //  Copyright © 2020 Artur Carneiro. All rights reserved.
 //
 
