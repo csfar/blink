@@ -24,8 +24,11 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     @Published private(set) var topic: String
 
     /// The timer set for the session.
-    @Published private(set) var timer: String
+    @Published private(set) var timer: String = ""
+
     var brainstormTimer = Timer()
+
+    @Published var isTimerActive: Bool = true
     
     /// String array variable to store ideas.
     /// When an idea is sent through P2P connection,
@@ -39,10 +42,10 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     /// - Parameter topic: A session's topic. Empty by default.
     /// - Parameter timer: A session's timer. Empty by default.
     init(topic: String = "",
-         timer: String = "") {
+         timer: Int = 0) {
         self.topic = topic
-        self.timer = timer
         super.init()
+        self.startBrainstormTimer(counter: timer)
         multipeerConnection.mcSession.delegate = self
     }
 
@@ -97,7 +100,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     func startBrainstormTimer(counter: Int) {
         
         /// Create a var to put the counter variable in the function scope.
-        var timerCounter = counter
+        var timerCounter = 1 * 60 
         var minute: Int = 0
         var second: Int = 0
         
@@ -131,6 +134,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
             /// When the timer reaches 0, it will be stopped through the invalidate method.
             if timerCounter == 0 {
                 self.brainstormTimer.invalidate()
+                self.isTimerActive = false
             }
         })
         

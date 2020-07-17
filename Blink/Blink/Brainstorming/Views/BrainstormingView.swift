@@ -27,9 +27,9 @@ struct BrainstormingView: View {
             /// number of ideas added.
             HStack {
                 Spacer()
-                Text(viewmodel.topic).font(.headline)
+                Text(viewmodel.timer).font(.headline)
                 Spacer()
-                Text(viewmodel.timer).font(.title)
+                Text(viewmodel.topic).font(.title)
                 Spacer()
                 Text("\(viewmodel.ideasMatrix.reduce(0) { $0 + $1.count })").font(.headline)
                 Spacer()
@@ -66,21 +66,23 @@ struct BrainstormingView: View {
                             self.viewmodel.addIdea(self.newIdea)
                             self.showKeyboard.toggle()
                             self.newIdea = ""
-                        }
+                        }.frame(width: 400, height: 50)
                     }
                 }
 
                 /// The Button responsible for moving forward to
                 /// voting. Should alert the user before moving on.
-                NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: nil, topic: viewmodel.topic)),
-                label: {
-                    HStack(alignment: .center) {
-                        Image(systemName: "checkmark.circle.fill")
-                        Spacer()
-                        Text("Vote")
-                        Spacer()
-                    }.frame(width: 400, height: 50).font(.headline)
-                })
+                if !viewmodel.isTimerActive {
+                    NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: viewmodel.ideasMatrix, topic: viewmodel.topic)),
+                                   label: {
+                                    HStack(alignment: .center) {
+                                        Image(systemName: "checkmark.circle.fill")
+                                        Spacer()
+                                        Text("Vote")
+                                        Spacer()
+                                    }.frame(width: 400, height: 50).font(.headline)
+                    })
+                }
             }.padding()
             Spacer()
         }

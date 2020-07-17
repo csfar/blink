@@ -94,7 +94,7 @@ struct MenuView: View {
 
                     VStack {
                         if viewmodel.anyConnected || viewmodel.isHosting {
-                            NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel(topic: viewmodel.topic, timer: viewmodel.topic)),
+                            NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel(topic: viewmodel.topic, timer: viewmodel.timer)),
                                            label: {
                                             HStack(alignment: .center) {
                                                 Image(systemName: "play")

@@ -21,20 +21,14 @@ struct GridView: View {
                 ForEach(items, id: \.self) { row in
                     HStack {
                         ForEach(row, id: \.id) { col in
-                            HStack {
-                                Spacer()
-                                Button(action: {
-                                }) {
-                                    Text(col.content)
-                                        .frame(minWidth: 200, maxWidth: 300, minHeight: 50, maxHeight: 75)
-                                        .padding()
-                                    }.padding()
-                                Spacer()
+                            Button(action: {
+                            }) {
+                                Text(col.content).frame(width: 400, height: 50).font(.headline)
                             }
                         }
                     }
                 }
-            }
+            }.padding()
         }
     }
 }

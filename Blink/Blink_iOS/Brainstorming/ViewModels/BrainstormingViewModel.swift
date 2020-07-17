@@ -17,7 +17,7 @@ final class BrainstormingViewModel: NSObject, ObservableObject {
     
     override init() {
         super.init()
-        multipeerConnection.delegate = self
+        multipeerConnection.mcSession.delegate = self
     }
     
     func sendIdea(_ content: String) {

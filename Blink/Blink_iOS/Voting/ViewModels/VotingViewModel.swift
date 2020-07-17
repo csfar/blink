@@ -20,7 +20,7 @@ final class VotingViewModel: NSObject, ObservableObject {
     init(topic: String = "") {
         self.topic = topic
         super.init()
-        multipeerConnection.delegate = self
+        multipeerConnection.mcSession.delegate = self
     }
     
     func checkVotedIdeas(_ ideas: [Idea]) {

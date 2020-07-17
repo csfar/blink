@@ -31,8 +31,9 @@ class VotingViewModel: NSObject, ObservableObject {
     /// Initialization of this ViewModel with the following parameters:
     /// - Parameter ideas: An array of String type that composes the ideas
     /// - Parameter topic: A session's topic. Empty by default.
-    init(ideas: [[Idea]]?,
+    init(ideas: [[Idea]],
          topic: String = "") {
+        self.ideas = ideas
         self.topic = topic
         super.init()
         multipeerConnection.mcSession.delegate = self
