@@ -25,6 +25,8 @@ class VotingViewModel: NSObject, ObservableObject {
 
     private var arrIdeas: [Idea] = [Idea]()
 
+    private var votedIdeas: [Idea] = [Idea]()
+
     /// The topic set for the session.
     var topic: String
     
@@ -45,12 +47,13 @@ class VotingViewModel: NSObject, ObservableObject {
     private func sendIdeas() {
         let mcSession = multipeerConnection.mcSession
         if mcSession.connectedPeers.count > 0 {
-            if let ideasData = try? NSKeyedArchiver.archivedData(withRootObject: ideas, requiringSecureCoding: false) {
-                do {
-                    try mcSession.send(ideasData, toPeers: mcSession.connectedPeers, with: .reliable)
-                } catch {
-                    /// - TODO: Propper error handling
-                }
+            do {
+                let data = try JSONEncoder().encode(ideas)
+                mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
+            } catch let _ as EncodingError {
+                os_log("Failed to encode ideas to be sent for voting", log: .voting, type: .error)
+            } catch {
+                os_log("Failed to send ideas to be voted on", log: .voting, type: .error)
             }
         }
     }
@@ -112,7 +115,7 @@ extension VotingViewModel: MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {
             let idea = try JSONDecoder().decode(Idea.self, from: data)
-            addNew(idea: idea)
+            votedIdeas.append(idea)
         } catch {
             os_log("Failed to decode Idea from iOS participant", log: .brainstorm, type: .error)
         }
