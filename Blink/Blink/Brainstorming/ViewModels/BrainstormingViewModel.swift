@@ -27,8 +27,12 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     @Published private(set) var timer: String = ""
 
     var brainstormTimer = Timer()
-
+    
+    /// Variables of Bool type to help in Timer behavior.
+    /// - isTimerActive: Inform if the timer is currently running or not.
+    /// - timeless: Inform if Brainstorm Session is timeless
     @Published var isTimerActive: Bool = true
+    @Published var timeless: Bool = false
     
     /// String array variable to store ideas.
     /// When an idea is sent through P2P connection,
@@ -100,44 +104,49 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     func startBrainstormTimer(counter: Int) {
         
         /// Create a var to put the counter variable in the function scope.
-        var timerCounter = counter * 60 
+        var timerCounter = counter * 60
         var minute: Int = 0
         var second: Int = 0
         
+        if timerCounter > 0 {
         /// Instanciating the brainstormTimer as a repeatable scheduledTimer with a 1 second interval.
-        brainstormTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (_) in
-            
-            /// Safely unwrapping the self in the timer scope
-            guard let self = self else { return }
-            
-            /// Updating the timerCounter by decreasing it, and also updating the ViewModel timer String.
-            timerCounter = timerCounter - 1
-            minute = timerCounter / 60
-            second = timerCounter % 60
-            
-            /// The timer will use 2 in both minute and second display.
-            /// If one of them are under 10, a 0 will be added to keep the standard size.
-            if minute < 10 {
-                if second < 10 {
-                    self.timer = "0\(minute) : 0\(second)"
+            brainstormTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (_) in
+                
+                /// Safely unwrapping the self in the timer scope
+                guard let self = self else { return }
+                
+                /// Updating the timerCounter by decreasing it, and also updating the ViewModel timer String.
+                timerCounter = timerCounter - 1
+                minute = timerCounter / 60
+                second = timerCounter % 60
+                
+                /// The timer will use 2 in both minute and second display.
+                /// If one of them are under 10, a 0 will be added to keep the standard size.
+                if minute < 10 {
+                    if second < 10 {
+                        self.timer = "0\(minute) : 0\(second)"
+                    } else {
+                        self.timer = "0\(minute) : \(second)"
+                    }
                 } else {
-                    self.timer = "0\(minute) : \(second)"
+                    if second < 10 {
+                        self.timer = "\(minute) : 0\(second)"
+                    } else {
+                        self.timer = "\(minute) : \(second)"
+                    }
                 }
-            } else {
-                if second < 10 {
-                    self.timer = "\(minute) : 0\(second)"
-                } else {
-                    self.timer = "\(minute) : \(second)"
+                
+                /// When the timer reaches 0, it will be stopped through the invalidate method.
+                if timerCounter == 0 {
+                    self.brainstormTimer.invalidate()
+                    self.isTimerActive = false
                 }
-            }
-            
-            /// When the timer reaches 0, it will be stopped through the invalidate method.
-            if timerCounter == 0 {
-                self.brainstormTimer.invalidate()
-                self.isTimerActive = false
-            }
-        })
-        
+            })
+        } else {
+            self.timeless = true
+            self.timer = "Without Time Limit"
+            self.isTimerActive = false
+        }
     }
 }
 
