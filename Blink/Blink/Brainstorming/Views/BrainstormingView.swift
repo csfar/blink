@@ -13,16 +13,16 @@ struct BrainstormingView: View {
     
     /// `BrainstormingView`'s viewmodel.
     @ObservedObject var viewmodel: BrainstormingViewModel
-
+    
     @State var newIdea: String = ""
-
+    
     @State var showKeyboard: Bool = false
     
     /// The body of a `BrainstormingView`
     var body: some View {
         VStack {
             Spacer()
-
+            
             /// The HStack containing the topic, timer and
             /// number of ideas added.
             HStack {
@@ -36,31 +36,37 @@ struct BrainstormingView: View {
             }
             Spacer()
             
-
+            
             /// The `GridView` used to layout the ideas in a
             /// 3-column grid.
             GridView(items: self.$viewmodel.ideasMatrix)
             Spacer()
-
+            
             /// The HStack containing the buttons for
             /// adding a new idea, using the Apple TV remote,
             /// and moving forward to voting.
             HStack(alignment: .center) {
-
+                
                 VStack {
-                    /// The Button responsible for adding new ideas
-                    /// using the Apple TV remote.
-                    Button(action: {
-                        self.showKeyboard.toggle()
-                    }) {
-                        HStack(alignment: .center) {
-                            Image(systemName: "plus")
-                            Spacer()
-                            Text("Add")
-                            Spacer()
-                        }.frame(width: 400, height: 50).font(.headline)
+                    /// Conditional to check if timer is active or
+                    /// if the Brainstorm Session is running timeless.
+                    /// This will prompt the view to add or remove the button
+                    /// that adds Ideas.
+                    if self.viewmodel.isTimerActive || self.viewmodel.timeless {
+                        /// The Button responsible for adding new ideas
+                        /// using the Apple TV remote.
+                        Button(action: {
+                            self.showKeyboard.toggle()
+                        }) {
+                            HStack(alignment: .center) {
+                                Image(systemName: "plus")
+                                Spacer()
+                                Text("Add")
+                                Spacer()
+                            }.frame(width: 400, height: 50).font(.headline)
+                        }
                     }
-
+                    
                     if showKeyboard {
                         TextField("Idea", text: self.$newIdea, onEditingChanged: {_ in}) {
                             self.viewmodel.addIdea(self.newIdea)
@@ -69,7 +75,7 @@ struct BrainstormingView: View {
                         }.frame(width: 400, height: 50)
                     }
                 }
-
+                
                 /// The Button responsible for moving forward to
                 /// voting. Should alert the user before moving on.
                 if !viewmodel.isTimerActive {
