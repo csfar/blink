@@ -43,6 +43,7 @@ struct RankingViewRow: View {
 struct RankingView: View {
     /// `RankingView`s ViewModel.
     @ObservedObject var viewmodel: RankingViewModel
+    @State var shouldRestart: Bool = false
 
     /// The body of a `RankingView`.
     var body: some View {
@@ -76,16 +77,15 @@ struct RankingView: View {
 
             /// The Button responsible for moving back to
             /// the menu. Should alert the user before moving on.
-            Button(action: {
-
-            }) {
+            /// This button works as a NavigationLink.
+            NavigationLink(destination: MenuView(viewmodel: MenuViewModel()), label: {
                 HStack(alignment: .center) {
                     Image(systemName: "arrow.clockwise")
                     Spacer()
                     Text("Restart")
                     Spacer()
                 }.frame(width: 400, height: 50).font(.headline)
-            }
+            })
             Spacer()
         }
     }
