@@ -27,8 +27,12 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     @Published private(set) var timer: String = ""
 
     var brainstormTimer = Timer()
-
+    
+    /// Variables of Bool type to help in Timer behavior.
+    /// - isTimerActive: Inform if the timer is currently running or not.
+    /// - timeless: Inform if Brainstorm Session is timeless
     @Published var isTimerActive: Bool = true
+    @Published var timeless: Bool = false
     
     /// String array variable to store ideas.
     /// When an idea is sent through P2P connection,
@@ -100,7 +104,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     func startBrainstormTimer(counter: Int) {
         
         /// Create a var to put the counter variable in the function scope.
-        var timerCounter = counter * 60 
+        var timerCounter = counter * 60
         var minute: Int = 0
         var second: Int = 0
         
@@ -139,6 +143,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
                 }
             })
         } else {
+            self.timeless = true
             self.timer = "Without Time Limit"
             self.isTimerActive = false
         }
