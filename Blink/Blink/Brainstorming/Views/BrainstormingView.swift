@@ -35,11 +35,10 @@ struct BrainstormingView: View {
                 Spacer()
             }
             Spacer()
-            
 
             /// The `GridView` used to layout the ideas in a
             /// 3-column grid.
-            GridView(items: self.$viewmodel.ideasMatrix)
+            GridView(items: $viewmodel.ideasMatrix)
             Spacer()
 
             /// The HStack containing the buttons for

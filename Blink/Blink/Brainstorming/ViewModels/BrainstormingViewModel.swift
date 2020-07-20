@@ -18,7 +18,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     
     /// Published variable of the idea Matrix.
     /// Any changes that occur in this variable will make the view update.
-    @Published var ideasMatrix: [[Idea]] = [[Idea]]()
+    @Published var ideasMatrix: [[Idea]] = [[Idea(content: "Waiting for idea... 🤔")]]
 
     /// The topic set for the session.
     @Published private(set) var topic: String
