@@ -45,7 +45,7 @@ struct VotingView: View {
                 }.font(.headline)
             }
             if viewmodel.shouldShowRank {
-                NavigationLink(destination: RankingView(viewmodel: RankingViewModel(topic: viewmodel.topic)), isActive: $viewmodel.shouldShowRank, label: {EmptyView().navigationBarItems(trailing: Text("Rank"))})
+                NavigationLink(destination: RankingView(viewmodel: RankingViewModel(topic: viewmodel.topic, ranking: viewmodel.ideas)), isActive: $viewmodel.shouldShowRank, label: {EmptyView().navigationBarItems(trailing: Text("Rank"))})
             }
         }.navigationBarTitle("\(viewmodel.topic)").navigationBarBackButtonHidden(true).padding()
             .navigationBarItems(trailing: Button("Send Votes") {

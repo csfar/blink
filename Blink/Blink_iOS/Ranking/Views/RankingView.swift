@@ -43,18 +43,10 @@ struct RankingView: View {
     @ObservedObject var viewmodel: RankingViewModel
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(0 ..< viewmodel.ranking.count) { index in
-                    RankingViewRow(index: index + 1, content: self.viewmodel.ranking[index].content, votes: self.viewmodel.ranking[index].votes)
-                }
-            }.navigationBarTitle("Ranking").navigationBarBackButtonHidden(true).padding()
-        }
-    }
-}
-
-struct RankingView_Previews: PreviewProvider {
-    static var previews: some View {
-        RankingView(viewmodel: RankingViewModel())
+        List {
+            ForEach(0 ..< viewmodel.ranking.count) { index in
+                RankingViewRow(index: index + 1, content: self.viewmodel.ranking[index].content, votes: self.viewmodel.ranking[index].votes)
+            }
+        }.navigationBarTitle("Ranking").navigationBarBackButtonHidden(true).padding()
     }
 }
