@@ -15,11 +15,6 @@ final class RankingViewModel: NSObject, ObservableObject {
     private let multipeerConnection = Multipeer.shared
     
     @Published var topic: String
-    private var ideas: [Idea] = [] {
-        didSet {
-            ranking = ideas.sorted { $0.votes > $1.votes }
-        }
-    }
     @Published var ranking: [Idea] = []
     
     init(topic: String = "") {
@@ -48,7 +43,7 @@ extension RankingViewModel: MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {
             let receivedIdeas = try JSONDecoder().decode([Idea].self, from: data)
-            self.ideas = receivedIdeas
+            self.ranking = receivedIdeas
         } catch {
             os_log("Could not receive ranking data from Host.", log: OSLog.ranking, type: .error)
         }

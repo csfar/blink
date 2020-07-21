@@ -20,12 +20,26 @@ final class RankingViewModel: NSObject, ObservableObject {
     @Published var topic: String
 
     init(ideas: [[Idea]],
+         votedIdeas: [Idea],
          topic: String = "") {
         self.topic = topic
         super.init()
-        self.ideas = convertIdeasMatrixIntoArray(ideas)
+        self.ideas = countVotes(ideas, votedIdeas)
         multipeerConnection.mcSession.delegate = self
         sendIdeas()
+    }
+    
+    func countVotes(_ ideas: [[Idea]], _ votedIdeas: [Idea]) -> [Idea] {
+        let convertedArray: [Idea] = convertIdeasMatrixIntoArray(ideas)
+        return convertedArray.map {
+            var countedIdea = $0
+            for idea in votedIdeas {
+                if idea.content == countedIdea.content {
+                    countedIdea.votes += 1
+                }
+            }
+            return countedIdea
+        }.sorted { $0.votes > $1.votes }
     }
 
     private func sendIdeas() {

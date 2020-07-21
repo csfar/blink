@@ -40,7 +40,7 @@ struct VotingView: View {
             /// The Button responsible for moving forward to
             /// ranking. Should alert the user before moving on.
             if viewmodel.shouldShowRanking {
-                NavigationLink(destination: RankingView(viewmodel: RankingViewModel(ideas: viewmodel.ideas, topic: viewmodel.topic)),
+                NavigationLink(destination: RankingView(viewmodel: RankingViewModel(ideas: viewmodel.ideas, votedIdeas: viewmodel.votedIdeas, topic: viewmodel.topic)),
                                isActive: $viewmodel.shouldShowRanking,
                                label: {EmptyView()})
             }

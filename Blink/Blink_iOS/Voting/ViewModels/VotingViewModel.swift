@@ -17,6 +17,8 @@ final class VotingViewModel: NSObject, ObservableObject {
     @Published var topic: String
     @Published var ideas: [Idea]
     
+    @Published var shouldShowRank: Bool = false
+    
     init(ideas: [Idea],
          topic: String = "") {
         self.ideas = ideas
@@ -65,6 +67,7 @@ extension VotingViewModel: MCSessionDelegate {
         do {
             let receivedIdeas = try JSONDecoder().decode([Idea].self, from: data)
             ideas = receivedIdeas
+            shouldShowRank = true
         } catch {
             os_log("Failed to decode ideas data from Host.", log: OSLog.voting, type: .error)
         }
