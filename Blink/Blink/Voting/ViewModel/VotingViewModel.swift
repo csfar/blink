@@ -25,7 +25,7 @@ class VotingViewModel: NSObject, ObservableObject {
 
     private var arrIdeas: [Idea] = [Idea]()
 
-    private var votedIdeas: [Idea] = [Idea]()
+    var votedIdeas: [Idea] = [Idea]()
 
     @Published var shouldShowRanking: Bool = false
 
@@ -54,7 +54,7 @@ class VotingViewModel: NSObject, ObservableObject {
         let mcSession = multipeerConnection.mcSession
         if mcSession.connectedPeers.count > 0 {
             do {
-                let data = try JSONEncoder().encode(arrIdeas)
+                let data = try JSONEncoder().encode(countVotes(ideas, votedIdeas))
                 try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
                 os_log("Ideas sent to participants", log: .voting, type: .info)
             } catch _ as EncodingError {
@@ -64,13 +64,19 @@ class VotingViewModel: NSObject, ObservableObject {
             }
         }
     }
+    
+    func countVotes(_ ideas: [[Idea]], _ votedIdeas: [Idea]) -> [Idea] {
+        let convertedArray: [Idea] = convertIdeasMatrixIntoArray(ideas)
+        return convertedArray.map {
+            var countedIdea = $0
+            for idea in votedIdeas {
+                if idea.content == countedIdea.content {
+                    countedIdea.votes += 1
+                }
+            }
+            return countedIdea
+        }.sorted { $0.votes > $1.votes }
 
-    private func addNew(idea: Idea) {
-        arrIdeas.append(idea)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.ideas = self.convertIdeasArrayInMatrix(ideas: self.arrIdeas)
-        }
     }
 
     private func convertIdeasMatrixIntoArray(_ ideas: [[Idea]]) -> [Idea] {
@@ -135,9 +141,8 @@ extension VotingViewModel: MCSessionDelegate {
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {
-            let idea = try JSONDecoder().decode(Idea.self, from: data)
-            votedIdeas.append(idea)
-
+            let idea = try JSONDecoder().decode([Idea].self, from: data)
+            votedIdeas.append(contentsOf: idea)
             os_log("Received votes from participant", log: .voting, type: .info )
         } catch {
             os_log("Failed to decode Idea from iOS participant", log: .voting, type: .error)

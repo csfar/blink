@@ -56,14 +56,15 @@ extension BrainstormingViewModel: MCSessionDelegate {
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        do {
-            let ideas = try JSONDecoder().decode([Idea].self, from: data)
-            self.ideas = ideas
-            self.shouldVote = true
-
-            os_log("Ideas received. Moving on to voting.", log: .brainstorm, type: .info)
-        } catch {
-            os_log("Failed to decode ideas from Mediator to be voted on", log: .brainstorm, type: .error)
+        DispatchQueue.main.async {
+            do {
+                let ideas = try JSONDecoder().decode([Idea].self, from: data)
+                self.ideas = ideas
+                self.shouldVote = true
+                os_log("Ideas received. Moving on to voting.", log: .brainstorm, type: .info)
+            } catch {
+                os_log("Failed to decode ideas from Mediator to be voted on", log: .voting, type: .error)
+            }
         }
     }
     
