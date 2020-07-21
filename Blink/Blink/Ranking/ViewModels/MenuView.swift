@@ -31,14 +31,11 @@ struct MenuView: View {
                 Spacer().sheet(isPresented: $viewmodel.isJoining) {
                     Browser(delegate: self.viewmodel)
                 }
-                NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel()), isActive: $viewmodel.isConnected, label: {EmptyView()})
+                if viewmodel.isConnected {
+                    NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel()), isActive: $viewmodel.isConnected, label: {EmptyView()})
+                }
             }
         }
     }
 }
 
-struct MenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        MenuView(viewmodel: MenuViewModel() )
-    }
-}

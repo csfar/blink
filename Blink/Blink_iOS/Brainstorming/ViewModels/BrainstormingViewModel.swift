@@ -17,12 +17,17 @@ final class BrainstormingViewModel: NSObject, ObservableObject {
 
     @Published var ideas: [Idea] = [Idea]()
     @Published var shouldVote: Bool = false
+    private var shouldDelegate: Bool?
     
     override init() {
         super.init()
-        multipeerConnection.mcSession.delegate = self
+        if let _ = shouldDelegate {
+            os_log("BrainstormingViewModel initialized.", log: .multipeer, type: .info)
+        } else {
+            multipeerConnection.mcSession.delegate = self
+            os_log("BrainstormingViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
+        }
 
-        os_log("BrainstormingViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
     }
     
     func sendIdea(_ content: String) {
@@ -61,6 +66,7 @@ extension BrainstormingViewModel: MCSessionDelegate {
                 let ideas = try JSONDecoder().decode([Idea].self, from: data)
                 self.ideas = ideas
                 self.shouldVote = true
+                self.shouldDelegate = false
                 os_log("Ideas received. Moving on to voting.", log: .brainstorm, type: .info)
             } catch {
                 os_log("Failed to decode ideas from Mediator to be voted on", log: .voting, type: .error)

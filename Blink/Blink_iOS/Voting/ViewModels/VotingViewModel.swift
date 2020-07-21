@@ -68,13 +68,16 @@ extension VotingViewModel: MCSessionDelegate {
     
     /// - TODO: Check any necessary changes on p2p for new data structure.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        do {
-            let receivedIdeas = try JSONDecoder().decode([Idea].self, from: data)
-            ideas = receivedIdeas
-            shouldShowRank = true
-            os_log("Ranking received. Moving on to ranking.", log: .voting, type: .info)
-        } catch {
-            os_log("Failed to decode ideas data from mediator.", log: OSLog.voting, type: .error)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            do {
+                let receivedIdeas = try JSONDecoder().decode([Idea].self, from: data)
+                self.ideas = receivedIdeas
+                self.shouldShowRank = true
+                os_log("Ranking received. Moving on to ranking.", log: .voting, type: .info)
+            } catch {
+                os_log("Failed to decode ideas data from mediator.", log: OSLog.voting, type: .error)
+            }
         }
     }
     

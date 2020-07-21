@@ -29,9 +29,3 @@ struct BrainstormingView: View {
             }.navigationBarBackButtonHidden(true).padding()
     }
 }
-
-struct BrainstormingView_Previews: PreviewProvider {
-    static var previews: some View {
-        BrainstormingView(viewmodel: BrainstormingViewModel())
-    }
-}

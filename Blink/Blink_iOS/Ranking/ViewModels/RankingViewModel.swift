@@ -15,13 +15,14 @@ final class RankingViewModel: NSObject, ObservableObject {
     private let multipeerConnection = Multipeer.shared
     
     @Published var topic: String
-    @Published var ranking: [Idea] = []
+    @Published var ranking: [Idea]
     
-    init(topic: String = "") {
+    init(topic: String = "", ranking: [Idea]) {
         self.topic = topic
+        self.ranking = ranking
         super.init()
         multipeerConnection.mcSession.delegate = self
-
+        print(ranking)
         os_log("RankingViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
     }
 
