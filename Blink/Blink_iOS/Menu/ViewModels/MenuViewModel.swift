@@ -24,6 +24,8 @@ final class MenuViewModel: NSObject, ObservableObject {
     override init() {
         super.init()
         multipeerConnection.delegate = self
+
+        os_log("MenuViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
     }
 
 }
@@ -64,7 +66,6 @@ extension MenuViewModel:  MCBrowserViewControllerDelegate {
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         browserViewController.dismiss(animated: true) { [weak self] in
-            self?.isConnected.toggle()
         }
     }
     

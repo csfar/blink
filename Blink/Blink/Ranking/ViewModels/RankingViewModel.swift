@@ -11,7 +11,6 @@ import MultipeerConnectivity
 import os.log
 
 final class RankingViewModel: NSObject, ObservableObject {
-    typealias Ranking = [(key: String, value: Int)]
 
     private let multipeerConnection = Multipeer.shared
 
@@ -26,6 +25,9 @@ final class RankingViewModel: NSObject, ObservableObject {
         super.init()
         self.ideas = countVotes(ideas, votedIdeas)
         multipeerConnection.mcSession.delegate = self
+
+        os_log("RankingViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
+
         sendIdeas()
     }
     
@@ -43,21 +45,21 @@ final class RankingViewModel: NSObject, ObservableObject {
     }
 
     private func sendIdeas() {
-        print("dede")
         let mcSession = multipeerConnection.mcSession
         if mcSession.connectedPeers.count > 0 {
             do {
                 let data = try JSONEncoder().encode(ideas)
                 try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
+                os_log("Ranking sent to participants", log: .ranking, type: .info)
             } catch _ as EncodingError {
-                os_log("Failed to encode ideas to be sent for voting", log: .voting, type: .error)
+                os_log("Failed to encode ranking", log: .ranking, type: .error)
             } catch {
-                os_log("Failed to send ideas to be voted on", log: .voting, type: .error)
+                os_log("Failed to send ranking", log: .ranking, type: .error)
             }
         }
     }
 
-    func convertIdeasMatrixIntoArray(_ ideas: [[Idea]]) -> [Idea] {
+    private func convertIdeasMatrixIntoArray(_ ideas: [[Idea]]) -> [Idea] {
         var arr: [Idea] = [Idea]()
         for row in ideas {
             arr.append(contentsOf: row)

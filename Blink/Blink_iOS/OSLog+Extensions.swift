@@ -16,4 +16,5 @@ extension OSLog {
     static let voting = OSLog(subsystem: subsystem, category: "voting")
     static let ranking = OSLog(subsystem: subsystem, category: "ranking")
     static let interaction = OSLog(subsystem: subsystem, category: "interaction")
+    static let multipeer = OSLog(subsystem: subsystem, category: "multipeer")
 }

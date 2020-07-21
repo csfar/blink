@@ -15,8 +15,11 @@ final class MenuViewModel: NSObject, ObservableObject {
     private lazy var multipeerConnection = Multipeer.shared
 
     @Published var topic: String = ""
+    
     @Published var timer: Int = 0
+
     @Published var isHosting: Bool = false
+
     var anyConnected: Bool {
         if multipeerConnection.mcSession.connectedPeers.count > 0 {
             return true
@@ -28,6 +31,8 @@ final class MenuViewModel: NSObject, ObservableObject {
     override init() {
         super.init()
         multipeerConnection.mcSession.delegate = self
+        
+        os_log("MenuViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
     }
     /// Starts hosting a Multipeer session with `blnk` as service type.
     func startHosting() {

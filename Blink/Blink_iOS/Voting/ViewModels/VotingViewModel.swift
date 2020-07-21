@@ -25,6 +25,8 @@ final class VotingViewModel: NSObject, ObservableObject {
         self.topic = topic
         super.init()
         multipeerConnection.mcSession.delegate = self
+
+        os_log("VotingViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
     }
     
     func checkVotedIdeas(_ ideas: [Idea]) {
@@ -39,6 +41,8 @@ final class VotingViewModel: NSObject, ObservableObject {
             do {
                 let data = try JSONEncoder().encode(votes)
                 try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
+
+                os_log("Votes sent to mediator", log: .voting, type: .info)
             } catch _ as EncodingError {
                 os_log("Failed to encode voted ideas as JSON.", log: OSLog.voting, type: .error)
             } catch _ as NSError {
@@ -68,8 +72,9 @@ extension VotingViewModel: MCSessionDelegate {
             let receivedIdeas = try JSONDecoder().decode([Idea].self, from: data)
             ideas = receivedIdeas
             shouldShowRank = true
+            os_log("Ranking received. Moving on to ranking.", log: .voting, type: .info)
         } catch {
-            os_log("Failed to decode ideas data from Host.", log: OSLog.voting, type: .error)
+            os_log("Failed to decode ideas data from mediator.", log: OSLog.voting, type: .error)
         }
     }
     

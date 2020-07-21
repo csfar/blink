@@ -41,6 +41,9 @@ class VotingViewModel: NSObject, ObservableObject {
         self.topic = topic
         super.init()
         multipeerConnection.mcSession.delegate = self
+
+        os_log("VotingViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
+
         self.arrIdeas = convertIdeasMatrixIntoArray(ideas)
         sendIdeas()
     }
@@ -53,6 +56,7 @@ class VotingViewModel: NSObject, ObservableObject {
             do {
                 let data = try JSONEncoder().encode(countVotes(ideas, votedIdeas))
                 try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
+                os_log("Ideas sent to participants", log: .voting, type: .info)
             } catch _ as EncodingError {
                 os_log("Failed to encode ideas to be sent for voting", log: .voting, type: .error)
             } catch {
@@ -72,9 +76,10 @@ class VotingViewModel: NSObject, ObservableObject {
             }
             return countedIdea
         }.sorted { $0.votes > $1.votes }
+
     }
 
-    func convertIdeasMatrixIntoArray(_ ideas: [[Idea]]) -> [Idea] {
+    private func convertIdeasMatrixIntoArray(_ ideas: [[Idea]]) -> [Idea] {
         var arr: [Idea] = [Idea]()
         for row in ideas {
             arr.append(contentsOf: row)
@@ -92,7 +97,7 @@ class VotingViewModel: NSObject, ObservableObject {
     /// in an idea 2D String matrix with 3 columns and N rows.
     /// This function is called with the following parameters:
     /// - Parameter ideas: The String array that contains the ideas sent through P2P connection.
-    func convertIdeasArrayInMatrix(ideas: [Idea]) -> [[Idea]] {
+    private func convertIdeasArrayInMatrix(ideas: [Idea]) -> [[Idea]] {
         var matrixIdeas: [[Idea]] = []
         var colIndex: Int = 0
         var ideaArray: [Idea] = []
@@ -138,8 +143,9 @@ extension VotingViewModel: MCSessionDelegate {
         do {
             let idea = try JSONDecoder().decode([Idea].self, from: data)
             votedIdeas.append(contentsOf: idea)
+            os_log("Received votes from participant", log: .voting, type: .info )
         } catch {
-            os_log("Failed to decode Idea from iOS participant", log: .brainstorm, type: .error)
+            os_log("Failed to decode Idea from iOS participant", log: .voting, type: .error)
         }
     }
 
