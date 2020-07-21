@@ -51,6 +51,8 @@ class BrainstormingViewModel: NSObject, ObservableObject {
         super.init()
         self.startBrainstormTimer(counter: timer)
         multipeerConnection.mcSession.delegate = self
+
+        os_log("BrainstormingViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
     }
 
     func addIdea(_ content: String) {
@@ -59,7 +61,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
         ideasMatrix = convertIdeasArrayInMatrix(ideas: ideas)
     }
 
-    func addNew(idea: Idea) {
+    private func addNew(idea: Idea) {
         ideas.append(idea)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -71,7 +73,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     /// in an idea 2D String matrix with 3 columns and N rows.
     /// This function is called with the following parameters:
     /// - Parameter ideas: The String array that contains the ideas sent through P2P connection.
-    func convertIdeasArrayInMatrix(ideas: [Idea]) -> [[Idea]] {
+    private func convertIdeasArrayInMatrix(ideas: [Idea]) -> [[Idea]] {
         var matrixIdeas: [[Idea]] = []
         var colIndex: Int = 0
         var ideaArray: [Idea] = []
@@ -101,7 +103,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     /// scheduled timer for the Brainstorm View.
     /// This function is called with the following parameters:
     /// - Parameter counter: An Int type variable that tells the time amount for the Brainstorm Timer.
-    func startBrainstormTimer(counter: Int) {
+    private func startBrainstormTimer(counter: Int) {
         
         /// Create a var to put the counter variable in the function scope.
         var timerCounter = counter * 60
@@ -142,10 +144,14 @@ class BrainstormingViewModel: NSObject, ObservableObject {
                     self.isTimerActive = false
                 }
             })
+
+            os_log("Timer set for @ minutes", log: .brainstorm, type: .info, counter)
         } else {
             self.timeless = true
             self.timer = "Without Time Limit"
             self.isTimerActive = false
+
+            os_log("Timer set without limit", log: .brainstorm, type: .info)
         }
     }
 }
@@ -169,8 +175,10 @@ extension BrainstormingViewModel: MCSessionDelegate {
         do {
             let idea = try JSONDecoder().decode(Idea.self, from: data)
             addNew(idea: idea)
+
+            os_log("Received new idea from a participant", log: .brainstorm, type: .info)
         } catch {
-            os_log("Failed to decode Idea from iOS participant", log: .brainstorm, type: .error)
+            os_log("Failed to decode Idea from participant", log: .brainstorm, type: .error)
         }
     }
     

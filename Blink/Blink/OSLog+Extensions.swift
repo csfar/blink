@@ -10,7 +10,7 @@ import Foundation
 import os.log
 
 extension OSLog {
-    private static var subsystem = Bundle.main.bundleIdentifier ?? "com.csfar.Blink.error"
+    private static var subsystem = Bundle.main.bundleIdentifier ?? "com.edsgroi.Blink.error"
 
     static let brainstorm = OSLog(subsystem: subsystem, category: "brainstorm")
     static let voting = OSLog(subsystem: subsystem, category: "voting")

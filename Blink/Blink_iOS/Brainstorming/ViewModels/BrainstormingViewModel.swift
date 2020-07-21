@@ -21,6 +21,8 @@ final class BrainstormingViewModel: NSObject, ObservableObject {
     override init() {
         super.init()
         multipeerConnection.mcSession.delegate = self
+
+        os_log("BrainstormingViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
     }
     
     func sendIdea(_ content: String) {
@@ -30,10 +32,11 @@ final class BrainstormingViewModel: NSObject, ObservableObject {
             do {
                 let data = try JSONEncoder().encode(idea)
                 try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
+                os_log("Idea sent to mediator", log: .brainstorm, type: .info)
             } catch _ as EncodingError {
                 os_log("Failed to encode idea as JSON.", log: OSLog.brainstorm, type: .error)
             } catch _ as NSError {
-                os_log("Failed to send data through connected peers.", log: OSLog.brainstorm, type: .error)
+                os_log("Failed to send data to mediator.", log: OSLog.brainstorm, type: .error)
             }
         }
     }
@@ -57,8 +60,10 @@ extension BrainstormingViewModel: MCSessionDelegate {
             let ideas = try JSONDecoder().decode([Idea].self, from: data)
             self.ideas = ideas
             self.shouldVote = true
+
+            os_log("Ideas received. Moving on to voting.", log: .brainstorm, type: .info)
         } catch {
-            os_log("Failed to decode ideas from Mediator to be voted on", log: .voting, type: .error)
+            os_log("Failed to decode ideas from Mediator to be voted on", log: .brainstorm, type: .error)
         }
     }
     
