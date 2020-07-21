@@ -29,7 +29,6 @@ final class Multipeer: NSObject, ObservableObject {
     var mcAdvertiserAssistant: MCAdvertiserAssistant
     
     var connectionStatus: ConnectionStatus
-//    var delegate: MCSessionDelegate?
     @Published var connectedPeersName: [String] = []
 
     override init() {
@@ -38,10 +37,6 @@ final class Multipeer: NSObject, ObservableObject {
         connectionStatus = .notConnected
         mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk", discoveryInfo: nil, session: mcSession)
         super.init()
-//        let _ = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer  in
-//            self.connectedPeersName = self.mcSession.peersName
-//            os_log("Peers name timer", log: .multipeer, type: .debug)
-//        }
     }
 }
 

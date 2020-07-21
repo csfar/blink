@@ -26,6 +26,8 @@ final class RankingViewModel: NSObject, ObservableObject {
         self.topic = topic
         super.init()
         multipeerConnection.mcSession.delegate = self
+
+        os_log("RankingViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
     }
 
 }
@@ -49,6 +51,8 @@ extension RankingViewModel: MCSessionDelegate {
         do {
             let receivedIdeas = try JSONDecoder().decode([Idea].self, from: data)
             self.ideas = receivedIdeas
+
+            os_log("Restarting session.", log: .ranking, type: .info)
         } catch {
             os_log("Could not receive ranking data from Host.", log: OSLog.ranking, type: .error)
         }
