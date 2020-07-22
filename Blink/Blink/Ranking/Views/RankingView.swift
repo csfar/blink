@@ -78,15 +78,29 @@ struct RankingView: View {
             /// The Button responsible for moving back to
             /// the menu. Should alert the user before moving on.
             /// This button works as a NavigationLink.
-//            NavigationLink(destination: MenuView(viewmodel: MenuViewModel()), label: {
-//                HStack(alignment: .center) {
-//                    Image(systemName: "arrow.clockwise")
-//                    Spacer()
-//                    Text("Restart")
-//                    Spacer()
-//                }.frame(width: 400, height: 50).font(.headline)
-//            })
-//            Spacer()
+            if shouldRestart {
+                NavigationLink(destination: MenuView(viewmodel: MenuViewModel()), label: {
+                    HStack(alignment: .center) {
+                        Image(systemName: "arrow.clockwise")
+                        Spacer()
+                        Text("Restart")
+                        Spacer()
+                    }.frame(width: 400, height: 50).font(.headline)
+                })
+                Spacer()
+            } else {
+                Button(action: {
+                    self.shouldRestart.toggle()
+                }, label: {
+                    HStack(alignment: .center) {
+                        Image(systemName: "arrow.clockwise")
+                        Spacer()
+                        Text("Restart?")
+                        Spacer()
+                    }.frame(width: 400, height: 50).font(.headline)
+                })
+                Spacer()
+            }
         }
     }
 }

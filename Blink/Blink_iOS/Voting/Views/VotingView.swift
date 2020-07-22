@@ -25,7 +25,7 @@ struct VotingView: View {
                             self.currentlyChosen = self.viewmodel.ideas[index]
                             self.currentlyChosen = Idea(content: "")
                         }, label: {
-                            Image(systemName: "checkmark.circle.fill")
+                            Image(systemName: "checkmark.circle.fill").foregroundColor(Color("Main"))
                         })
                     } else {
                         Button(action: {
@@ -39,7 +39,7 @@ struct VotingView: View {
                             }
                             self.currentlyChosen = self.viewmodel.ideas[index]
                         }, label: {
-                            Image(systemName: "circle")
+                            Image(systemName: "circle").foregroundColor(Color("Main"))
                         })
                     }
                 }.font(.headline)
@@ -50,7 +50,13 @@ struct VotingView: View {
         }.navigationBarTitle("\(viewmodel.topic)").navigationBarBackButtonHidden(true).padding()
             .navigationBarItems(trailing: Button("Send Votes") {
                 self.viewmodel.checkVotedIdeas(self.viewmodel.ideas)
-        })
+        }.foregroundColor(Color("Main")))
     }
 }
 
+
+struct VotingView_Previews: PreviewProvider {
+    static var previews: some View {
+        VotingView(viewmodel: VotingViewModel(ideas: [Idea(content: "Teste"), Idea(content: "Teste2")]))
+    }
+}
