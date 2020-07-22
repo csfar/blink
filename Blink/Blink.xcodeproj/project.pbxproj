@@ -68,7 +68,7 @@
 		2294603424BE4FC300BBEE2C /* Idea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Idea.swift; sourceTree = "<group>"; };
 		2294603624BF750100BBEE2C /* OSLog+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
 		2294603824BF802100BBEE2C /* RankingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewModel.swift; sourceTree = "<group>"; };
-		4F5F12CF24B639FA00A7D9E7 /* Blink_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blink_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F5F12CF24B639FA00A7D9E7 /* Blink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F5F12D124B639FA00A7D9E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F5F12D324B639FA00A7D9E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4F5F12D724B639FC00A7D9E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -333,7 +333,7 @@
 			children = (
 				A418231624B39DDF0082962F /* Blink.app */,
 				A418232A24B39DE10082962F /* BlinkTests.xctest */,
-				4F5F12CF24B639FA00A7D9E7 /* Blink_iOS.app */,
+				4F5F12CF24B639FA00A7D9E7 /* Blink.app */,
 				4F5F12E424B639FD00A7D9E7 /* Blink_iOSTests.xctest */,
 			);
 			name = Products;
@@ -470,7 +470,7 @@
 			);
 			name = Blink_iOS;
 			productName = Blink_iOS;
-			productReference = 4F5F12CF24B639FA00A7D9E7 /* Blink_iOS.app */;
+			productReference = 4F5F12CF24B639FA00A7D9E7 /* Blink.app */;
 			productType = "com.apple.product-type.application";
 		};
 		4F5F12E324B639FD00A7D9E7 /* Blink_iOSTests */ = {
@@ -715,16 +715,16 @@
 				DEVELOPMENT_TEAM = L76X5KFZD9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Blink_iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.edgarsgroi.Blink-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Blink;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -737,16 +737,16 @@
 				DEVELOPMENT_TEAM = L76X5KFZD9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Blink_iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.edgarsgroi.Blink-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Blink;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
