@@ -65,7 +65,7 @@ extension MenuViewModel:  MCBrowserViewControllerDelegate {
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        browserViewController.dismiss(animated: true) { [weak self] in
+        browserViewController.dismiss(animated: true) {
         }
     }
     
