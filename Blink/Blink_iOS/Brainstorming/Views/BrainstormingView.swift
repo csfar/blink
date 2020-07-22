@@ -16,16 +16,22 @@ struct BrainstormingView: View {
 
     var body: some View {
         VStack {
-            Text(viewmodel.topic).font(.title).padding()
+            Text("Brainstorming").foregroundColor(Color("Main")).font(.title).bold().padding()
             TextField("Idea", text: $newIdea).padding()
             Button(action: {
                 self.viewmodel.sendIdea(self.newIdea)
             }) {
                 Text("Send").foregroundColor(Color.white).bold()
-            }.padding().background(Color.red).cornerRadius(10)
+            }.padding().background(Color("Main")).cornerRadius(10)
             if viewmodel.shouldVote {
                 NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: self.viewmodel.ideas)), isActive: self.$viewmodel.shouldVote, label: {EmptyView().navigationBarItems(trailing: Text("Vote"))})
             }
             }.navigationBarBackButtonHidden(true).padding()
+    }
+}
+
+struct BrainstormingView_Previews: PreviewProvider {
+    static var previews: some View {
+        BrainstormingView(viewmodel: BrainstormingViewModel())
     }
 }

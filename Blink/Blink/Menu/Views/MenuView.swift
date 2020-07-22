@@ -41,9 +41,13 @@ struct MenuView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Image("Icon").padding()
+                Spacer()
                 HStack {
                     if viewmodel.timer > 0 {
                         Text("\(viewmodel.timer) minutes")
+                    } else {
+                        Text("No time limit")
                     }
                     if !viewmodel.topic.isEmpty {
                         Text("\(viewmodel.topic)")
@@ -51,7 +55,6 @@ struct MenuView: View {
                 }
                 Spacer()
                 HStack {
-
                     VStack {
                         /// The Button responsible for setting a timer.
                         Button(action: {
@@ -66,12 +69,11 @@ struct MenuView: View {
                         }.frame(width: 400, height: 50).font(.headline)
 
                         if selectingTimer {
-                            VStack {
-                                TimerRow(timer: $viewmodel.timer, minutes: 5)
-                                TimerRow(timer: $viewmodel.timer, minutes: 10)
-                                TimerRow(timer: $viewmodel.timer, minutes: 15)
-                                TimerRow(timer: $viewmodel.timer, minutes: 20)
-                            }.padding().frame(width: 400)
+                            VStack() {
+                                TimerRow(timer: $viewmodel.timer, minutes: 10).frame(height: 50).padding()
+                                TimerRow(timer: $viewmodel.timer, minutes: 15).frame(height: 50).padding()
+                                TimerRow(timer: $viewmodel.timer, minutes: 20).frame(height: 50).padding()
+                            }.frame(width: 400).padding()
                         }
                     }.frame(width: 500)
 
@@ -121,7 +123,7 @@ struct MenuView: View {
                 }
                 Spacer()
             }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 

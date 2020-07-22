@@ -106,7 +106,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     private func startBrainstormTimer(counter: Int) {
         
         /// Create a var to put the counter variable in the function scope.
-        var timerCounter = 1 * 60
+        var timerCounter = counter * 60
         var minute: Int = 0
         var second: Int = 0
         

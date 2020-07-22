@@ -16,16 +16,16 @@ struct MenuView: View {
         NavigationView {
             VStack {
                 Spacer()
-                Text("Blink").font(.largeTitle).bold()
+                Image("blink-ios-icon").resizable().frame(width: 200, height: 200).cornerRadius(15)
                 Spacer()
                 Button(action: {
                     self.viewmodel.isJoining.toggle()
                 }) {
                     Text("Join session")
                         .bold()
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                         .padding()
-                        .background(Color.yellow)
+                        .background(Color("Main"))
                         .cornerRadius(10)
                 }
                 Spacer().sheet(isPresented: $viewmodel.isJoining) {
