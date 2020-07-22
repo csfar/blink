@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "blink-ios-icon-@2x.png",
+      "filename" : "blink-ios-icon_.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
@@ -13,7 +13,7 @@
       "size" : "20x20"
     },
     {
-      "filename" : "blink-ios-icon-58px.png",
+      "filename" : "blink-ios-icon-58px-1.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
@@ -55,7 +55,7 @@
       "size" : "20x20"
     },
     {
-      "filename" : "blink-ios-icon-@2x-1.png",
+      "filename" : "blink-ios-icon_-2.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "20x20"
@@ -67,13 +67,13 @@
       "size" : "29x29"
     },
     {
-      "filename" : "blink-ios-icon-58px-1.png",
+      "filename" : "blink-ios-icon-58px.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
-      "filename" : "blink-ios-icon_.png",
+      "filename" : "blink-ios-icon_-1.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "40x40"
