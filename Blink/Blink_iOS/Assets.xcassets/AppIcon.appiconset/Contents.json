@@ -1,61 +1,61 @@
 {
   "images" : [
     {
-      "filename" : "blink-ios-icon@2x.png",
+      "filename" : "blink-ios-icon-@2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
-      "filename" : "blink-ios-icon@3x.png",
+      "filename" : "blink-ios-icon-@3x.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "20x20"
     },
     {
-      "filename" : "blink-ios-icon-58px@2x.png",
+      "filename" : "blink-ios-icon-58px.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
-      "filename" : "blink-ios-icon-87px@3x.png",
+      "filename" : "blink-ios-icon-87px.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
-      "filename" : "blink-ios-icon-80px@2x.png",
+      "filename" : "blink-ios-icon_@2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
     },
     {
-      "filename" : "blink-ios-icon-120px@3x.png",
+      "filename" : "blink-ios-icon_@3x.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "40x40"
     },
     {
-      "filename" : "blink-ios-icon-120px@3x-1.png",
+      "filename" : "blink-ios-icon_@3x-1.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
-      "filename" : "blink-ios-icon-180px@3x.png",
+      "filename" : "blink-ios-icon-180px.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
     },
     {
-      "filename" : "blink-ios-icon-20px.png",
+      "filename" : "blink-ios-icon-.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "20x20"
     },
     {
-      "filename" : "blink-ios-icon@2x-1.png",
+      "filename" : "blink-ios-icon-@2x-1.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "20x20"
@@ -67,19 +67,19 @@
       "size" : "29x29"
     },
     {
-      "filename" : "blink-ios-icon-58px@2x-1.png",
+      "filename" : "blink-ios-icon-58px-1.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
-      "filename" : "blink-ios-icon@2x-2.png",
+      "filename" : "blink-ios-icon_.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "40x40"
     },
     {
-      "filename" : "blink-ios-icon-80px@2x-1.png",
+      "filename" : "blink-ios-icon_@2x-1.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "40x40"
@@ -91,7 +91,7 @@
       "size" : "76x76"
     },
     {
-      "filename" : "blink-ios-icon-152px@2x.png",
+      "filename" : "blink-ios-icon-152px.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "76x76"
