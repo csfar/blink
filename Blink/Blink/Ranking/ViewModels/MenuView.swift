@@ -25,9 +25,10 @@ struct MenuView: View {
                         .bold()
                         .foregroundColor(.white)
                         .padding()
-                        .background(Color("Main"))
-                        .cornerRadius(10)
-                }
+                    }
+                .padding()
+                .background(Color("Main"))
+                .cornerRadius(10)
                 Spacer().sheet(isPresented: $viewmodel.isJoining) {
                     Browser(delegate: self.viewmodel)
                 }
