@@ -90,6 +90,6 @@ struct BrainstormingView: View {
                 }
             }.padding()
             Spacer()
-        }.navigationBarBackButtonHidden(true)
+            }.navigationBarBackButtonHidden(true).onExitCommand(perform: {})
     }
 }
