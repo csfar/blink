@@ -101,6 +101,6 @@ struct RankingView: View {
                 })
                 Spacer()
             }
-        }
+        }.onExitCommand(perform: {})
     }
 }

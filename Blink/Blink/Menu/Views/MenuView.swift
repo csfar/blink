@@ -123,12 +123,6 @@ struct MenuView: View {
                 }
                 Spacer()
             }
-        }.navigationBarBackButtonHidden(true)
-    }
-}
-
-struct MenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        MenuView(viewmodel: MenuViewModel())
+            }.navigationBarBackButtonHidden(true).onExitCommand(perform: {})
     }
 }

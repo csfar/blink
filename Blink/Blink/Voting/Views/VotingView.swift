@@ -56,6 +56,6 @@ struct VotingView: View {
             }).frame(width: 400, height: 50).font(.headline)
 
             Spacer()
-        }.navigationBarBackButtonHidden(true)
+            }.navigationBarBackButtonHidden(true).onExitCommand(perform: {})
     }
 }
