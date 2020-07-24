@@ -18,11 +18,18 @@ struct BrainstormingView: View {
         VStack {
             Text("Brainstorming").foregroundColor(Color("Main")).font(.title).bold().padding()
             TextField("Idea", text: $newIdea).padding()
-            Button(action: {
-                self.viewmodel.sendIdea(self.newIdea)
-            }) {
-                Text("Send").foregroundColor(Color.white).bold()
-            }.padding().background(Color("Main")).cornerRadius(10)
+                .border(Color("Main"), width: 3)
+                .cornerRadius(5)
+            
+            if !newIdea.isEmpty {
+                Button(action: {
+                    self.viewmodel.sendIdea(self.newIdea)
+                    self.newIdea = ""
+                }) {
+                    Text("Send").foregroundColor(Color.white).bold()
+                }.padding().background(Color("Main")).cornerRadius(10)
+            }
+            
             if viewmodel.shouldVote {
                 NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: self.viewmodel.ideas)), isActive: self.$viewmodel.shouldVote, label: {EmptyView().navigationBarItems(trailing: Text("Vote"))})
             }
