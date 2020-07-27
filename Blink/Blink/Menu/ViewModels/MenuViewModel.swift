@@ -30,6 +30,7 @@ final class MenuViewModel: NSObject, ObservableObject {
 
     override init() {
         super.init()
+        startHosting()
         multipeerConnection.mcSession.delegate = self
         
         os_log("MenuViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
