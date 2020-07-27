@@ -47,6 +47,6 @@ struct RankingView: View {
             ForEach(0 ..< viewmodel.ranking.count) { index in
                 RankingViewRow(index: index + 1, content: self.viewmodel.ranking[index].content, votes: self.viewmodel.ranking[index].votes)
             }
-        }.navigationBarTitle("Ranking").navigationBarBackButtonHidden(true).padding()
+            }.navigationBarTitle("Ranking").navigationBarBackButtonHidden(true).padding()
     }
 }
