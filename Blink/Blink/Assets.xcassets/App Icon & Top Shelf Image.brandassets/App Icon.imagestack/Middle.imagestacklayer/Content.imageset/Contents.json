@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "Small Icon - Middle.png",
+      "filename" : "new-tvos-icon-middle.png",
       "idiom" : "tv",
       "scale" : "1x"
     },
     {
-      "filename" : "Small Icon - Middle@2x.png",
+      "filename" : "new-tvos-icon-middle@2x.png",
       "idiom" : "tv",
       "scale" : "2x"
     }
