@@ -17,7 +17,6 @@ struct VotingView: View {
     @State var showVotingFeedback: Bool = false
     /// Bool type variable that controls if the alert box that tells
     /// the user if he has voted or not.
-    @State var showVotedFeedback: Bool = false
     /// Bool type variable that tells if the user has voted or not.
     @State var hasVotted: Bool = false
     
@@ -81,8 +80,6 @@ struct VotingView: View {
                 if self.hasVotted == false {
                     self.viewmodel.checkVotedIdeas(self.viewmodel.ideas)
                     self.showVotingFeedback.toggle()
-                } else {
-                    self.showVotedFeedback.toggle()
                 }
             }.foregroundColor(Color("Main")))
             /// Alert created to provide a feedback to the user so
@@ -90,10 +87,6 @@ struct VotingView: View {
             .alert(isPresented: $showVotingFeedback) {
                 Alert(title: Text("Vote Sent!"), message: Text("Your vote was sent to the TV"), dismissButton: .default(Text("Ok!")) { self.hasVotted.toggle()
                     })
-        }
-            /// Alert that tells the user that he has alredy voted.
-            .alert(isPresented: $showVotedFeedback) {
-                Alert(title: Text("Already Voted"), message: Text("You have already voted."), dismissButton: .default(Text("Ok!")))
         }
     }
 }

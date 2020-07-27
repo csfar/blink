@@ -12,7 +12,7 @@ struct RankingViewRow: View {
     let index: Int
     let content: String
     let votes: Int
-
+    
     var body: some View {
         HStack {
             if index == 1 {
@@ -41,12 +41,31 @@ struct RankingViewRow: View {
 
 struct RankingView: View {
     @ObservedObject var viewmodel: RankingViewModel
-
+    @State var shouldRestart: Bool = false
+    
     var body: some View {
-        List {
-            ForEach(0 ..< viewmodel.ranking.count) { index in
-                RankingViewRow(index: index + 1, content: self.viewmodel.ranking[index].content, votes: self.viewmodel.ranking[index].votes)
-            }
+        VStack {
+            List {
+                ForEach(0 ..< viewmodel.ranking.count) { index in
+                    RankingViewRow(index: index + 1, content: self.viewmodel.ranking[index].content, votes: self.viewmodel.ranking[index].votes)
+                }
             }.navigationBarTitle("Ranking").navigationBarBackButtonHidden(true).padding()
+            
+            /// Restart button to go back to menu.
+            /// This will make it possible for the user in iOS
+            /// to restart their brainstorming when current one is finished.
+            Button(action: {
+                self.shouldRestart.toggle()
+            }) {
+                Text("Restart")
+                    .bold()
+                    .foregroundColor(.white)
+                    .padding()
+            }
+            .padding()
+            .background(Color("Main"))
+            .cornerRadius(10)
+            NavigationLink(destination: MenuView(viewmodel: MenuViewModel()), isActive: self.$shouldRestart) { EmptyView() }
+        }
     }
 }

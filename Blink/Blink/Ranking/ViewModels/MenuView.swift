@@ -36,7 +36,7 @@ struct MenuView: View {
                     NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel()), isActive: $viewmodel.isConnected, label: {EmptyView()})
                 }
             }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
