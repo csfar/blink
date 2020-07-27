@@ -10,10 +10,12 @@ import SwiftUI
 
 struct TimerRow: View {
     @Binding var timer: Int
+    @Binding var selectedTimer: Bool
     let minutes: Int
-
+    
     var body: some View {
         Button(action: {
+            self.selectedTimer = false
             self.timer = self.minutes
         }, label: {
             HStack {
@@ -30,12 +32,12 @@ struct TimerRow: View {
 /// Representation of the main menu. This view should be
 /// the app's entry point.
 struct MenuView: View {
-
+    
     @ObservedObject var viewmodel: MenuViewModel
-
+    
     @State var selectingTimer: Bool = false
-
     @State var selectingTopic: Bool = false
+    @State var shouldStart: Bool = false
     
     /// The body of a `MenuView`.
     var body: some View {
@@ -67,16 +69,16 @@ struct MenuView: View {
                                 Spacer()
                             }.frame(width: 400, height: 50)
                         }.frame(width: 400, height: 50).font(.headline)
-
+                        
                         if selectingTimer {
                             VStack() {
-                                TimerRow(timer: $viewmodel.timer, minutes: 10).frame(height: 50).padding()
-                                TimerRow(timer: $viewmodel.timer, minutes: 15).frame(height: 50).padding()
-                                TimerRow(timer: $viewmodel.timer, minutes: 20).frame(height: 50).padding()
+                                TimerRow(timer: $viewmodel.timer, selectedTimer: $selectingTimer, minutes: 10).frame(height: 50).padding()
+                                TimerRow(timer: $viewmodel.timer, selectedTimer: $selectingTimer, minutes: 15).frame(height: 50).padding()
+                                TimerRow(timer: $viewmodel.timer, selectedTimer: $selectingTimer, minutes: 20).frame(height: 50).padding()
                             }.frame(width: 400).padding()
                         }
                     }.frame(width: 500)
-
+                    
                     VStack{
                         /// The Button responsible for setting a topic.
                         Button(action: {
@@ -93,36 +95,28 @@ struct MenuView: View {
                             TextField("Topic", text: $viewmodel.topic).frame(width: 400, height: 50)
                         }
                     }.frame(width: 500)
-
+                    
                     VStack {
-                        if viewmodel.anyConnected || viewmodel.isHosting {
-                            NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel(topic: viewmodel.topic, timer: viewmodel.timer)),
-                                           label: {
-                                            HStack(alignment: .center) {
-                                                Image(systemName: "play")
-                                                Spacer()
-                                                Text("Start session")
-                                                Spacer()
-                                            }.frame(width: 400, height: 50).font(.headline)
-                            })
-
-                        } else {
-                            /// The Button responsible for starting the session.
-                            Button(action: {
-                                self.viewmodel.startHosting()
-                            }) {
-                                HStack(alignment: .center) {
-                                    Image(systemName: "plus")
-                                    Spacer()
-                                    Text("Host a session")
-                                    Spacer()
-                                }.frame(width: 400, height: 50).font(.headline)
-                            }
+                        Button(action: {
+                            self.shouldStart.toggle()
+                        }) {
+                            HStack(alignment: .center) {
+                                Image(systemName: "play")
+                                Spacer()
+                                Text("Start session")
+                                Spacer()
+                            }.frame(width: 400, height: 50).font(.headline)
                         }
+                        
                     }.frame(width: 500)
                 }
                 Spacer()
+                
+                /// Navigation link to go towards the next scren.
+                if shouldStart == true {
+                    NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel(topic: viewmodel.topic, timer: viewmodel.timer)), isActive: self.$shouldStart) { EmptyView() }
+                }
             }
-            }.navigationBarBackButtonHidden(true).onExitCommand(perform: {})
+        }.navigationBarBackButtonHidden(true).onExitCommand(perform: {})
     }
 }
