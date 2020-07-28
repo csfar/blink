@@ -21,19 +21,28 @@ struct BrainstormingView: View {
     /// The body of a `BrainstormingView`
     var body: some View {
         VStack {
-            Spacer()
+//            Spacer()
             
             /// The HStack containing the topic, timer and
             /// number of ideas added.
-            HStack {
+            HStack(alignment: .center) {
                 Spacer()
-                Text(viewmodel.timer).font(.headline)
+                Text(viewmodel.timer)
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 45, weight: .regular, design: .rounded))
                 Spacer()
-                Text(viewmodel.topic).font(.title)
+                Text(viewmodel.topic)
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 50, weight: .bold, design: .rounded))
                 Spacer()
-                Text("\(viewmodel.ideasMatrix.reduce(0) { $0 + $1.count })").font(.headline)
+                Text("\(viewmodel.ideasMatrix.reduce(0) { $0 + $1.count })")
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 45, weight: .regular, design: .rounded))
                 Spacer()
             }
+                .frame(width: UIScreen.main.bounds.width, height: 200, alignment: .center)
+                .background(Color("Main"))
+                
             Spacer()
           
             /// The `GridView` used to layout the ideas in a
@@ -91,5 +100,7 @@ struct BrainstormingView: View {
             }.padding()
             Spacer()
             }.navigationBarBackButtonHidden(true).onExitCommand(perform: {})
+            .background(Color.white)
+        .edgesIgnoringSafeArea(.vertical)
     }
 }
