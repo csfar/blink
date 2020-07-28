@@ -19,6 +19,8 @@ struct BrainstormingView: View {
     /// Bool type variable that refreshes the placeholder text once
     /// an idea is sent through the press of the button.
     @State private var refreshPlaceholder: Bool = false
+    /// Binding that has the reference for the State var on the MenuView
+    @Binding var hasStarted: Bool
 
 
     var body: some View {
@@ -48,14 +50,8 @@ struct BrainstormingView: View {
             }
             
             if viewmodel.shouldVote {
-                NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: self.viewmodel.ideas)), isActive: self.$viewmodel.shouldVote, label: {EmptyView().navigationBarItems(trailing: Text("Vote"))})
+                NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: self.viewmodel.ideas), hasStarted: $hasStarted), isActive: self.$viewmodel.shouldVote, label: {EmptyView().navigationBarItems(trailing: Text("Vote"))}).isDetailLink(false)
             }
             }.navigationBarBackButtonHidden(true).padding()
-    }
-}
-
-struct BrainstormingView_Previews: PreviewProvider {
-    static var previews: some View {
-        BrainstormingView(viewmodel: BrainstormingViewModel())
     }
 }

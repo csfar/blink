@@ -19,6 +19,8 @@ struct VotingView: View {
     /// the user if he has voted or not.
     /// Bool type variable that tells if the user has voted or not.
     @State var hasVotted: Bool = false
+    /// Binding that has the reference for the State var on the MenuView
+    @Binding var hasStarted: Bool
     
     var body: some View {
         VStack {
@@ -70,7 +72,7 @@ struct VotingView: View {
             /// The conditional that controls when RankingView should appear on screen.
             /// It will only activate when the tv goes to its RankingView.
             if viewmodel.shouldShowRank {
-                NavigationLink(destination: RankingView(viewmodel: RankingViewModel(topic: viewmodel.topic, ranking: viewmodel.ideas)), isActive: $viewmodel.shouldShowRank, label: {EmptyView().navigationBarItems(trailing: Text("Rank"))})
+                NavigationLink(destination: RankingView(viewmodel: RankingViewModel(topic: viewmodel.topic, ranking: viewmodel.ideas), hasStarted: $hasStarted), isActive: $viewmodel.shouldShowRank, label: {EmptyView().navigationBarItems(trailing: Text("Rank"))}).isDetailLink(false)
             }
         }
             /// All the necessary setup and handling for navigation itens.
