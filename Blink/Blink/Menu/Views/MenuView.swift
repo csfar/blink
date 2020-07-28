@@ -72,9 +72,9 @@ struct MenuView: View {
                         
                         if selectingTimer {
                             VStack() {
+                                TimerRow(timer: $viewmodel.timer, selectedTimer: $selectingTimer, minutes: 2).frame(height: 50).padding()
+                                TimerRow(timer: $viewmodel.timer, selectedTimer: $selectingTimer, minutes: 5).frame(height: 50).padding()
                                 TimerRow(timer: $viewmodel.timer, selectedTimer: $selectingTimer, minutes: 10).frame(height: 50).padding()
-                                TimerRow(timer: $viewmodel.timer, selectedTimer: $selectingTimer, minutes: 15).frame(height: 50).padding()
-                                TimerRow(timer: $viewmodel.timer, selectedTimer: $selectingTimer, minutes: 20).frame(height: 50).padding()
                             }.frame(width: 400).padding()
                         }
                     }.frame(width: 500)
