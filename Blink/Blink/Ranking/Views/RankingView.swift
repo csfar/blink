@@ -9,28 +9,28 @@
 import SwiftUI
 
 struct RankingViewRow: View {
-    let index: Int
+    let position: Int
     let content: String
     let votes: Int
 
     var body: some View {
         HStack {
-            if index == 1 {
+            if position == 1 {
                 Image(systemName: "rosette")
                     .font(.headline)
                     .foregroundColor(Color.yellow)
-            } else if index == 2 {
+            } else if position == 2 {
                 Image(systemName: "rosette")
                     .font(.headline)
                     .foregroundColor(Color.white)
-            } else if index == 3 {
+            } else if position == 3 {
                 Image(systemName: "rosette")
                     .font(.headline)
                     .foregroundColor(Color.orange)
             } else {
                 Image(systemName: "minus")
             }
-            Text("\(index)").font(.subheadline)
+            Text("\(position)").font(.subheadline)
             Text("\(content)").font(.headline)
             Spacer()
             Text("\(votes)").bold()
@@ -68,7 +68,7 @@ struct RankingView: View {
                 ForEach(0 ..< viewmodel.ideas.count) { index in
                     Button(action: {
                     }) {
-                        RankingViewRow(index: index + 1, content: self.viewmodel.ideas[index].content, votes: self.viewmodel.ideas[index].votes)
+                        RankingViewRow(position: self.viewmodel.ideas[index].position, content: self.viewmodel.ideas[index].content, votes: self.viewmodel.ideas[index].votes)
                         .frame(width: 1000, height: 50)
                     }.padding()
                 }
@@ -78,28 +78,20 @@ struct RankingView: View {
             /// The Button responsible for moving back to
             /// the menu. Should alert the user before moving on.
             /// This button works as a NavigationLink.
+            Button(action: {
+                self.shouldRestart.toggle()
+            }, label: {
+                HStack(alignment: .center) {
+                    Image(systemName: "arrow.clockwise")
+                    Spacer()
+                    Text("Restart")
+                    Spacer()
+                }.frame(width: 400, height: 50).font(.headline)
+            })
+            Spacer()
+            
             if shouldRestart {
-                NavigationLink(destination: MenuView(viewmodel: MenuViewModel()), label: {
-                    HStack(alignment: .center) {
-                        Image(systemName: "arrow.clockwise")
-                        Spacer()
-                        Text("Restart")
-                        Spacer()
-                    }.frame(width: 400, height: 50).font(.headline)
-                })
-                Spacer()
-            } else {
-                Button(action: {
-                    self.shouldRestart.toggle()
-                }, label: {
-                    HStack(alignment: .center) {
-                        Image(systemName: "arrow.clockwise")
-                        Spacer()
-                        Text("Restart?")
-                        Spacer()
-                    }.frame(width: 400, height: 50).font(.headline)
-                })
-                Spacer()
+                NavigationLink(destination: MenuView(viewmodel: MenuViewModel()), isActive: $shouldRestart) { EmptyView() }
             }
         }.onExitCommand(perform: {})
     }
