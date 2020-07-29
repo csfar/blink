@@ -41,7 +41,8 @@ struct RankingViewRow: View {
 
 struct RankingView: View {
     @ObservedObject var viewmodel: RankingViewModel
-    @State var shouldRestart: Bool = false
+    /// Binding that has the reference for the State var on the MenuView
+    @Binding var hasStarted: Bool
     
     var body: some View {
         VStack {
@@ -55,7 +56,7 @@ struct RankingView: View {
             /// This will make it possible for the user in iOS
             /// to restart their brainstorming when current one is finished.
             Button(action: {
-                self.shouldRestart.toggle()
+                self.hasStarted.toggle()
             }) {
                 Text("Restart")
                     .bold()
@@ -65,7 +66,6 @@ struct RankingView: View {
             .padding()
             .background(Color("Main"))
             .cornerRadius(10)
-            NavigationLink(destination: MenuView(viewmodel: MenuViewModel()), isActive: self.$shouldRestart) { EmptyView() }
         }
     }
 }

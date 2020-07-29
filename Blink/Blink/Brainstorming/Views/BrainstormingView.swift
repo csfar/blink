@@ -15,7 +15,7 @@ struct BrainstormingView: View {
     @ObservedObject var viewmodel: BrainstormingViewModel
     
     @State var newIdea: String = ""
-    
+    @State var shouldVote: Bool = false
     @State var showKeyboard: Bool = false
     
     /// The body of a `BrainstormingView`
@@ -44,7 +44,7 @@ struct BrainstormingView: View {
                 .background(Color("Main"))
                 
             Spacer()
-          
+            
             /// The `GridView` used to layout the ideas in a
             /// 3-column grid.
             GridView(items: $viewmodel.ideasMatrix)
@@ -86,17 +86,22 @@ struct BrainstormingView: View {
                 
                 /// The Button responsible for moving forward to
                 /// voting. Should alert the user before moving on.
-                if !viewmodel.isTimerActive {
-                    NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: viewmodel.ideasMatrix, topic: viewmodel.topic)),
-                                   label: {
-                                    HStack(alignment: .center) {
-                                        Image(systemName: "checkmark.circle.fill")
-                                        Spacer()
-                                        Text("Vote")
-                                        Spacer()
-                                    }.frame(width: 400, height: 50).font(.headline)
-                    })
+                Button(action: {
+                    self.shouldVote.toggle()
+                }) {
+                    HStack(alignment: .center) {
+                        Image(systemName: "checkmark.circle.fill")
+                        Spacer()
+                        Text("Vote")
+                        Spacer()
+                    }.frame(width: 400, height: 50).font(.headline)
                 }
+                
+                /// The conditional responsible for creating the NavigationLink
+                if self.shouldVote {
+                    NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: viewmodel.ideasMatrix, topic: viewmodel.topic)), isActive: $shouldVote) { EmptyView() }
+                }
+                
             }.padding()
             Spacer()
             }.navigationBarBackButtonHidden(true).onExitCommand(perform: {})
