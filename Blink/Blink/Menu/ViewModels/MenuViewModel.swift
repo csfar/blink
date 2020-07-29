@@ -14,7 +14,7 @@ final class MenuViewModel: NSObject, ObservableObject {
     
     private lazy var multipeerConnection = Multipeer.shared
 
-    @Published var topic: String = ""
+    @Published var topic: String = "Choose a topic for your brainstorming session"
     
     @Published var timer: Int = 0
 
