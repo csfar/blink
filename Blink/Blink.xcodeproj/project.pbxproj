@@ -10,6 +10,7 @@
 		2294603524BE4FC300BBEE2C /* Idea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294603424BE4FC300BBEE2C /* Idea.swift */; };
 		2294603724BF750100BBEE2C /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294603624BF750100BBEE2C /* OSLog+Extensions.swift */; };
 		2294603924BF802100BBEE2C /* RankingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294603824BF802100BBEE2C /* RankingViewModel.swift */; };
+		4F16F00324D1F041008123F5 /* GridViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16F00224D1F041008123F5 /* GridViewTests.swift */; };
 		4F5F12D224B639FA00A7D9E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F12D124B639FA00A7D9E7 /* AppDelegate.swift */; };
 		4F5F12D424B639FA00A7D9E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F12D324B639FA00A7D9E7 /* SceneDelegate.swift */; };
 		4F5F12D824B639FC00A7D9E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F12D724B639FC00A7D9E7 /* Assets.xcassets */; };
@@ -24,8 +25,6 @@
 		4F5F130F24B661D700A7D9E7 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F130E24B661D700A7D9E7 /* MenuViewModel.swift */; };
 		4F5F131124B6659A00A7D9E7 /* BrainstormingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F131024B6659A00A7D9E7 /* BrainstormingViewModel.swift */; };
 		4F5F131324B78BCB00A7D9E7 /* VotingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F131224B78BCB00A7D9E7 /* VotingViewModel.swift */; };
-		4F5F131524B8DDB500A7D9E7 /* VotingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F131424B8DDB500A7D9E7 /* VotingViewModelTests.swift */; };
-		4F5F131724BCCE9600A7D9E7 /* BrainstormingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F131624BCCE9600A7D9E7 /* BrainstormingViewModelTests.swift */; };
 		4F5F131B24BCFFA400A7D9E7 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F131A24BCFFA400A7D9E7 /* Browser.swift */; };
 		A418231A24B39DDF0082962F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A418231924B39DDF0082962F /* AppDelegate.swift */; };
 		A418231C24B39DDF0082962F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A418231B24B39DDF0082962F /* MenuView.swift */; };
@@ -68,6 +67,7 @@
 		2294603424BE4FC300BBEE2C /* Idea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Idea.swift; sourceTree = "<group>"; };
 		2294603624BF750100BBEE2C /* OSLog+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
 		2294603824BF802100BBEE2C /* RankingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewModel.swift; sourceTree = "<group>"; };
+		4F16F00224D1F041008123F5 /* GridViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewTests.swift; sourceTree = "<group>"; };
 		4F5F12CF24B639FA00A7D9E7 /* Blink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F5F12D124B639FA00A7D9E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F5F12D324B639FA00A7D9E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,8 +86,6 @@
 		4F5F130E24B661D700A7D9E7 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		4F5F131024B6659A00A7D9E7 /* BrainstormingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainstormingViewModel.swift; sourceTree = "<group>"; };
 		4F5F131224B78BCB00A7D9E7 /* VotingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingViewModel.swift; sourceTree = "<group>"; };
-		4F5F131424B8DDB500A7D9E7 /* VotingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingViewModelTests.swift; sourceTree = "<group>"; };
-		4F5F131624BCCE9600A7D9E7 /* BrainstormingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainstormingViewModelTests.swift; sourceTree = "<group>"; };
 		4F5F131A24BCFFA400A7D9E7 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		A418231624B39DDF0082962F /* Blink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A418231924B39DDF0082962F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -372,8 +370,7 @@
 			children = (
 				A418232E24B39DE10082962F /* BlinkTests.swift */,
 				A418233024B39DE10082962F /* Info.plist */,
-				4F5F131424B8DDB500A7D9E7 /* VotingViewModelTests.swift */,
-				4F5F131624BCCE9600A7D9E7 /* BrainstormingViewModelTests.swift */,
+				4F16F00224D1F041008123F5 /* GridViewTests.swift */,
 			);
 			path = BlinkTests;
 			sourceTree = "<group>";
@@ -666,8 +663,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A418232F24B39DE10082962F /* BlinkTests.swift in Sources */,
-				4F5F131724BCCE9600A7D9E7 /* BrainstormingViewModelTests.swift in Sources */,
-				4F5F131524B8DDB500A7D9E7 /* VotingViewModelTests.swift in Sources */,
+				4F16F00324D1F041008123F5 /* GridViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

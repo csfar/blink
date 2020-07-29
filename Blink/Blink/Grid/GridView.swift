@@ -21,14 +21,23 @@ struct GridView: View {
                 ForEach(items, id: \.self) { row in
                     HStack {
                         ForEach(row, id: \.id) { col in
-                            Button(action: {
-                            }) {
-                                Text(col.content).frame(width: 400, height: 50).font(.headline)
-                            }
+                            self.makeText(col, row)
                         }
                     }
                 }
             }.padding()
+        }
+    }
+    
+    private func makeText(_ idea: Idea, _ row: [Idea]) -> Text {
+        guard let indexRow = items.firstIndex(of: row) else { return Text("")}
+        guard let indexCol = row.firstIndex(of: idea) else { return Text("")}
+        
+        
+        if ((indexCol + indexRow) % 2 == 0) {
+            return Text(idea.content).foregroundColor(Color("Accent"))
+        } else {
+            return Text(idea.content).foregroundColor(Color("Black"))
         }
     }
 }

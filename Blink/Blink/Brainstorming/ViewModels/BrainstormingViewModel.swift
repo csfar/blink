@@ -65,7 +65,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
         ideas.append(idea)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.ideasMatrix = self.convertIdeasArrayInMatrix(ideas: self.ideas)
+            self.ideasMatrix = self.makeGridList(with: self.ideas)
         }
     }
     
@@ -153,6 +153,27 @@ class BrainstormingViewModel: NSObject, ObservableObject {
 
             os_log("Timer set without limit", log: .brainstorm, type: .info)
         }
+    }
+    
+    private func makeGridList(with ideas: [Idea]) -> [[Idea]] {
+        var gridList: [[Idea]] = [[Idea]]()
+        var row = ""
+        var rowArr = [Idea]()
+        for idea in ideas {
+            let aux = row.isEmpty ? "\(idea.content)" : "\(row) \(idea.content)"
+            if aux.count < 80 {
+                row = aux
+                rowArr.append(idea)
+                if ideas.last == idea {
+                    gridList.append(rowArr)
+                }
+            } else {
+                gridList.append(rowArr)
+                row = ""
+                rowArr = []
+            }
+        }
+        return gridList
     }
 }
 
