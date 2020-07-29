@@ -18,7 +18,7 @@ struct MenuView: View {
 
     @State var shouldStart: Bool = false
 
-    @State var timer: String = "00:00"
+    @State var timer: String = ""
     
     /// The body of a `MenuView`.
     var body: some View {
@@ -28,12 +28,12 @@ struct MenuView: View {
                        VStack(alignment: .center) {
                            Spacer()
 
-                        Text(timer)
-                               .font(.system(size: 250, weight: .bold, design: .rounded))
+                        Text("\(timer) min")
+                               .font(.system(size: 225, weight: .bold, design: .rounded))
                                .foregroundColor(Color("Background"))
                                .frame(width: UIScreen.main.bounds.width/2 * 0.8, height: UIScreen.main.bounds.height * 0.42)
 
-                        TextField("Set a timer", text: $timer)
+                        TextField("Set the amount of minutes", text: $timer)
                                .keyboardType(.numberPad)
                                .padding()
                                .frame(width: UIScreen.main.bounds.width/2 * 0.8)
@@ -48,7 +48,7 @@ struct MenuView: View {
                        VStack(alignment: .leading) {
                            Spacer()
 
-                        Text(viewmodel.topic)
+                        Text("Topic: \(viewmodel.topic)")
                                .font(.system(size: 100, weight: .bold, design: .rounded))
                                .foregroundColor(Color("Accent"))
                                .multilineTextAlignment(.leading)
@@ -85,7 +85,7 @@ struct MenuView: View {
                        .frame(width: UIScreen.main.bounds.width/2)
                        .background(Color("Background"))
                 if shouldStart == true {
-                    NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel(topic: viewmodel.topic, timer: viewmodel.timer)), isActive: self.$shouldStart) { EmptyView() }
+                    NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel(topic: viewmodel.topic, timer: Int(timer) ?? 0)), isActive: self.$shouldStart) { EmptyView() }
                 }
              }
              .edgesIgnoringSafeArea(.vertical)
