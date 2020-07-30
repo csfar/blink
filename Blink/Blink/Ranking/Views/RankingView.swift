@@ -44,7 +44,7 @@ struct RankingView: View {
                 ForEach(0 ..< viewmodel.ideas.count) { index in
                     Button(action: {
                     }) {
-                        RankingViewRow(index: index + 1, content: self.viewmodel.ideas[index].content, votes: self.viewmodel.ideas[index].votes)
+                        RankingViewRow(position: self.viewmodel.ideas[index].position, content: self.viewmodel.ideas[index].content, votes: self.viewmodel.ideas[index].votes)
                             .frame(width: 1000, height: 50)
                     }.padding()
                 }
@@ -60,36 +60,15 @@ struct RankingView: View {
                 HStack(alignment: .center) {
                     Image(systemName: "arrow.clockwise")
                     Spacer()
-                    Text("Restart")
+                    Text("Restart?")
                     Spacer()
-                }.frame(width: 400, height: 50).font(.headline)
-            })
+                }
+            }).frame(width: (UIScreen.main.bounds.width/2 * 0.8) / 2, height: UIScreen.main.bounds.height * 0.15)
+            .foregroundColor(Color("Black"))
             Spacer()
-            
+            /// Navigation Link responsible to restarting the Brainstorm
             if shouldRestart {
-                NavigationLink(destination: MenuView(viewmodel: MenuViewModel()), label: {
-                    HStack(alignment: .center) {
-                        Image(systemName: "arrow.clockwise")
-                        Spacer()
-                        Text("Restart")
-                        Spacer()
-                    }
-                }).frame(width: (UIScreen.main.bounds.width/2 * 0.8) / 2, height: UIScreen.main.bounds.height * 0.15)
-                .foregroundColor(Color("Black"))
-                Spacer()
-            } else {
-                Button(action: {
-                    self.shouldRestart.toggle()
-                }, label: {
-                    HStack(alignment: .center) {
-                        Image(systemName: "arrow.clockwise")
-                        Spacer()
-                        Text("Restart?")
-                        Spacer()
-                    }
-                }).frame(width: (UIScreen.main.bounds.width/2 * 0.8) / 2, height: UIScreen.main.bounds.height * 0.15)
-                .foregroundColor(Color("Black"))
-                Spacer()
+                NavigationLink(destination: MenuView(viewmodel: MenuViewModel()), isActive: $shouldRestart) { EmptyView() }
             }
         }.navigationBarBackButtonHidden(true).onExitCommand(perform: {})
         .background(Color.white)

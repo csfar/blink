@@ -9,28 +9,28 @@
 import SwiftUI
 
 struct RankingViewRow: View {
-    let index: Int
+    let position: Int
     let content: String
     let votes: Int
 
     var body: some View {
         HStack {
-            if index == 1 {
+            if position == 1 {
                 Image(systemName: "rosette")
                     .font(.headline)
                     .foregroundColor(Color.yellow)
-            } else if index == 2 {
+            } else if position == 2 {
                 Image(systemName: "rosette")
                     .font(.headline)
                     .foregroundColor(Color.white)
-            } else if index == 3 {
+            } else if position == 3 {
                 Image(systemName: "rosette")
                     .font(.headline)
                     .foregroundColor(Color.orange)
             } else {
                 Image(systemName: "minus")
             }
-            Text("\(index)")
+            Text("\(position)")
                 .font(.system(.subheadline, design: .rounded))
                 .foregroundColor(Color("Black"))
             Text("\(content)")
