@@ -31,17 +31,12 @@ struct RankingViewRow: View {
                 Image(systemName: "minus")
                 .foregroundColor(Color("Background"))
             }
-<<<<<<< HEAD
             Text("\(index)")
                 .font(.system(.subheadline, design: .rounded))
                 .foregroundColor(Color("Background"))
             Text("\(content)")
                 .font(.system(.headline, design: .rounded))
                 .foregroundColor(Color("Background"))
-=======
-            Text("\(position)").font(.subheadline)
-            Text("\(content)").font(.headline)
->>>>>>> 09538a42bb2e528ca67bff603ba04c39b74e84be
             Spacer()
             Text("\(votes)")
                 .font(.system(.headline, design: .rounded))
