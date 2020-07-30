@@ -19,13 +19,15 @@ struct GridView: View {
         VStack {
             ScrollView(.vertical) {
                 ForEach(items, id: \.self) { row in
-                    HStack {
-                        ForEach(row, id: \.id) { col in
-                            self.makeText(col, row)
-                        }
+                    List {
+                        HStack {
+                            ForEach(row, id: \.id) { col in
+                                self.makeText(col, row)
+                            }
+                        }.padding()
                     }
                 }
-            }.padding()
+                }.padding()
         }
     }
     
@@ -35,9 +37,9 @@ struct GridView: View {
         
         
         if ((indexCol + indexRow) % 2 == 0) {
-            return Text(idea.content).foregroundColor(Color("Accent"))
+            return Text(idea.content).foregroundColor(Color("Accent")).font(.system(size: 40, weight: .semibold, design: .rounded))
         } else {
-            return Text(idea.content).foregroundColor(Color("Black"))
+            return Text(idea.content).foregroundColor(Color("Black")).font(.system(size: 40, weight: .semibold, design: .rounded))
         }
     }
 }

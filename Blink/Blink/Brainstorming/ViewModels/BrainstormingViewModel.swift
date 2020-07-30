@@ -161,7 +161,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
         var rowArr = [Idea]()
         for idea in ideas {
             let aux = row.isEmpty ? "\(idea.content)" : "\(row) \(idea.content)"
-            if aux.count < 80 {
+            if aux.count < 70 {
                 row = aux
                 rowArr.append(idea)
                 if ideas.last == idea {
