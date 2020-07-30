@@ -35,7 +35,7 @@ struct VotingView: View {
                 Spacer()
             }
                 .frame(width: UIScreen.main.bounds.width, height: 200, alignment: .center)
-                .background(Color("Main"))
+                .background(Color("Accent"))
             Spacer()
 
             /// A votable version of `GridView` following the same 3-column

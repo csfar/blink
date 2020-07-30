@@ -37,7 +37,7 @@ struct RankingView: View {
                 Spacer()
             }
                 .frame(width: UIScreen.main.bounds.width, height: 200, alignment: .center)
-                .background(Color("Main"))
+                .background(Color("Accent"))
 
             Spacer()
 

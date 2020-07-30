@@ -75,8 +75,8 @@ struct VotingView: View {
                 /// This Text is just a placeholder. Final design will be put in its place.
                 VStack(alignment: .center) {
                     Text("Waiting for TV Mediator to go to ranking phase.")
-                        .font(.system(size: 22, weight: .semibold))
-                        .foregroundColor(Color("Accent"))
+                        .font(.system(size: 22, weight: .semibold, design: .rounded))
+                        .foregroundColor(Color("Background"))
                         .padding()
                 }
             }
@@ -86,7 +86,7 @@ struct VotingView: View {
                 NavigationLink(destination: RankingView(viewmodel: RankingViewModel(topic: viewmodel.topic, ranking: viewmodel.ideas), hasStarted: $hasStarted), isActive: $viewmodel.shouldShowRank, label: {EmptyView().navigationBarItems(trailing: Text("Rank"))}).isDetailLink(false)
             }
         }
-            .frame(width: UIScreen.main.bounds.width)
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             .background(Color("Accent"))
 
             /// All the necessary setup and handling for navigation itens.
@@ -97,7 +97,7 @@ struct VotingView: View {
                     self.viewmodel.checkVotedIdeas(self.viewmodel.ideas)
                     self.showVotingFeedback.toggle()
                 }
-            }.foregroundColor(Color("Accent")))
+            }.foregroundColor(Color("Background")))
             /// Alert created to provide a feedback to the user so
             /// he can knows that his idea was sent.
             .alert(isPresented: $showVotingFeedback) {

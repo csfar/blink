@@ -55,6 +55,7 @@ struct MenuView: View {
             /// This guarantee that the hasStarted var stays false when this view has appeared.
             .onAppear() {
                 self.hasStarted = false
+                UINavigationBar.appearance().backgroundColor = UIColor(named: "Accent")
         }
     }
 }
