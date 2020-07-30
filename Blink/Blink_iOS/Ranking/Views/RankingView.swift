@@ -31,7 +31,7 @@ struct RankingViewRow: View {
                 Image(systemName: "minus")
                 .foregroundColor(Color("Background"))
             }
-            Text("\(index)")
+            Text("\(position)")
                 .font(.system(.subheadline, design: .rounded))
                 .foregroundColor(Color("Background"))
             Text("\(content)")

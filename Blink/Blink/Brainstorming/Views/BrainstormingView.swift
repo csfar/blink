@@ -88,6 +88,8 @@ struct BrainstormingView: View {
                 /// The Button responsible for moving forward to
                 /// voting. Should alert the user before moving on.
                 Button(action: {
+                    /// Make it certain that the timer is no longer active.
+                    self.viewmodel.brainstormTimer.invalidate()
                     self.shouldVote.toggle()
                 }) {
                     HStack(alignment: .center) {
