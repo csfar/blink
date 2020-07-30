@@ -9,21 +9,21 @@
 import SwiftUI
 
 struct RankingViewRow: View {
-    let index: Int
+    let position: Int
     let content: String
     let votes: Int
     
     var body: some View {
         HStack {
-            if index == 1 {
+            if position == 1 {
                 Image(systemName: "rosette")
                     .font(.headline)
                     .foregroundColor(Color.yellow)
-            } else if index == 2 {
+            } else if position == 2 {
                 Image(systemName: "rosette")
                     .font(.headline)
                     .foregroundColor(Color.gray)
-            } else if index == 3 {
+            } else if position == 3 {
                 Image(systemName: "rosette")
                     .font(.headline)
                     .foregroundColor(Color.orange)
@@ -31,12 +31,17 @@ struct RankingViewRow: View {
                 Image(systemName: "minus")
                 .foregroundColor(Color("Background"))
             }
+<<<<<<< HEAD
             Text("\(index)")
                 .font(.system(.subheadline, design: .rounded))
                 .foregroundColor(Color("Background"))
             Text("\(content)")
                 .font(.system(.headline, design: .rounded))
                 .foregroundColor(Color("Background"))
+=======
+            Text("\(position)").font(.subheadline)
+            Text("\(content)").font(.headline)
+>>>>>>> 09538a42bb2e528ca67bff603ba04c39b74e84be
             Spacer()
             Text("\(votes)")
                 .font(.system(.headline, design: .rounded))
@@ -57,7 +62,7 @@ struct RankingView: View {
         VStack {
             List {
                 ForEach(0 ..< viewmodel.ranking.count) { index in
-                    RankingViewRow(index: index + 1, content: self.viewmodel.ranking[index].content, votes: self.viewmodel.ranking[index].votes)
+                    RankingViewRow(position: self.viewmodel.ranking[index].position, content: self.viewmodel.ranking[index].content, votes: self.viewmodel.ranking[index].votes)
                 }
             }
             .onAppear(perform: {

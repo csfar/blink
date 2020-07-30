@@ -17,8 +17,6 @@ struct RankingView: View {
     /// The body of a `RankingView`.
     var body: some View {
         VStack {
-            Spacer()
-
             /// The HStack containing the topic and
             /// number of ideas added.
            HStack(alignment: .center) {
@@ -56,6 +54,18 @@ struct RankingView: View {
             /// The Button responsible for moving back to
             /// the menu. Should alert the user before moving on.
             /// This button works as a NavigationLink.
+            Button(action: {
+                self.shouldRestart.toggle()
+            }, label: {
+                HStack(alignment: .center) {
+                    Image(systemName: "arrow.clockwise")
+                    Spacer()
+                    Text("Restart")
+                    Spacer()
+                }.frame(width: 400, height: 50).font(.headline)
+            })
+            Spacer()
+            
             if shouldRestart {
                 NavigationLink(destination: MenuView(viewmodel: MenuViewModel()), label: {
                     HStack(alignment: .center) {

@@ -102,6 +102,7 @@ struct VotingView: View {
             /// he can knows that his idea was sent.
             .alert(isPresented: $showVotingFeedback) {
                 Alert(title: Text("Vote Sent!"), message: Text("Your vote was sent to the TV"), dismissButton: .default(Text("Ok!")) { self.hasVotted.toggle()
+                    self.viewmodel.inVoting = false
                     })
         }
     }

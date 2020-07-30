@@ -13,6 +13,7 @@ import os.log
 final class VotingViewModel: NSObject, ObservableObject {
     
     private var multipeerConnection = Multipeer.shared
+    @Published var inVoting: Bool
     
     @Published var topic: String
     @Published var ideas: [Idea]
@@ -23,6 +24,7 @@ final class VotingViewModel: NSObject, ObservableObject {
          topic: String = "") {
         self.ideas = ideas
         self.topic = topic
+        self.inVoting = true
         super.init()
         multipeerConnection.mcSession.delegate = self
 
@@ -71,10 +73,12 @@ extension VotingViewModel: MCSessionDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             do {
-                let receivedIdeas = try JSONDecoder().decode([Idea].self, from: data)
-                self.ideas = receivedIdeas
-                self.shouldShowRank = true
-                os_log("Ranking received. Moving on to ranking.", log: .voting, type: .info)
+                if peerID.displayName.contains("Brainstorm Host") {
+                    let receivedIdeas = try JSONDecoder().decode([Idea].self, from: data)
+                    self.ideas = receivedIdeas
+                    self.shouldShowRank = true
+                    os_log("Ranking received. Moving on to ranking.", log: .voting, type: .info)
+                }
             } catch {
                 os_log("Failed to decode ideas data from mediator.", log: OSLog.voting, type: .error)
             }

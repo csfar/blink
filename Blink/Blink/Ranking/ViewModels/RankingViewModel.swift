@@ -24,6 +24,7 @@ final class RankingViewModel: NSObject, ObservableObject {
         self.topic = topic
         super.init()
         self.ideas = countVotes(ideas, votedIdeas)
+        self.ideas = giveRankingPosition(self.ideas)
         multipeerConnection.mcSession.delegate = self
 
         os_log("RankingViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
@@ -42,6 +43,24 @@ final class RankingViewModel: NSObject, ObservableObject {
             }
             return countedIdea
         }.sorted { $0.votes > $1.votes }
+    }
+    
+    /// This function gives a rank position to the idea based on
+    /// the amount of votes that the idea has. It has the following parameter:
+    /// - Parameter ideas: The Idea type array that will have its positions given.
+    func giveRankingPosition(_ ideas: [Idea]) -> [Idea] {
+        var rankedIdeas = ideas
+        var position = 1
+        
+        for index in 0 ..< rankedIdeas.count {
+            rankedIdeas[index].position = position
+            if index != 0 && rankedIdeas[index].votes == rankedIdeas[index - 1].votes {
+                rankedIdeas[index].position = rankedIdeas[index - 1].position
+            } else {
+                position += 1
+            }
+        }
+        return rankedIdeas
     }
 
     private func sendIdeas() {

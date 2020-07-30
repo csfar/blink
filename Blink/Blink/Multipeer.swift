@@ -32,7 +32,7 @@ final class Multipeer: NSObject, ObservableObject {
     @Published var connectedPeersName: [String] = []
 
     override init() {
-        peerID = MCPeerID(displayName: UIDevice.current.name)
+        peerID = MCPeerID(displayName: "Brainstorm Host \(UIDevice.current.name)")
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         connectionStatus = .notConnected
         mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "blnk", discoveryInfo: nil, session: mcSession)
