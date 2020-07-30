@@ -18,7 +18,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     
     /// Published variable of the idea Matrix.
     /// Any changes that occur in this variable will make the view update.
-    @Published var ideasMatrix: [[Idea]] = [[Idea(content: "Waiting for idea... 🤔")]]
+    @Published var ideasMatrix: [[Idea]] = [[Idea(content: "Waiting for ideas... 🤔")]]
 
     /// The topic set for the session.
     @Published private(set) var topic: String
@@ -52,20 +52,21 @@ class BrainstormingViewModel: NSObject, ObservableObject {
         self.startBrainstormTimer(counter: timer)
         multipeerConnection.mcSession.delegate = self
 
+
         os_log("BrainstormingViewModel initialized as MCSession's delegate.", log: .multipeer, type: .info)
     }
 
     func addIdea(_ content: String) {
         let newIdea = Idea(content: content)
         ideas.append(newIdea)
-        ideasMatrix = convertIdeasArrayInMatrix(ideas: ideas)
+        ideasMatrix = convertIdeasArrayInMatrix(ideas: ideas.reversed())
     }
 
     private func addNew(idea: Idea) {
         ideas.append(idea)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.ideasMatrix = self.makeGridList(with: self.ideas)
+            self.ideasMatrix = self.makeGridList(with: self.ideas.reversed())
         }
     }
     
@@ -161,7 +162,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
         var rowArr = [Idea]()
         for idea in ideas {
             let aux = row.isEmpty ? "\(idea.content)" : "\(row) \(idea.content)"
-            if aux.count < 70 {
+            if aux.count < 65 {
                 row = aux
                 rowArr.append(idea)
                 if ideas.last == idea {

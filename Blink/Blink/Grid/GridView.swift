@@ -13,20 +13,18 @@ import SwiftUI
 struct GridView: View {
     /// The 2D matrix containing the items as Strings.
     @Binding var items: [[Idea]]
-
+    
     /// The body of a `GridView`
     var body: some View {
         VStack {
             ScrollView(.vertical) {
                 ForEach(items, id: \.self) { row in
-                    List {
                         HStack {
                             ForEach(row, id: \.id) { col in
-                                self.makeText(col, row)
+                                self.makeText(col, row).focusable()
                             }
                         }.padding()
                     }
-                }
                 }.padding()
         }
     }

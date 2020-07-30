@@ -17,19 +17,25 @@ struct VotingView: View {
     /// The body of a `VotingView`
     var body: some View {
         VStack {
-            Spacer()
-
-            /// The HStack containing the topic and
+            /// The HStack containing the topic, timer and
             /// number of ideas added.
             HStack(alignment: .center) {
                 Spacer()
-                Text(viewmodel.topic).font(.headline)
+                Text(viewmodel.topic)
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 45, weight: .regular, design: .rounded))
                 Spacer()
-                Text("Time to vote!").font(.title)
+                Text("Time to vote!")
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 50, weight: .bold, design: .rounded))
                 Spacer()
-                Text("\(viewmodel.ideas.reduce(0) { $0 + $1.count })").font(.headline)
+                Text("\(viewmodel.ideas.reduce(0) { $0 + $1.count })")
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 45, weight: .regular, design: .rounded))
                 Spacer()
             }
+                .frame(width: UIScreen.main.bounds.width, height: 200, alignment: .center)
+                .background(Color("Main"))
             Spacer()
 
             /// A votable version of `GridView` following the same 3-column
@@ -53,9 +59,12 @@ struct VotingView: View {
                     Text("Rank")
                     Spacer()
                 }
-            }).frame(width: 400, height: 50).font(.headline)
+            }).frame(width: (UIScreen.main.bounds.width/2 * 0.8) / 2, height: UIScreen.main.bounds.height * 0.15)
+                .foregroundColor(Color("Black"))
 
             Spacer()
-            }.navigationBarBackButtonHidden(true).onExitCommand(perform: {})
+        }.navigationBarBackButtonHidden(true).onExitCommand(perform: {})
+            .background(Color.white)
+            .edgesIgnoringSafeArea(.vertical)
     }
 }

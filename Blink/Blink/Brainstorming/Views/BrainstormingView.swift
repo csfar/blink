@@ -21,8 +21,7 @@ struct BrainstormingView: View {
     /// The body of a `BrainstormingView`
     var body: some View {
         VStack {
-//            Spacer()
-            
+
             /// The HStack containing the topic, timer and
             /// number of ideas added.
             HStack(alignment: .center) {
@@ -71,7 +70,8 @@ struct BrainstormingView: View {
                                 Spacer()
                                 Text("Add")
                                 Spacer()
-                            }.frame(width: 400, height: 50).font(.headline)
+                            }.frame(width: (UIScreen.main.bounds.width/2 * 0.8) / 2 )
+                                .foregroundColor(Color("Black"))
                         }
                     }
                     
@@ -80,7 +80,8 @@ struct BrainstormingView: View {
                             self.viewmodel.addIdea(self.newIdea)
                             self.showKeyboard.toggle()
                             self.newIdea = ""
-                        }.frame(width: 400, height: 50)
+                        }.frame(width: (UIScreen.main.bounds.width/2 * 0.8) / 2 )
+                        .foregroundColor(Color("Black"))
                     }
                 }
                 
@@ -94,7 +95,8 @@ struct BrainstormingView: View {
                         Spacer()
                         Text("Vote")
                         Spacer()
-                    }.frame(width: 400, height: 50).font(.headline)
+                    }.frame(width: (UIScreen.main.bounds.width/2 * 0.8) / 2 )
+                        .foregroundColor(Color("Black"))
                 }
                 
                 /// The conditional responsible for creating the NavigationLink
@@ -102,10 +104,10 @@ struct BrainstormingView: View {
                     NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: viewmodel.ideasMatrix, topic: viewmodel.topic)), isActive: $shouldVote) { EmptyView() }
                 }
                 
-            }.padding()
+            }.frame(height: UIScreen.main.bounds.height * 0.15)
             Spacer()
-            }.navigationBarBackButtonHidden(true).onExitCommand(perform: {})
+        }.navigationBarBackButtonHidden(true).onExitCommand(perform: {})
             .background(Color.white)
-        .edgesIgnoringSafeArea(.vertical)
+            .edgesIgnoringSafeArea(.vertical)
     }
 }
