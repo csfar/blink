@@ -29,12 +29,21 @@ struct RankingViewRow: View {
                     .foregroundColor(Color.orange)
             } else {
                 Image(systemName: "minus")
+                .foregroundColor(Color("Background"))
             }
-            Text("\(index)").font(.subheadline)
-            Text("\(content)").font(.headline)
+            Text("\(index)")
+                .font(.system(.subheadline, design: .rounded))
+                .foregroundColor(Color("Background"))
+            Text("\(content)")
+                .font(.system(.headline, design: .rounded))
+                .foregroundColor(Color("Background"))
             Spacer()
-            Text("\(votes)").bold()
+            Text("\(votes)")
+                .font(.system(.headline, design: .rounded))
+                .foregroundColor(Color("Background"))
             Text("votes")
+                .font(.system(.body, design: .rounded))
+                .foregroundColor(Color("Background"))
         }
     }
 }
@@ -50,7 +59,11 @@ struct RankingView: View {
                 ForEach(0 ..< viewmodel.ranking.count) { index in
                     RankingViewRow(index: index + 1, content: self.viewmodel.ranking[index].content, votes: self.viewmodel.ranking[index].votes)
                 }
-            }.navigationBarTitle("Ranking").navigationBarBackButtonHidden(true).padding()
+            }
+            .onAppear(perform: {
+                UITableViewCell.appearance().backgroundColor = UIColor(named: "Accent")
+                UITableView.appearance().backgroundColor = UIColor(named: "Accent")
+            }).navigationBarTitle("Ranking").navigationBarBackButtonHidden(true).padding()
             
             /// Restart button to go back to menu.
             /// This will make it possible for the user in iOS
@@ -59,13 +72,17 @@ struct RankingView: View {
                 self.hasStarted.toggle()
             }) {
                 Text("Restart")
+                    .font(.system(.headline, design: .rounded))
                     .bold()
-                    .foregroundColor(.white)
-                    .padding()
+                    .foregroundColor(Color("Accent"))
             }
-            .padding()
-            .background(Color("Main"))
-            .cornerRadius(10)
-        }
+            .frame(width: UIScreen.main.bounds.width * 0.4,
+                   height: UIScreen.main.bounds.height * 0.1)
+                .background(Color("Background"))
+                .cornerRadius(15)
+                .shadow(radius: 5, y: 15)
+
+            Spacer(minLength: 20)
+        }.background(Color("Accent"))
     }
 }

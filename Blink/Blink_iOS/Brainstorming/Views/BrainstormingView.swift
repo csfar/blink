@@ -25,19 +25,37 @@ struct BrainstormingView: View {
 
     var body: some View {
         VStack {
-            Text("Brainstorming").foregroundColor(Color("Main")).font(.title).bold().padding()
-            TextField("Idea" + (refreshPlaceholder ? "" : " "), text: $newIdea).padding()
-                .border(Color("Main"), width: 3)
-                .cornerRadius(5)
+            Spacer()
+            Text("Brainstorming")
+                .foregroundColor(Color("Background"))
+                .font(.system(.title, design: .rounded))
+                .bold()
+                .frame(height: UIScreen.main.bounds.height * 0.2)
+
+            TextField("Idea" + (refreshPlaceholder ? "" : " "), text: $newIdea)
+                .frame(width: UIScreen.main.bounds.width * 0.8)
+                .padding()
+                .background(Color("Background"))
+                .cornerRadius(15)
+                .shadow(radius: 5, y: 15)
             
             if !newIdea.isEmpty {
+                Spacer()
                 Button(action: {
                     self.viewmodel.sendIdea(self.newIdea)
                     self.showIdeaFeedback.toggle()
                     
                 }) {
-                    Text("Send").foregroundColor(Color.white).bold()
-                }.padding().background(Color("Main")).cornerRadius(10)
+                    Text("Send")
+                        .font(.system(.headline, design: .rounded))
+                        .bold()
+                        .foregroundColor(Color("Accent"))
+                }
+                .frame(width: UIScreen.main.bounds.width * 0.4,
+                       height: UIScreen.main.bounds.height * 0.1)
+                .background(Color("Background"))
+                .cornerRadius(15)
+                .shadow(radius: 5, y: 15)
                     /// Alert that is created to serve as feedback to inform the user
                     /// that an idea was sent to the TV.
                     .alert(isPresented: $showIdeaFeedback) {
@@ -48,10 +66,16 @@ struct BrainstormingView: View {
                         })
                 }
             }
+
+            Spacer(minLength: UIScreen.main.bounds.height * 0.5)
             
             if viewmodel.shouldVote {
                 NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: self.viewmodel.ideas), hasStarted: $hasStarted), isActive: self.$viewmodel.shouldVote, label: {EmptyView().navigationBarItems(trailing: Text("Vote"))}).isDetailLink(false)
             }
-            }.navigationBarBackButtonHidden(true).padding()
+        }.navigationBarBackButtonHidden(true)
+            .frame(width: UIScreen.main.bounds.width)
+            .background(Color("Accent"))
+            .edgesIgnoringSafeArea(.vertical)
     }
 }
+

@@ -30,14 +30,20 @@ struct VotingView: View {
                     ForEach(0 ..< viewmodel.ideas.count) { index in
                         HStack(alignment: .center) {
                             Text("\(self.viewmodel.ideas[index].content)")
+                                .font(.system(.headline, design: .rounded))
+                                .foregroundColor(Color("Background"))
+
                             Spacer()
+
                             if self.viewmodel.ideas[index].isSelected {
                                 Button(action: {
                                     self.viewmodel.ideas[index].isSelected.toggle()
                                     self.currentlyChosen = self.viewmodel.ideas[index]
                                     self.currentlyChosen = Idea(content: "")
                                 }, label: {
-                                    Image(systemName: "checkmark.circle.fill").foregroundColor(Color("Main"))
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundColor(Color("Background"))
+                                        .font(.system(.headline, design: .rounded))
                                 })
                             } else {
                                 Button(action: {
@@ -51,11 +57,16 @@ struct VotingView: View {
                                     }
                                     self.currentlyChosen = self.viewmodel.ideas[index]
                                 }, label: {
-                                    Image(systemName: "circle").foregroundColor(Color("Main"))
+                                    Image(systemName: "circle")
+                                        .foregroundColor(Color("Background"))
+                                        .font(.system(.headline, design: .rounded))
                                 })
                             }
-                        }.font(.headline)
+                        }
                     }
+                }.onAppear {
+                    UITableView.appearance().backgroundColor = UIColor(named: "Accent")
+                    UITableViewCell.appearance().backgroundColor = UIColor(named: "Accent")
                 }
             } else {
                 /// When user has voted, this View Content will appear while he awaits for the TV
@@ -65,7 +76,7 @@ struct VotingView: View {
                 VStack(alignment: .center) {
                     Text("Waiting for TV Mediator to go to ranking phase.")
                         .font(.system(size: 22, weight: .semibold))
-                        .foregroundColor(Color("Main"))
+                        .foregroundColor(Color("Accent"))
                         .padding()
                 }
             }
@@ -75,15 +86,18 @@ struct VotingView: View {
                 NavigationLink(destination: RankingView(viewmodel: RankingViewModel(topic: viewmodel.topic, ranking: viewmodel.ideas), hasStarted: $hasStarted), isActive: $viewmodel.shouldShowRank, label: {EmptyView().navigationBarItems(trailing: Text("Rank"))}).isDetailLink(false)
             }
         }
+            .frame(width: UIScreen.main.bounds.width)
+            .background(Color("Accent"))
+
             /// All the necessary setup and handling for navigation itens.
             /// Elements such as NavButtons and NavTitles will be configured here
             .navigationBarTitle("\(viewmodel.topic)").navigationBarBackButtonHidden(true).padding()
-            .navigationBarItems(trailing: Button("Send Votes") {
+            .navigationBarItems(trailing: Button("Send") {
                 if self.hasVotted == false {
                     self.viewmodel.checkVotedIdeas(self.viewmodel.ideas)
                     self.showVotingFeedback.toggle()
                 }
-            }.foregroundColor(Color("Main")))
+            }.foregroundColor(Color("Accent")))
             /// Alert created to provide a feedback to the user so
             /// he can knows that his idea was sent.
             .alert(isPresented: $showVotingFeedback) {
@@ -92,3 +106,4 @@ struct VotingView: View {
         }
     }
 }
+
