@@ -103,7 +103,7 @@ struct BrainstormingView: View {
                 
                 /// The conditional responsible for creating the NavigationLink
                 if self.shouldVote {
-                    NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: viewmodel.ideasMatrix, topic: viewmodel.topic)), isActive: $shouldVote) { EmptyView() }
+                    NavigationLink(destination: VotingView(viewmodel: VotingViewModel(ideas: viewmodel.convertIdeasArrayInMatrix(ideas: viewmodel.ideas), topic: viewmodel.topic)), isActive: $shouldVote) { EmptyView() }
                 }
                 
             }.frame(height: UIScreen.main.bounds.height * 0.15)

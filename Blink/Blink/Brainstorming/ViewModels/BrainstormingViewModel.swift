@@ -37,7 +37,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     /// String array variable to store ideas.
     /// When an idea is sent through P2P connection,
     /// It will be stored in this array.
-    private var ideas: [Idea] = [Idea]()
+    var ideas: [Idea] = [Idea]()
 
     /// Initialize a new instance of this type.
     /// Sets itself as the MultipeerConnectivity delegate.
@@ -74,7 +74,7 @@ class BrainstormingViewModel: NSObject, ObservableObject {
     /// in an idea 2D String matrix with 3 columns and N rows.
     /// This function is called with the following parameters:
     /// - Parameter ideas: The String array that contains the ideas sent through P2P connection.
-    private func convertIdeasArrayInMatrix(ideas: [Idea]) -> [[Idea]] {
+    func convertIdeasArrayInMatrix(ideas: [Idea]) -> [[Idea]] {
         var matrixIdeas: [[Idea]] = []
         var colIndex: Int = 0
         var ideaArray: [Idea] = []

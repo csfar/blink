@@ -76,7 +76,7 @@ struct BrainstormingView: View {
         }.navigationBarBackButtonHidden(true)
             .frame(width: UIScreen.main.bounds.width)
             .background(Color("Accent"))
-            .edgesIgnoringSafeArea(.vertical)
+            .edgesIgnoringSafeArea(.bottom)
     }
 }
 
