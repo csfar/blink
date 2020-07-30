@@ -59,7 +59,10 @@ struct GridViewVotable: View {
                                     } else {
                                         GridViewVotableRow(idea: self.items[row][col])
                                     }
-                                }.padding()
+                                    }
+                                .foregroundColor(Color("Black"))
+                            .frame(height: UIScreen.main.bounds.height * 0.15)
+                                    .padding()
                             }
                         }
                     }
