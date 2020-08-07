@@ -56,6 +56,7 @@ struct MenuView: View {
             .onAppear() {
                 self.hasStarted = false
                 UINavigationBar.appearance().backgroundColor = UIColor(named: "Accent")
+                UINavigationBar.appearance().tintColor = UIColor(named: "Background")
         }
     }
 }
