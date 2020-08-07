@@ -105,6 +105,7 @@ struct VotingView: View {
                     self.viewmodel.inVoting = false
                     })
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
