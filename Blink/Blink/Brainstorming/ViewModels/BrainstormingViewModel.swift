@@ -165,13 +165,15 @@ class BrainstormingViewModel: NSObject, ObservableObject {
             if aux.count < 65 {
                 row = aux
                 rowArr.append(idea)
-                if ideas.last == idea {
-                    gridList.append(rowArr)
-                }
+                
             } else {
                 gridList.append(rowArr)
-                row = ""
+                row = "\(idea.content)"
                 rowArr = []
+                rowArr.append(idea)
+            }
+            if ideas.last == idea {
+                gridList.append(rowArr)
             }
         }
         return gridList
