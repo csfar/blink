@@ -67,6 +67,7 @@ struct VotingView: View {
                 }.onAppear {
                     UITableView.appearance().backgroundColor = UIColor(named: "Accent")
                     UITableViewCell.appearance().backgroundColor = UIColor(named: "Accent")
+                    UINavigationBar.appearance().tintColor = UIColor(named: "Background")
                 }
             } else {
                 /// When user has voted, this View Content will appear while he awaits for the TV
@@ -91,7 +92,7 @@ struct VotingView: View {
 
             /// All the necessary setup and handling for navigation itens.
             /// Elements such as NavButtons and NavTitles will be configured here
-            .navigationBarTitle("\(viewmodel.topic)").navigationBarBackButtonHidden(true).padding()
+            .navigationBarTitle(Text("Voting").foregroundColor(Color("Background"))).navigationBarBackButtonHidden(true).padding()
             .navigationBarItems(trailing: Button("Send") {
                 if self.hasVotted == false {
                     self.viewmodel.checkVotedIdeas(self.viewmodel.ideas)
@@ -105,6 +106,7 @@ struct VotingView: View {
                     self.viewmodel.inVoting = false
                     })
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 

@@ -63,7 +63,8 @@ struct RankingView: View {
             .onAppear(perform: {
                 UITableViewCell.appearance().backgroundColor = UIColor(named: "Accent")
                 UITableView.appearance().backgroundColor = UIColor(named: "Accent")
-            }).navigationBarTitle("Ranking").navigationBarBackButtonHidden(true).padding()
+                UINavigationBar.appearance().tintColor = UIColor(named: "Background")
+            }).navigationBarTitle(Text("Ranking").foregroundColor(Color("Background"))).navigationBarBackButtonHidden(true).padding()
             
             /// Restart button to go back to menu.
             /// This will make it possible for the user in iOS
@@ -84,5 +85,7 @@ struct RankingView: View {
 
             Spacer(minLength: 20)
         }.background(Color("Accent"))
+        .foregroundColor(Color("Background"))
+            .edgesIgnoringSafeArea(.bottom)
     }
 }
