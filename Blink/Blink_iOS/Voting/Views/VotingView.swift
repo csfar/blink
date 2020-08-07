@@ -91,7 +91,7 @@ struct VotingView: View {
 
             /// All the necessary setup and handling for navigation itens.
             /// Elements such as NavButtons and NavTitles will be configured here
-            .navigationBarTitle("Voting").navigationBarBackButtonHidden(true).padding()
+            .navigationBarTitle(Text("Voting").foregroundColor(Color("Background"))).navigationBarBackButtonHidden(true).padding()
             .navigationBarItems(trailing: Button("Send") {
                 if self.hasVotted == false {
                     self.viewmodel.checkVotedIdeas(self.viewmodel.ideas)
