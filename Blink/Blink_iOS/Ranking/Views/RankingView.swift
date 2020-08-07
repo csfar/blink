@@ -84,6 +84,7 @@ struct RankingView: View {
 
             Spacer(minLength: 20)
         }.background(Color("Accent"))
-            .edgesIgnoringSafeArea(.vertical)
+        .foregroundColor(Color("Background"))
+            .edgesIgnoringSafeArea(.bottom)
     }
 }
