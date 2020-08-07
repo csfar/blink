@@ -63,6 +63,7 @@ struct RankingView: View {
             .onAppear(perform: {
                 UITableViewCell.appearance().backgroundColor = UIColor(named: "Accent")
                 UITableView.appearance().backgroundColor = UIColor(named: "Accent")
+                UINavigationBar.appearance().tintColor = UIColor(named: "Background")
             }).navigationBarTitle(Text("Ranking").foregroundColor(Color("Background"))).navigationBarBackButtonHidden(true).padding()
             
             /// Restart button to go back to menu.

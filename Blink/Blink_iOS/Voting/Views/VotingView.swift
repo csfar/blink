@@ -67,6 +67,7 @@ struct VotingView: View {
                 }.onAppear {
                     UITableView.appearance().backgroundColor = UIColor(named: "Accent")
                     UITableViewCell.appearance().backgroundColor = UIColor(named: "Accent")
+                    UINavigationBar.appearance().tintColor = UIColor(named: "Background")
                 }
             } else {
                 /// When user has voted, this View Content will appear while he awaits for the TV
