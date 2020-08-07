@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-
-
 /// Representation of the main menu. This view should be
 /// the app's entry point.
 struct MenuView: View {
@@ -24,14 +22,22 @@ struct MenuView: View {
     var body: some View {
         NavigationView {
              HStack(spacing: 0) {
-
                        VStack(alignment: .center) {
+                        Spacer(minLength: UIScreen.main.bounds.height * 0.05)
+                        HStack {
+                            Image("new-tvos-icon-front-large")
+                                .resizable()
+                                .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.height * 0.1)
+                            Spacer()
+                            Spacer()
+                        }
+                        .background(Color("Accent"))
                            Spacer()
 
                         Text("\(timer) min")
                                .font(.system(size: 225, weight: .bold, design: .rounded))
                                .foregroundColor(Color("Background"))
-                               .frame(width: UIScreen.main.bounds.width/2 * 0.8, height: UIScreen.main.bounds.height * 0.42)
+                               .frame(width: UIScreen.main.bounds.width/2 * 0.8, height: UIScreen.main.bounds.height * 0.32)
 
                         TextField("Set the amount of minutes", text: $timer)
                                .keyboardType(.numberPad)
@@ -39,7 +45,7 @@ struct MenuView: View {
                                .frame(width: UIScreen.main.bounds.width/2 * 0.8)
                                .foregroundColor(Color("Black"))
 
-                           Spacer(minLength: 225)
+                        Spacer(minLength: UIScreen.main.bounds.height * 0.245)
                        }
                        .frame(width: UIScreen.main.bounds.width/2)
                        .background(Color("Accent"))
@@ -88,8 +94,8 @@ struct MenuView: View {
                     NavigationLink(destination: BrainstormingView(viewmodel: BrainstormingViewModel(topic: viewmodel.topic, timer: Int(timer) ?? 0)), isActive: self.$shouldStart) { EmptyView() }
                 }
              }
-             .edgesIgnoringSafeArea(.vertical)
-        }
+                .edgesIgnoringSafeArea(.vertical)
         .navigationBarBackButtonHidden(true).onExitCommand(perform: {})
+        }
     }
 }
