@@ -43,13 +43,6 @@ struct GridViewVotable: View {
                                         self.items[row][col].isSelected.toggle()
                                         self.currentlyChosen = Idea(content: "")
                                     } else {
-                                        self.items = self.items.map { $0.map {
-                                            var idea = $0
-                                            if $0 == self.currentlyChosen {
-                                                idea.isSelected.toggle()
-                                            }
-                                            return idea
-                                            } }
                                         self.items[row][col].isSelected.toggle()
                                         self.currentlyChosen = self.items[row][col]
                                     }

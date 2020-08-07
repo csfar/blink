@@ -48,13 +48,6 @@ struct VotingView: View {
                             } else {
                                 Button(action: {
                                     self.viewmodel.ideas[index].isSelected.toggle()
-                                    self.viewmodel.ideas = self.viewmodel.ideas.map {
-                                        var idea = $0
-                                        if $0 == self.currentlyChosen {
-                                            idea.isSelected.toggle()
-                                        }
-                                        return idea
-                                    }
                                     self.currentlyChosen = self.viewmodel.ideas[index]
                                 }, label: {
                                     Image(systemName: "circle")
