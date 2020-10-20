@@ -1,5 +1,7 @@
 # Blink
 
+Carry out your brainstormings with Blink! - Brainstorming. With it you will be able to connect with up to 7 iPhones and conduct a complete brainstorming session.
+
 ## Features
 
 * Timer
@@ -26,3 +28,5 @@
 * Multipeer
 * Can add ideas
 * Can vote on ideas
+
+## Architecture
