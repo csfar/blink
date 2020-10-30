@@ -1,5 +1,7 @@
 # Blink! - Brainstorming
 
+![BlinkLogo](https://github.com/csfar/blink/blob/dev/FullIcon/tvOS%20Icon.png)
+
 Carry out your brainstormings with Blink! - Brainstorming. With it you will be able to connect with up to 7 iPhones and conduct a complete brainstorming session.
 
 Brainstorming is a idea creation and problem resolution process commonly used in the through out the entire world. With "Blink!" you will be able to connect simultaneously with up to 7 iPhones, send ideas through your connected within the timelimit, conduct voting sessions and check out the final ranking of the most voted ideas.
