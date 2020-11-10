@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "new-tvos-icon-middle-large.png",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
